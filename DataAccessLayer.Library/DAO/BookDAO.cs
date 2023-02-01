@@ -15,7 +15,7 @@ namespace DataAccessLayer.Library
     {
         
 
-        public const string path = "C:\\Users\\federico.babbini\\Desktop\\OOP\\ReadXmlCsharp\\Database.xml";
+        public const string path = "C:\\Users\\federico.babbini\\Desktop\\Database.xml";
         public void Create(Book book)
         {
 

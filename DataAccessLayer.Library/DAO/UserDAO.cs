@@ -14,7 +14,7 @@ namespace DataAccessLayer.Library
 {
     public class UserDAO : IUserDAO
     {
-        public const string path = "C:\\Users\\federico.babbini\\Desktop\\OOP\\ReadXmlCsharp\\Database.xml";
+        public const string path = "C:\\Users\\federico.babbini\\Desktop\\Database.xml";
         //•	Verificare i dati di login inseriti 
         public List<User> Read()
         {
