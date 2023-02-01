@@ -1,11 +1,11 @@
-1-Quando si modifia un libro la quantit‡ viene aggiunta e non sostituita. E' cosÏ perchË quando si 
-crea un nuovo libro, se questo Ë gi‡ presente, la quantit‡ viene aggiornata. Si potrebbe fare un metodo 
-nella LBL per aggiornare solo la quantit‡ (update_quantity).
+1-Quando si modifia un libro la quantit√† viene aggiunta e non sostituita. E' cos√¨ perch√® quando si 
+crea un nuovo libro, se questo √® gi√† presente, la quantit√† viene aggiornata. Si potrebbe fare un metodo 
+nella LBL per aggiornare solo la quantit√† (update_quantity).
 
 2- problemi nella visualizzazione dello storico: se l'utente inserisce un utente che non esiste
 si lancia un'eccezione.
 
-3- se si cancella un libro decremento la quantit‡ di uno, oppure cancello tutto quanto? Inoltre il
-libro puÚ essere cancellato solo se nessun utente lo sta prenotando
+3- se si cancella un libro decremento la quantit√† di uno, oppure cancello tutto quanto? Inoltre il
+libro pu√≤ essere cancellato solo se nessun utente lo sta prenotando
 
-4- inserire la visualizzazione prenotazioni per lo user
+DONE 4- inserire la visualizzazione prenotazioni per lo user DONE
