@@ -5,6 +5,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Runtime.CompilerServices;
 using System.Runtime.ConstrainedExecution;
 using System.Security.Cryptography.X509Certificates;
@@ -293,40 +294,52 @@ namespace BusinessLogic.Library
             //var reservationResult = new ReservationResult( userList[userId],bookList[bookId],false);
 
 
-            if ((bookList[bookId].Quantity > 0)&&  // vedo se questo libro ha quantità >0
+            if (bookList[bookId].Quantity > 0)
+            { // vedo se questo libro ha quantità >0
 
-                (queryReservedBookByUser.Count == 0))//questo utente non ha prenotazioni attive per questo libro
-            {
-                // calcolo quante prenotazioni attive ha quel libro
-                var queryBookReservations = reservationList.Where(r =>
-                r.Book.BookId == bookId// reservation di questo libro IL PROBLEMA QUI é CHE STE RESERVATION RIMANGONO SEMPRE QUINDI DEVO CONTROLLARE ENDTIME
-                && r.EndDate < DateTime.Now// se l'end date non è oggi allora prenotazione attiva
-                ).Select(e => e).ToList();
+                if (queryReservedBookByUser.Count == 0)
+                { //questo utente non ha prenotazioni attive per questo libro
 
-                // se il numero di prenotazioni attive è minore della quantità del libro
-                if (queryBookReservations.Count < bookList[bookId].Quantity)
+                    // calcolo quante prenotazioni attive ha quel libro
+                    var queryBookReservations = reservationList.Where(r =>
+                    r.Book.BookId == bookId// reservation di questo libro IL PROBLEMA QUI é CHE STE RESERVATION RIMANGONO SEMPRE QUINDI DEVO CONTROLLARE ENDTIME
+                    && r.EndDate < DateTime.Now// se l'end date non è oggi allora prenotazione attiva
+                    ).Select(e => e).ToList();
+
+                    // se il numero di prenotazioni attive è minore della quantità del libro
+                    if (queryBookReservations.Count < bookList[bookId].Quantity)
+                    {
+                        // prenotazione success
+
+
+                        this.Repository.CreateReservation(bookList[bookId], userList[--userId]);// userId è decrementato perchè sul db parte da 1 (invece che da 0)
+                        var reservationResult = new ReservationResult(userList[userId], bookList[bookId], 0);
+                        // decrementare quantita di questo libro NOOOOOOOOOOO
+
+
+
+                        return reservationResult;
+
+                    }
+                    else
+                    {
+                        var reservationResult = new ReservationResult(userList[userId], bookList[bookId], 2);// il libro non è disponibile
+                        return reservationResult;
+
+                    }
+
+
+                }else
                 {
-                    // prenotazione success
-
-
-                    this.Repository.CreateReservation(bookList[bookId], userList[--userId]);// userId è decrementato perchè sul db parte da 1 (invece che da 0)
-                    var reservationResult = new ReservationResult(userList[userId], bookList[bookId], 0);
-                    // decrementare quantita di questo libro NOOOOOOOOOOO
-
-
-
-                    return reservationResult;
-
-                }
-                else
-                {
-                    var reservationResult = new ReservationResult(userList[userId], bookList[bookId], 1);// il libro non è disponibile
+                    var reservationResult = new ReservationResult(userList[userId], bookList[bookId], 2);// l'utente ha già prenotato questo libro
                     return reservationResult;
                 }
+
+
             }
             else
             {
-                var reservationResult = new ReservationResult(userList[userId], bookList[bookId], 2);// l'utente ha già prenotato il libro
+                var reservationResult = new ReservationResult(userList[userId], bookList[bookId], 1);// il libro non è disponibile
                 return reservationResult;
             }
         }
@@ -359,7 +372,7 @@ namespace BusinessLogic.Library
             
              if (queryBookToReturn.Count > 0)// questo utente ha questo libro attualmente in prestito
             {
-                var reservationResult = new ReservationResult(userList[userId], bookList[bookId], 0);
+                var reservationResult = new ReservationResult(userList[--userId], bookList[bookId], 0);
                 // questo sotto potrei farlo con un mapper
                 var reservationToUpdate = new Reservation(queryBookToReturn[0].ResId, queryBookToReturn[0].User,
                     queryBookToReturn[0].Book, queryBookToReturn[0].StartDate, DateTime.Now);

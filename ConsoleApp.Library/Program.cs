@@ -209,6 +209,16 @@ namespace ConsoleApp.Library
 
                     continue;
                 }
+                if (decision == "4")
+                {
+                    Console.WriteLine("Visualizzazione Storico Prenotazioni");
+
+                    IOptionSelected optionSelected = new VisualizzazioneStoricoPrenotazioniUser(currentUser, lbl);
+                    OptionSelected optionToDo = new OptionSelected(optionSelected);
+                    optionToDo.Doing();
+
+                }
+
 
                 if (decision == "5")
                 {
