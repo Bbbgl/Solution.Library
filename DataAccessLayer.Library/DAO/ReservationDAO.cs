@@ -12,12 +12,14 @@ namespace DataAccessLayer.Library
 {
     public class ReservationDAO : IReservationDAO
     {
-       
+        public const string path = "C:\\Users\\federico.babbini\\Desktop\\OOP\\ReadXmlCsharp\\Database.xml";
+
+
         public void Create(Book book, User user)
         {
             
             //prova con LINQ
-            var xDoc = XDocument.Load("C:\\Users\\federico.babbini\\Desktop\\OOP\\ReadXmlCsharp\\Database.xml");
+            var xDoc = XDocument.Load(path);
             var count = xDoc.Descendants("Reservation").Count();
             var newRes = new XElement("Reservation");
             newRes.SetAttributeValue("ReservationId", count++.ToString());
@@ -29,7 +31,7 @@ namespace DataAccessLayer.Library
             newRes.SetAttributeValue("EndDate", ((DateTime.Now).AddDays(30)).ToString());
 
             xDoc.Root.Element("Reservations").Add(newRes);
-            xDoc.Save("C:\\Users\\federico.babbini\\Desktop\\OOP\\ReadXmlCsharp\\Database.xml");
+            xDoc.Save(path);
 
 
         }
@@ -43,7 +45,7 @@ namespace DataAccessLayer.Library
             
 
             XmlDocument xmlDoc = new XmlDocument();
-            xmlDoc.Load("C:\\Users\\federico.babbini\\Desktop\\OOP\\ReadXmlCsharp\\Database.xml");
+            xmlDoc.Load(path);
             XmlNodeList resNodes = xmlDoc.SelectNodes("//Library/Reservations/Reservation");
             var reservationList = new List<Reservation>();
             
@@ -72,7 +74,7 @@ namespace DataAccessLayer.Library
         public void Update(Reservation reservation, int reservation_id)
         {
             XmlDocument xmlDoc = new XmlDocument();
-            xmlDoc.Load("C:\\Users\\federico.babbini\\Desktop\\OOP\\ReadXmlCsharp\\Database.xml");
+            xmlDoc.Load(path);
             XmlNodeList resNodes = xmlDoc.SelectNodes("//Library/Reservations/Reservation");
 
             // resNodes[reservation_id].Attributes["ReservationId"].Value = reservation.ResId.ToString(); non serve aggiornare l'id tanto è lo stesso
@@ -88,7 +90,7 @@ namespace DataAccessLayer.Library
 
             
 
-            xmlDoc.Save("C:\\Users\\federico.babbini\\Desktop\\OOP\\ReadXmlCsharp\\Database.xml");
+            xmlDoc.Save(path);
         }
     }
 }

@@ -13,11 +13,7 @@ namespace DataAccessLayer.Library
    
    public class BookDAO:IBookDAO
     {
-        //public IBookDAO bookDAO;
-        //public BookDAO(IBookDAO bookDAO)
-        //{
-        //    this.bookDAO = bookDAO;
-        //}
+        
 
         public const string path = "C:\\Users\\federico.babbini\\Desktop\\OOP\\ReadXmlCsharp\\Database.xml";
         public void Create(Book book)
@@ -37,7 +33,7 @@ namespace DataAccessLayer.Library
             newBook.SetAttributeValue("Quantity",book.Quantity.ToString()); 
 
             xDoc.Root.Element("Books").Add(newBook);
-            xDoc.Save("C:\\Users\\federico.babbini\\Desktop\\OOP\\ReadXmlCsharp\\Database.xml");
+            xDoc.Save(path);
 
 
             //XmlDocument xmlDoc = new XmlDocument();
@@ -63,7 +59,7 @@ namespace DataAccessLayer.Library
         {
             XmlDocument xmlDoc = new XmlDocument();
             // c'è anche XDocument
-            xmlDoc.Load("C:\\Users\\federico.babbini\\Desktop\\OOP\\ReadXmlCsharp\\Database.xml");
+            xmlDoc.Load(path);
             XmlNodeList bookNodes = xmlDoc.SelectNodes("//Library/Books/Book");
             var bookList = new List<Book>();
             foreach (XmlNode bookNode in bookNodes)
@@ -101,7 +97,7 @@ namespace DataAccessLayer.Library
         {
 
             XmlDocument xmlDoc = new XmlDocument();
-            xmlDoc.Load("C:\\Users\\federico.babbini\\Desktop\\OOP\\ReadXmlCsharp\\Database.xml");
+            xmlDoc.Load(path);
             XmlNodeList bookNodes = xmlDoc.SelectNodes("//Library/Books/Book");
 
             bookNodes[id_book].Attributes["Title"].Value = book.Title;
@@ -122,7 +118,7 @@ namespace DataAccessLayer.Library
 
             //}
 
-            xmlDoc.Save("C:\\Users\\federico.babbini\\Desktop\\OOP\\ReadXmlCsharp\\Database.xml");
+            xmlDoc.Save(path);
 
             
 
@@ -131,7 +127,7 @@ namespace DataAccessLayer.Library
         public void UpdateIds (int id_book)
         {
             XmlDocument xmlDoc = new XmlDocument();
-            xmlDoc.Load("C:\\Users\\federico.babbini\\Desktop\\OOP\\ReadXmlCsharp\\Database.xml");
+            xmlDoc.Load(path);
             XmlNodeList bookNodes = xmlDoc.SelectNodes("//Library/Books/Book");
 
             var librosel = bookNodes[id_book];
@@ -140,14 +136,14 @@ namespace DataAccessLayer.Library
             {
                 bookNode.Attributes["BookId"].Value = count++.ToString();
             }
-            xmlDoc.Save("C:\\Users\\federico.babbini\\Desktop\\OOP\\ReadXmlCsharp\\Database.xml");
+            xmlDoc.Save(path);
 
         }
 
         public void Delete (int id_book)
         {
             XmlDocument xmlDoc = new XmlDocument();
-            xmlDoc.Load("C:\\Users\\federico.babbini\\Desktop\\OOP\\ReadXmlCsharp\\Database.xml");
+            xmlDoc.Load(path);
             XmlNodeList bookNodes = xmlDoc.SelectNodes("//Library/Books/Book");
             
             bookNodes[id_book].ParentNode.RemoveChild(bookNodes[id_book]);//così si elimina proprio la riga
@@ -162,7 +158,7 @@ namespace DataAccessLayer.Library
 
             //}
 
-            xmlDoc.Save("C:\\Users\\federico.babbini\\Desktop\\OOP\\ReadXmlCsharp\\Database.xml");
+            xmlDoc.Save(path);
         }
     }
 }

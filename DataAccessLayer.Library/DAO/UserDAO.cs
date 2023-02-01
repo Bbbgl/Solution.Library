@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -13,11 +14,12 @@ namespace DataAccessLayer.Library
 {
     public class UserDAO : IUserDAO
     {
+        public const string path = "C:\\Users\\federico.babbini\\Desktop\\OOP\\ReadXmlCsharp\\Database.xml";
         //•	Verificare i dati di login inseriti 
         public List<User> Read()
         {
             XmlDocument xmlDoc = new XmlDocument();
-            xmlDoc.Load("C:\\Users\\federico.babbini\\Desktop\\OOP\\ReadXmlCsharp\\Database.xml");
+            xmlDoc.Load(path);
             XmlNodeList userNodes = xmlDoc.SelectNodes("//Library/Users/User");
             var userList = new List<User>();
             foreach(XmlNode userNode in userNodes)
