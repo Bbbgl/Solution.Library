@@ -48,9 +48,12 @@ namespace BusinessLogic.Library
                 var queryId = bookList.Where(b => b.Title == modifyingBVM.Title && b.AuthorName == modifyingBVM.AuthorName
              && b.AuthorSurname == modifyingBVM.AuthorSurname && b.PublishingHouse == modifyingBVM.PublishingHouse).Select(e => e.BookId).ToList();
             Id= queryId[0];
-            
-            
-              var book = new Book(Id, modifyingBVM.Title, modifyingBVM.AuthorName, modifyingBVM.AuthorSurname, modifyingBVM.PublishingHouse, modifyingBVM.Quantity);
+            var queryQuantity = bookList.Where(b => b.Title == modifyingBVM.Title && b.AuthorName == modifyingBVM.AuthorName
+            && b.AuthorSurname == modifyingBVM.AuthorSurname && b.PublishingHouse == modifyingBVM.PublishingHouse).Select(e => e.Quantity).ToList();
+            var quantity = queryQuantity[0];
+
+
+            var book = new Book(Id, modifyingBVM.Title, modifyingBVM.AuthorName, modifyingBVM.AuthorSurname, modifyingBVM.PublishingHouse, quantity);
             return book;
         }
 
