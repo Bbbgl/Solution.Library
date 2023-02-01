@@ -33,25 +33,7 @@ namespace ConsoleApp.Library
 
             var userViewModel = new LoginViewModel(username, password);
 
-
-
-            //    1.	Login(UI) : Deve essere possibile accedere all’applicativo solo
-            //    dopo aver effettuato
-            //    l’accesso con uno degli utenti presenti a sistema.
-            //Se l’accesso non va a buon fine, l’utente può scegliere se uscire dall’applicativo.
-            //Se l’accesso va a buon fine, l’utente può accedere alle funzionalità della biblioteca
-            //(in base al suo ruolo)
-
-            // LoginViewModel lvm = new LoginViewModel (username , pwd);
-
-            
-
-            //UserDAO user_db = new UserDAO();// in realtà non posso chiamare il dao nel program
-
-            //var listaUtentiDalDb = user_db.Read();
-            //var userExist = libraryBusinessLogic.LoginUserCheck(username, password, listaUtentiDalDb);
-            //var userExist = libraryBusinessLogic.LoginUserCheck(lvm, listaUtentiDB);
-            // userViewModel --> usato per il check role, gli if li facciamo in base al viewmodel
+           
             var currentUser = lbl.Login(userViewModel);
 
             if (currentUser.Username == null) {
@@ -60,15 +42,8 @@ namespace ConsoleApp.Library
                 Console.ReadLine();
                 System.Environment.Exit(1);
             }
-            #region
-            //if (!userExist)
-            //{
-
-            //    Console.WriteLine("Nome utente o password errati");
-            //    Console.WriteLine("Press any key to quit");
-            //    Console.ReadLine();
-            //    System.Environment.Exit(1);
-            //}
+           
+           
 
             else Console.WriteLine("Login avvenuto con successo");
 

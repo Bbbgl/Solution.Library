@@ -108,7 +108,8 @@ namespace DataAccessLayer.Library
             bookNodes[id_book].Attributes["AuthorName"].Value = book.AuthorName;
             bookNodes[id_book].Attributes["AuthorSurname"].Value = book.AuthorSurname;
             bookNodes[id_book].Attributes["Publisher"].Value = book.PublishingHouse;
-            bookNodes[id_book].Attributes["Quantity"].Value = book.Quantity.ToString();
+            var quantity = Int32.Parse(bookNodes[id_book].Attributes["Quantity"].Value);
+            bookNodes[id_book].Attributes["Quantity"].Value = (quantity+book.Quantity).ToString();
             //for(int i = 0; i < bookNodes.Count; i++) {
             //    if (bookNodes[i].Attributes["Title"].Value == book.Title)
             //    {

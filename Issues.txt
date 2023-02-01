@@ -1,0 +1,6 @@
+1-Quando si modifia un libro la quantità viene aggiunta e non sostituita. E' così perchè quando si 
+crea un nuovo libro, se questo è già presente, la quantità viene aggiornata. Si potrebbe fare un metodo 
+nella LBL per aggiornare solo la quantità (update_quantity).
+
+2- problemi nella visualizzazione dello storico: se l'utente inserisce un utente che non esiste
+si lancia un'eccezione.

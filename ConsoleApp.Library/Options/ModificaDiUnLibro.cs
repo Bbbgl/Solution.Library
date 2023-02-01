@@ -37,7 +37,7 @@ namespace ConsoleApp.Library.Options
             Console.WriteLine("inserisci quantità");
             var quantity = Console.ReadLine();
 
-            var bookToModifyViewModel = new ModifyingBookViewModel(title, authorName, authorSurname, publishingHouse,Int32.Parse(quantity));
+            var bookToModifyViewModel = new ModifyingBookViewModel(title, authorName, authorSurname, publishingHouse/*,Int32.Parse(quantity)*/);
 
            var bookToModify = mapper.MapperModifyingBVMtoBOOK(bookToModifyViewModel);// e qui ricavo l'id
 
@@ -49,7 +49,7 @@ namespace ConsoleApp.Library.Options
             var newAuthorSurname = Console.ReadLine();
             Console.WriteLine("inserire nuovo casa editrice");
             var newPublishingHouse = Console.ReadLine();
-            Console.WriteLine("inserisci nuovo quantità");
+            Console.WriteLine("inserisci nuova quantità");
             var newQuantity = Console.ReadLine();
             //var queryId = book_list.Where(b => b.Title == title).Select(e => e.BookId).Take(1).ToList();
             

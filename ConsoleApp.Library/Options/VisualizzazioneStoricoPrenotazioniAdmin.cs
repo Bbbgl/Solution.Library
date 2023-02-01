@@ -41,7 +41,7 @@ namespace ConsoleApp.Library.Options
             var usernameViewModel = new UsernameViewModel(usernameForFilter);
 
             var userForFiltering = mapper.MapperUsernameVMtoUser(usernameViewModel);
-
+                //TODO try { } se l'utente inserito non esiste c'è un eccezione
                 userForFilteringId = userForFiltering.UserId;
                 
             }

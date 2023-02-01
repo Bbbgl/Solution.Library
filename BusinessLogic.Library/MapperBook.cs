@@ -97,14 +97,22 @@ namespace BusinessLogic.Library
             return book;
         }
 
-        public User MapperUsernameVMtoUser (UsernameViewModel uvm)
+        public User MapperUsernameVMtoUser(UsernameViewModel uvm)
         {
             var userDAO = new UserDAO();
             var userList = userDAO.Read();
 
-            var queryByUsername = userList.Where(u => u.Username == uvm.Userame).Select(e => e).ToList();
-            return new User(queryByUsername[0].UserId, queryByUsername[0].Username, queryByUsername[0].Password, queryByUsername[0].Role);
+            var queryByUsername = userList.Where(u => u.Username == uvm.Userame).Select(e => e).ToList();// se l'utente non inserisce un nome utente c'è un'eccezione
+            try
+            {
+                return new User(queryByUsername[0].UserId, queryByUsername[0].Username, queryByUsername[0].Password, queryByUsername[0].Role);
 
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("utente non riconosciuto");
+                return null;
+            }
         }
 
         public Book MapperBVMtoBOOKforGetReservationsHistory(BookViewModel bvm)
