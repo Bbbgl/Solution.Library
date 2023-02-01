@@ -7,3 +7,5 @@ si lancia un'eccezione.
 
 3- se si cancella un libro decremento la quantità di uno, oppure cancello tutto quanto? Inoltre il
 libro può essere cancellato solo se nessun utente lo sta prenotando
+
+4- inserire la visualizzazione prenotazioni per lo user
