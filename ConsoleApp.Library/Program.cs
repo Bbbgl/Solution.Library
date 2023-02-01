@@ -60,6 +60,7 @@ namespace ConsoleApp.Library
                 Console.ReadLine();
                 System.Environment.Exit(1);
             }
+            #region
             //if (!userExist)
             //{
 
