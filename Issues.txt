@@ -5,7 +5,7 @@ nella LBL per aggiornare solo la quantità (update_quantity).
 2- problemi nella visualizzazione dello storico: se l'utente inserisce un utente che non esiste
 si lancia un'eccezione.
 
-3- se si cancella un libro decremento la quantità di uno, oppure cancello tutto quanto? Inoltre il
-libro può essere cancellato solo se nessun utente lo sta prenotando
+3- se si cancella un libro decremento la quantità di uno, oppure cancello tutto quanto(per ora è così)?
+Inoltre il libro può essere cancellato solo se nessun utente lo sta prenotando
 
 DONE 4- inserire la visualizzazione prenotazioni per lo user DONE

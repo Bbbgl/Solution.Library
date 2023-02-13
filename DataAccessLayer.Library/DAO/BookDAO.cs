@@ -93,7 +93,7 @@ namespace DataAccessLayer.Library
 
         
 
-        public void Update(Book book,int id_book)
+        public void Update(Book book,int id_book)// l'id si puà tranquillamente togliere
         {
 
             XmlDocument xmlDoc = new XmlDocument();
