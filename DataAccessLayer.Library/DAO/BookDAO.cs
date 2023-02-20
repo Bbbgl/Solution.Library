@@ -1,12 +1,14 @@
 ﻿using Model.Library;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
+using static DataAccessLayer.Library.DBConnection;
 
 namespace DataAccessLayer.Library
 {
@@ -19,40 +21,62 @@ namespace DataAccessLayer.Library
         public void Create(Book book)
         {
 
-            //prova con LINQ
-            var xDoc = XDocument.Load(path);
-            var count = xDoc.Descendants("Book").Count();
-            var newBook = new XElement("Book");
-            newBook.SetAttributeValue("BookId", count++.ToString());
-            newBook.SetAttributeValue("Title", book.Title);
+            // INIZIO PROVA CON SQL
+
+            var numBooks = this.Read().Count;
+
+            using (SqlConnection conn = DB.GetSqlConnection())
+            {
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"CreateBook";
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+                    SqlParameter p1 = new SqlParameter("BookId", System.Data.SqlDbType.Int);
+                    p1.Value = numBooks++;
+                    cmd.Parameters.Add(p1);
+
+                    SqlParameter p2 = new SqlParameter("Title", System.Data.SqlDbType.NVarChar, 100);
+                    p2.Value = book.Title;
+                    cmd.Parameters.Add(p2);
+
+                    SqlParameter p3 = new SqlParameter("AuthorName", System.Data.SqlDbType.NVarChar, 100);
+                    p3.Value = book.AuthorName;
+                    cmd.Parameters.Add(p3);
+
+                    SqlParameter p4 = new SqlParameter("AuthorSurname", System.Data.SqlDbType.NVarChar, 100);
+                    p4.Value = book.AuthorSurname;
+                    cmd.Parameters.Add(p4);
+
+                    SqlParameter p5 = new SqlParameter("Publisher", System.Data.SqlDbType.NVarChar, 100);
+                    p5.Value = book.PublishingHouse;
+                    cmd.Parameters.Add(p5);
+
+                    SqlParameter p6 = new SqlParameter("Quantity", System.Data.SqlDbType.Int);
+                    p6.Value = book.Quantity;
+                    cmd.Parameters.Add(p6);
+
+                    cmd.ExecuteNonQuery();
+
+                }
+            }
+
+
+                    //------------XML-------------------
+            //        var xDoc = XDocument.Load(path);
+            //var count = xDoc.Descendants("Book").Count();
+            //var newBook = new XElement("Book");
+            //newBook.SetAttributeValue("BookId", count++.ToString());
+            //newBook.SetAttributeValue("Title", book.Title);
             
             
-            newBook.SetAttributeValue("AuthorName", book.AuthorName);
-            newBook.SetAttributeValue("AuthorSurname", book.AuthorSurname);
-            newBook.SetAttributeValue("Publisher", book.PublishingHouse);
-            newBook.SetAttributeValue("Quantity",book.Quantity.ToString()); 
+            //newBook.SetAttributeValue("AuthorName", book.AuthorName);
+            //newBook.SetAttributeValue("AuthorSurname", book.AuthorSurname);
+            //newBook.SetAttributeValue("Publisher", book.PublishingHouse);
+            //newBook.SetAttributeValue("Quantity",book.Quantity.ToString()); 
 
-            xDoc.Root.Element("Books").Add(newBook);
-            xDoc.Save(path);
-
-
-            //XmlDocument xmlDoc = new XmlDocument();
-            //xmlDoc.Load("C:\\Users\\federico.babbini\\Desktop\\OOP\\ReadXmlCsharp\\Database.xml");
-
-            //XmlNodeList bookNodes = xmlDoc.SelectNodes("//Library/Books/Book");
-            //bookNodes.lastChild.Attributes["BookId"].Value = count++.ToString;
-
-            //XmlNode bookNode = xmlDoc.SelectSingleNode("//Library/Books");
-            //XmlElement newBookNode = xmlDoc.CreateElement("Book", null);
-            //newBookNode.SetAttribute("BookId", Count++.ToString());
-            //newBookNode.SetAttribute("Title", book.Title);
-            //newBookNode.SetAttribute("AuthorName", book.AuthorName);
-            //newBookNode.SetAttribute("AuthorSurname", book.AuthorSurname);
-            //newBookNode.SetAttribute("Publisher", book.PublishingHouse);
-            //newBookNode.SetAttribute("Quantity", book.Quantity.ToString());
-            //bookNode.AppendChild(newBookNode);
-            //xmlDoc.Save("C:\\Users\\federico.babbini\\Desktop\\OOP\\ReadXmlCsharp\\Database.xml");
-
+            //xDoc.Root.Element("Books").Add(newBook);
+            //xDoc.Save(path);
         }
 
         public List<Book> Read()
