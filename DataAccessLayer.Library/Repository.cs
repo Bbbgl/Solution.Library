@@ -72,7 +72,16 @@ namespace DataAccessLayer.Library
             this.ReservationDAO.Update(reservation,reservation_id);
         }
 
-        
+        public static string ApplicationName
+        {
+            get;
+            set;
+        }
+        public static int ConnectionTimeout
+        {
+            get;
+            set;
+        }
 
 
     }

@@ -47,7 +47,7 @@ namespace BusinessLogic.Library
             // messa così mi modifica solo la quantità
                 var queryId = bookList.Where(b => b.Title == modifyingBVM.Title && b.AuthorName == modifyingBVM.AuthorName
              && b.AuthorSurname == modifyingBVM.AuthorSurname && b.PublishingHouse == modifyingBVM.PublishingHouse).Select(e => e.BookId).ToList();
-            Id= queryId[0];
+            Id= queryId[0];//la ricerca di un libro da modificare può lanciare un'eccezione,need try-catch
             var queryQuantity = bookList.Where(b => b.Title == modifyingBVM.Title && b.AuthorName == modifyingBVM.AuthorName
             && b.AuthorSurname == modifyingBVM.AuthorSurname && b.PublishingHouse == modifyingBVM.PublishingHouse).Select(e => e.Quantity).ToList();
             var quantity = queryQuantity[0];

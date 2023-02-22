@@ -23,7 +23,9 @@ namespace DataAccessLayer.Library
 
             // INIZIO PROVA CON SQL
 
-            var numBooks = this.Read().Count;
+            var numBooks = this.Read().Count;// problema!!! L'id deve essere deciso in sql,
+                                             // se cancello un libro si sballa la conta, provo a mettere l'id non come variabile della storeproc
+
 
             using (SqlConnection conn = DB.GetSqlConnection())
             {
@@ -32,9 +34,9 @@ namespace DataAccessLayer.Library
                     cmd.CommandText = @"CreateBook";
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
-                    SqlParameter p1 = new SqlParameter("BookId", System.Data.SqlDbType.Int);
-                    p1.Value = numBooks++;
-                    cmd.Parameters.Add(p1);
+                    //SqlParameter p1 = new SqlParameter("BookId", System.Data.SqlDbType.Int);
+                    //p1.Value = numBooks++;
+                    //cmd.Parameters.Add(p1);
 
                     SqlParameter p2 = new SqlParameter("Title", System.Data.SqlDbType.NVarChar, 100);
                     p2.Value = book.Title;
@@ -59,6 +61,7 @@ namespace DataAccessLayer.Library
                     cmd.ExecuteNonQuery();
 
                 }
+                //conn.Close();
             }
 
 
@@ -106,7 +109,7 @@ namespace DataAccessLayer.Library
                     }
 
                 }
-                conn.Close();
+                //conn.Close();
             }
             return bookList;
         }
@@ -124,55 +127,98 @@ namespace DataAccessLayer.Library
 
 
 
-            //    XmlDocument xmlDoc = new XmlDocument();
-            //    // c'è anche XDocument
-            //    xmlDoc.Load(path);
-            //    XmlNodeList bookNodes = xmlDoc.SelectNodes("//Library/Books/Book");
-            //    var bookList = new List<Book>();
-            //    foreach (XmlNode bookNode in bookNodes)
-            //    {
-            //        var bookIdDB = bookNode.Attributes["BookId"].Value;
-            //        var titleDB = bookNode.Attributes["Title"];
-            //        var authorNameDB = bookNode.Attributes["AuthorName"];
-            //        var authorSurnameDB = bookNode.Attributes["AuthorSurname"];
-            //        var publisherDB = bookNode.Attributes["Publisher"];
-            //        var quantityDB = bookNode.Attributes["Quantity"].Value;
-            //        //int quantityDBtoInt;
-            //        //try
-            //        //{
-            //        //    quantityDBtoInt = Convert.ToInt32(quantityDB);
+        //    XmlDocument xmlDoc = new XmlDocument();
+        //    // c'è anche XDocument
+        //    xmlDoc.Load(path);
+        //    XmlNodeList bookNodes = xmlDoc.SelectNodes("//Library/Books/Book");
+        //    var bookList = new List<Book>();
+        //    foreach (XmlNode bookNode in bookNodes)
+        //    {
+        //        var bookIdDB = bookNode.Attributes["BookId"].Value;
+        //        var titleDB = bookNode.Attributes["Title"];
+        //        var authorNameDB = bookNode.Attributes["AuthorName"];
+        //        var authorSurnameDB = bookNode.Attributes["AuthorSurname"];
+        //        var publisherDB = bookNode.Attributes["Publisher"];
+        //        var quantityDB = bookNode.Attributes["Quantity"].Value;
+        //        //int quantityDBtoInt;
+        //        //try
+        //        //{
+        //        //    quantityDBtoInt = Convert.ToInt32(quantityDB);
 
-            //        //}catch (Exception e)
-            //        //{
-            //        //    quantityDBtoInt = 0;
-            //        //}
-            //        var book = new Book(Int32.Parse(bookIdDB),titleDB.Value, authorNameDB.Value, authorSurnameDB.Value,
-            //            publisherDB.Value, Int32.Parse(quantityDB));
-            //        bookList.Add(book);
-
-
-            //    }
+        //        //}catch (Exception e)
+        //        //{
+        //        //    quantityDBtoInt = 0;
+        //        //}
+        //        var book = new Book(Int32.Parse(bookIdDB),titleDB.Value, authorNameDB.Value, authorSurnameDB.Value,
+        //            publisherDB.Value, Int32.Parse(quantityDB));
+        //        bookList.Add(book);
 
 
-
-            //    return bookList;
-            //}
+        //    }
 
 
 
-            public void Update(Book book,int id_book)// l'id si puà tranquillamente togliere
+        //    return bookList;
+        //}
+
+
+
+        public void Update(Book book, int id_book)// l'id si puà tranquillamente togliere
         {
+            using(SqlConnection conn = DB.GetSqlConnection())
+            {
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"UpdateBook";
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
-            XmlDocument xmlDoc = new XmlDocument();
-            xmlDoc.Load(path);
-            XmlNodeList bookNodes = xmlDoc.SelectNodes("//Library/Books/Book");
+                    SqlParameter p1 = new SqlParameter("BookId", System.Data.SqlDbType.Int);
+                    p1.Value = id_book;
+                    cmd.Parameters.Add(p1);
 
-            bookNodes[id_book].Attributes["Title"].Value = book.Title;
-            bookNodes[id_book].Attributes["AuthorName"].Value = book.AuthorName;
-            bookNodes[id_book].Attributes["AuthorSurname"].Value = book.AuthorSurname;
-            bookNodes[id_book].Attributes["Publisher"].Value = book.PublishingHouse;
-            var quantity = Int32.Parse(bookNodes[id_book].Attributes["Quantity"].Value);
-            bookNodes[id_book].Attributes["Quantity"].Value = (quantity+book.Quantity).ToString();
+                    SqlParameter p2 = new SqlParameter("Title", System.Data.SqlDbType.NVarChar, 100);
+                    p2.Value = book.Title;
+                    cmd.Parameters.Add(p2);
+
+                    SqlParameter p3 = new SqlParameter("AuthorName", System.Data.SqlDbType.NVarChar, 100);
+                    p3.Value = book.AuthorName;
+                    cmd.Parameters.Add(p3);
+
+                    SqlParameter p4 = new SqlParameter("AuthorSurname", System.Data.SqlDbType.NVarChar, 100);
+                    p4.Value = book.AuthorSurname;
+                    cmd.Parameters.Add(p4);
+
+                    SqlParameter p5 = new SqlParameter("Publisher", System.Data.SqlDbType.NVarChar, 100);
+                    p5.Value = book.PublishingHouse;
+                    cmd.Parameters.Add(p5);
+
+                    SqlParameter p6 = new SqlParameter("Quantity", System.Data.SqlDbType.Int);
+                    p6.Value = book.Quantity;
+                    cmd.Parameters.Add(p6);
+
+                    cmd.ExecuteNonQuery();
+
+                }
+                conn.Close();
+            }
+
+
+
+
+
+
+
+
+            //XmlDocument xmlDoc = new XmlDocument();
+            //xmlDoc.Load(path);
+            //XmlNodeList bookNodes = xmlDoc.SelectNodes("//Library/Books/Book");
+
+            //bookNodes[id_book].Attributes["Title"].Value = book.Title;
+            //bookNodes[id_book].Attributes["AuthorName"].Value = book.AuthorName;
+            //bookNodes[id_book].Attributes["AuthorSurname"].Value = book.AuthorSurname;
+            //bookNodes[id_book].Attributes["Publisher"].Value = book.PublishingHouse;
+            //var quantity = Int32.Parse(bookNodes[id_book].Attributes["Quantity"].Value);
+            //bookNodes[id_book].Attributes["Quantity"].Value = (quantity + book.Quantity).ToString();
             //for(int i = 0; i < bookNodes.Count; i++) {
             //    if (bookNodes[i].Attributes["Title"].Value == book.Title)
             //    {
@@ -185,9 +231,7 @@ namespace DataAccessLayer.Library
 
             //}
 
-            xmlDoc.Save(path);
-
-            
+            //xmlDoc.Save(path);
 
         }
 
