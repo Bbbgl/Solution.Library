@@ -253,23 +253,42 @@ namespace DataAccessLayer.Library
 
         public void Delete (int id_book)
         {
-            XmlDocument xmlDoc = new XmlDocument();
-            xmlDoc.Load(path);
-            XmlNodeList bookNodes = xmlDoc.SelectNodes("//Library/Books/Book");
-            
-            bookNodes[id_book].ParentNode.RemoveChild(bookNodes[id_book]);//così si elimina proprio la riga
 
-            
+            using (SqlConnection conn = DB.GetSqlConnection())
+            {
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"DeleteBook";
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
-            
+                    SqlParameter p1 = new SqlParameter("BookId", System.Data.SqlDbType.Int);
+                    p1.Value = id_book;
+                    cmd.Parameters.Add(p1);
 
-            //var bookNode = xmlDoc.SelectSingleNode("//Library/Books");
-            //for(var i = id_book; i< bookNodes.Count; i++) { 
-            //bookNode.ChildNodes[i].Attributes["BookId"].Value= (i-1).ToString();
+                    
 
-            //}
+                    cmd.ExecuteNonQuery();
 
-            xmlDoc.Save(path);
+                }
+                conn.Close();
+            }
+
+
+
+
+
+
+
+
+
+
+            //XmlDocument xmlDoc = new XmlDocument();
+            //xmlDoc.Load(path);
+            //XmlNodeList bookNodes = xmlDoc.SelectNodes("//Library/Books/Book");
+
+            //bookNodes[id_book].ParentNode.RemoveChild(bookNodes[id_book]);//così si elimina proprio la riga
+
+            //xmlDoc.Save(path);
         }
     }
 }
