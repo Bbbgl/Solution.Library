@@ -27,6 +27,7 @@ namespace DataAccessLayer.Library
         //CRUD methods RESERVATION
         List<Reservation> ReadReservations();//sarebbe get reservation
 
+        //List<Reservation> GetReservationHistory(int? bookId, int? userId, ReservationStatus? reservationStatus);
         void CreateReservation(Book book, User user);
         void UpdateReservation(Reservation reservation, int reservation_id);
     }

@@ -23,7 +23,7 @@ namespace ConsoleApp.Library.Options
         public User User { get; set; }
         public LibraryBusinessLogic LibraryBusinessLogic { get; set; }
 
-
+        // l'admin credo possa vedere le prenotazioni di tutti gli utenti
         public VisualizzazioneStoricoPrenotazioniAdmin(User currentUser, LibraryBusinessLogic lbl)
         {
             this.User = currentUser;

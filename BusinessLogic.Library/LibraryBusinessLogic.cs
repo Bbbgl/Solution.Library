@@ -81,43 +81,48 @@ namespace BusinessLogic.Library
 
         public void AddBook(Book book)
         {
-            //var book_db = new BookDAO();
-            //var bookList = book_db.Read();
+            //PROVO A FARE TUTTO CON SQL
+
+            this.Repository.CreateBook(book);
+
+
+            ////var book_db = new BookDAO();
+            ////var bookList = book_db.Read();
             
-            var bookList = Repository.ReadBooks();
-            bool libroIsPresent = false;
+            //var bookList = Repository.ReadBooks();
+            //bool libroIsPresent = false;
 
-            // devo trovare l'id del libro inserito, che è l'unico parametro non noto all'utente
-            var book_id = 0;
-            for (var i = 0; i < bookList.Count(); i++)
-            {
-                //se presente
-                if (((book.Title).Equals(bookList[i].Title)) && ((book.AuthorSurname).Equals(bookList[i].AuthorSurname)))//AGGIUNGI GLI ALTRI
-                {
+            //// devo trovare l'id del libro inserito, che è l'unico parametro non noto all'utente
+            //var book_id = 0;
+            //for (var i = 0; i < bookList.Count(); i++)
+            //{
+            //    //se presente
+            //    if (((book.Title).Equals(bookList[i].Title)) && ((book.AuthorSurname).Equals(bookList[i].AuthorSurname)))//AGGIUNGI GLI ALTRI
+            //    {
 
-                    book_id = i;
-                    libroIsPresent = true;
-
-
-
-                    //    libroIsPresent = true;
-                    break;
-                }
-                else {
-                    libroIsPresent = false;
-
-                }
-                //else { libroIsPresent = false; }
+            //        book_id = i;
+            //        libroIsPresent = true;
 
 
 
+            //        //    libroIsPresent = true;
+            //        break;
+            //    }
+            //    else {
+            //        libroIsPresent = false;
+
+            //    }
+            //    //else { libroIsPresent = false; }
 
 
-            }
-            if (libroIsPresent) { this.Repository.UpdateBook(book, book_id); }
-            else { this.Repository.CreateBook(book); }
-            //guardare se il libro è presente--> se si aggiungere quantità(update BookDAo)
-            //altrimenti aggiungere libro (create bookDAO)
+
+
+
+            //}
+            //if (libroIsPresent) { this.Repository.UpdateBook(book, book_id); }
+            //else { this.Repository.CreateBook(book); }
+            ////guardare se il libro è presente--> se si aggiungere quantità(update BookDAo)
+            ////altrimenti aggiungere libro (create bookDAO)
         }
 
         public void UpdateBook(int bookId, Book bookWithNewValues)
@@ -445,6 +450,9 @@ namespace BusinessLogic.Library
 
 
         }
+
+        //public List<ReservationViewModel> GetReservationHistorySQL(int? bookId, int? userId, ReservationStatus? reservationStatus)
+       
     }
 
 

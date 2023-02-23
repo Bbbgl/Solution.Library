@@ -61,7 +61,7 @@ namespace DataAccessLayer.Library
                     cmd.ExecuteNonQuery();
 
                 }
-                //conn.Close();
+                conn.Close();
             }
 
 
@@ -251,7 +251,7 @@ namespace DataAccessLayer.Library
 
         }
 
-        public void Delete (int id_book)
+        public void Delete (int id_book)// considera la cascade delete per elimiare le righe
         {
 
             using (SqlConnection conn = DB.GetSqlConnection())

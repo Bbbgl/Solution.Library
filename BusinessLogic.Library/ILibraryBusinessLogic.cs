@@ -45,5 +45,7 @@ namespace BusinessLogic.Library
         ReservationResult BookReturn(int bookId, int userId);
 
         List<ReservationViewModel> GetReservationHistory(int? bookId, int? userId, ReservationStatus? reservationStatus);
+
+       // List<ReservationViewModel> GetReservationHistorySQL(int? bookId, int? userId, ReservationStatus? reservationStatus);
     }
 }
