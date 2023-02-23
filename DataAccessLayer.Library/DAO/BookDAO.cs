@@ -23,7 +23,7 @@ namespace DataAccessLayer.Library
 
             // INIZIO PROVA CON SQL
 
-            var numBooks = this.Read().Count;// problema!!! L'id deve essere deciso in sql,
+            //var numBooks = this.Read().Count;// problema!!! L'id deve essere deciso in sql,
                                              // se cancello un libro si sballa la conta, provo a mettere l'id non come variabile della storeproc
 
 
