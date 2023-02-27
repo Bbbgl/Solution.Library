@@ -34,9 +34,9 @@ namespace DataAccessLayer.Library
                     cmd.CommandText = @"CreateBook";
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
-                    //SqlParameter p1 = new SqlParameter("BookId", System.Data.SqlDbType.Int);
-                    //p1.Value = numBooks++;
-                    //cmd.Parameters.Add(p1);
+                    SqlParameter p1 = new SqlParameter("BookId", System.Data.SqlDbType.Int);
+                    p1.Value = book.BookId;
+                    cmd.Parameters.Add(p1);
 
                     SqlParameter p2 = new SqlParameter("Title", System.Data.SqlDbType.NVarChar, 100);
                     p2.Value = book.Title;

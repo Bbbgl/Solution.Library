@@ -37,16 +37,15 @@ namespace ConsoleApp.Library.Options
             Console.WriteLine("Casa Editrice");
             var bookPublishingHouseToSearch = Console.ReadLine();
 
-            var bookViewModel = new BookViewModel(bookTitleToSearch, bookAuthorNameToSearch,
+            var bookToSearch = new BookViewModel(bookTitleToSearch, bookAuthorNameToSearch,
                 bookAuthorSurnameToSearch, bookPublishingHouseToSearch);
 
-            var mapper = new MapperBook();// non serve se facessi MapperBook STATIC
+            // non serve se facessi MapperBook STATIC
 
-            var book = mapper.MapperBVMtoBOOK(bookViewModel);// se nel metodo search utilizzassi un bvm (o meglio un search bvm) non avrei bisogno di chiamare il mapper qui
 
             // posso provare qui a creare la lbl, oppure usarla come parametro
 
-            var bookAvailableList = this.LibraryBusinessLogic.SearchBookWithAvailabilityInfos(book);
+            var bookAvailableList = this.LibraryBusinessLogic.SearchBookWithAvailabilityInfos(bookToSearch);
 
             foreach (var books in bookAvailableList)
             {

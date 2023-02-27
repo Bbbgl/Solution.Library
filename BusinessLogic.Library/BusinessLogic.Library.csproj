@@ -54,6 +54,7 @@
     <Compile Include="ViewModels\ReservationViewModel.cs" />
     <Compile Include="ViewModels\ReservingBookViewModel.cs" />
     <Compile Include="ViewModels\ReturningBookViewModel.cs" />
+    <Compile Include="ViewModels\SearchingBookViewModel.cs" />
     <Compile Include="ViewModels\UsernameViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

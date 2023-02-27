@@ -37,13 +37,14 @@ namespace ConsoleApp.Library
             Console.WriteLine("inserisci quantità");
             var quantity = Console.ReadLine();
 
-            var addingBvm = new AddingBookViewModel(title, authorName, authorSurname, publishingHouse, Int16.Parse(quantity));
+            var addingBVM = new AddingBookViewModel(title, authorName, authorSurname, publishingHouse, Int16.Parse(quantity));
             // var queryId = book_list.Where(b => b.Title == title).Select(e => e.BookId).Take(1).ToList();
+            this.LibraryBusinessLogic.AddBook(addingBVM);
 
-            var bookToAdd = mapper.MapperAddingBVMtoBOOK(addingBvm);
+            //var bookToAdd = mapper.MapperAddingBVMtoBOOK(addingBvm);
             //var id_book = book_list.Count();
             //var libro = new Book(id_book++, title, authorName, authorSurname, publishingHouse, Int16.Parse(quantity));
-           this.LibraryBusinessLogic.AddBook(bookToAdd);// se il libro è presente deve essere aggiornata la quantità
+          ;// se il libro è presente deve essere aggiornata la quantità
 
         }
     }

@@ -1,4 +1,5 @@
 ﻿using BusinessLogic.Library.ViewModels;
+using ConsoleApp.Library.Options;
 using DataAccessLayer.Library;
 using Model.Library;
 using System;
@@ -17,10 +18,16 @@ namespace BusinessLogic.Library
 {
     public class LibraryBusinessLogic : ILibraryBusinessLogic
     {
+
         //•	Login: Dovrà essere valutata l’esistenza o meno dello User sulla base dei dati
         //specificati dall’utente (Username, Password)
 
-       public IRepository Repository { get; set; }  
+
+        public IRepository Repository { get; set; }
+
+     
+       
+
 
         public LibraryBusinessLogic (IRepository repository)
         {
@@ -50,79 +57,104 @@ namespace BusinessLogic.Library
             }
         }
 
-        public bool LoginUserCheck(string username, string password, List<User> userList)
-        {
+        //public bool LoginUserCheck(string username, string password, List<User> userList)
+        //{
 
-            var check = true;
-            for (int i = 0; i < userList.Count(); i++)
-            {
-                if ((username.Equals(userList[i].Username)) && (password.Equals(userList[i].Password)))
-                {
-                    check = true;
-                    break;
-                }
-                else check = false;
+        //    var check = true;
+        //    for (int i = 0; i < userList.Count(); i++)
+        //    {
+        //        if ((username.Equals(userList[i].Username)) && (password.Equals(userList[i].Password)))
+        //        {
+        //            check = true;
+        //            break;
+        //        }
+        //        else check = false;
+        //    }
+        //    return check;
+        //}// prova LINQ
+
+
+        //public bool AdminCheck(string username, List<User> userList)
+        //{
+        //    var userIndex = 0;
+        //    for (int i = 0; i < userList.Count(); i++)
+        //    {
+        //        if (username.Equals(userList[i].Username)) { userIndex = i; break; }// metto solo username ora, perchè non ci sono utenti con stesso username
+        //    }
+        //    if (userList[userIndex].Role.Equals("Admin")) return true;
+        //    else return false;
+        //}
+
+
+        public void AddBook(AddingBookViewModel addingBVM)
+        {
+            #region
+            //<//PROVO A FARE TUTTO CON SQL
+
+            //this.Repository.CreateBook(book);
+            #endregion
+
+            var bookList = Repository.ReadBooks();
+            var bookId = 0;
+            var filteredBook = bookList.Where(b => b.Title == addingBVM.Title && b.AuthorName == addingBVM.AuthorName
+                        && b.AuthorSurname == addingBVM.AuthorSurname && b.PublishingHouse == addingBVM.PublishingHouse).ToList();
+            Book bookToAdd;
+
+            // controllo se nella lista di libri c'è il libro che si vuole inserire
+
+            if (filteredBook.Count > 0) 
+            { 
+                //il libro è presente (la conta è positiva)
+                bookId = filteredBook[0].BookId;
+            //l'id è quello dell'attuale libro, quindi devo aggiornare la quantità
+            bookToAdd = new Book(bookId, addingBVM.Title, addingBVM.AuthorName, addingBVM.AuthorSurname, addingBVM.PublishingHouse, addingBVM.Quantity);
+
+            this.Repository.UpdateBook(bookToAdd,bookId);// l' id qui non serve
             }
-            return check;
-        }// prova LINQ
-
-
-        public bool AdminCheck(string username, List<User> userList)
-        {
-            var userIndex = 0;
-            for (int i = 0; i < userList.Count(); i++)
+            else // il libro non è presente quindi crealo
             {
-                if (username.Equals(userList[i].Username)) { userIndex = i; break; }// metto solo username ora, perchè non ci sono utenti con stesso username
+                bookId = bookList.Count + 1;//forse +1
+                bookToAdd= new Book(bookId, addingBVM.Title, addingBVM.AuthorName, addingBVM.AuthorSurname, addingBVM.PublishingHouse, addingBVM.Quantity);
+                this.Repository.CreateBook(bookToAdd);
             }
-            if (userList[userIndex].Role.Equals("Admin")) return true;
-            else return false;
-        }
-
-
-        public void AddBook(Book book)
-        {
-            //PROVO A FARE TUTTO CON SQL
-
-            this.Repository.CreateBook(book);
-
-
+       
             ////var book_db = new BookDAO();
             ////var bookList = book_db.Read();
-            
-            //var bookList = Repository.ReadBooks();
-            //bool libroIsPresent = false;
 
-            //// devo trovare l'id del libro inserito, che è l'unico parametro non noto all'utente
-            //var book_id = 0;
-            //for (var i = 0; i < bookList.Count(); i++)
-            //{
-            //    //se presente
-            //    if (((book.Title).Equals(bookList[i].Title)) && ((book.AuthorSurname).Equals(bookList[i].AuthorSurname)))//AGGIUNGI GLI ALTRI
-            //    {
+                //var bookList = Repository.ReadBooks();
+                //bool libroIsPresent = false;
 
-            //        book_id = i;
-            //        libroIsPresent = true;
+                //// devo trovare l'id del libro inserito, che è l'unico parametro non noto all'utente
+                //var book_id = 0;
+                //for (var i = 0; i < bookList.Count(); i++)
+                //{
+                //    //se presente
+                //    if (((book.Title).Equals(bookList[i].Title)) && ((book.AuthorSurname).Equals(bookList[i].AuthorSurname)))//AGGIUNGI GLI ALTRI
+                //    {
 
-
-
-            //        //    libroIsPresent = true;
-            //        break;
-            //    }
-            //    else {
-            //        libroIsPresent = false;
-
-            //    }
-            //    //else { libroIsPresent = false; }
+                //        book_id = i;
+                //        libroIsPresent = true;
 
 
 
+                //        //    libroIsPresent = true;
+                //        break;
+                //    }
+                //    else {
+                //        libroIsPresent = false;
+
+                //    }
+                //    //else { libroIsPresent = false; }
 
 
-            //}
-            //if (libroIsPresent) { this.Repository.UpdateBook(book, book_id); }
-            //else { this.Repository.CreateBook(book); }
-            ////guardare se il libro è presente--> se si aggiungere quantità(update BookDAo)
-            ////altrimenti aggiungere libro (create bookDAO)
+
+
+
+                //}
+                //if (libroIsPresent) { this.Repository.UpdateBook(book, book_id); }
+                //else { this.Repository.CreateBook(book); }
+                ////guardare se il libro è presente--> se si aggiungere quantità(update BookDAo)
+                ////altrimenti aggiungere libro (create bookDAO)
         }
 
         public void UpdateBook(int bookId, Book bookWithNewValues)
@@ -132,7 +164,7 @@ namespace BusinessLogic.Library
 
         }
 
-        public List<Book> SearchBook(Book book)
+        public List<Book> SearchBook(Book book)// non lo chiamo mai si può cancellare
         {
             //var book_db = new BookDAO();
             //var bookList = book_db.Read();
@@ -141,47 +173,85 @@ namespace BusinessLogic.Library
 
             var bookList = this.Repository.ReadBooks();
 
-            var queryTitle =  bookList.Where(b => (b.Title == (book.Title)))
-                 .Select(e => e);
+            //var queryTitle =  bookList.Where(b => (b.Title == (book.Title)))
+            //     .Select(e => e);-----FACCIO TUTTO IN SQL
                 
-            return queryTitle.ToList();
+            return bookList.ToList();
             
 
 
         }
 
-        public List<BookViewModel> SearchBookWithAvailabilityInfos(Book book)
+        public List<SearchingBookViewModel> SearchBookWithAvailabilityInfos(BookViewModel bvm)
         {
-            var bookWithAvaiabilityInfosList = new List<BookViewModel>();
+            var bookWithAvaiabilityInfosList = new List<SearchingBookViewModel>();
 
             //var book_db = new BookDAO();
+            //var bookList = this.Repository.ReadBooks();
+            //var mapper = new MapperBook();
+            //metodo nel mapper che da bvm mi ritorna lista di searchingBvm
+            //bookWithAvaiabilityInfosList = mapper.MapperBVMtoSearchingBVM(bvm);
+
             var bookList = this.Repository.ReadBooks();
 
-            var filteredBookByQuantity = bookList.Where(b => b.Quantity > 0)
-                 .Select(e => e).ToList();
+            foreach (var book in bookList)
+            {
+                // filtro la lista di libri in base al bvm
 
-            if(!string.IsNullOrEmpty(book.Title))
-            {
-                filteredBookByQuantity = filteredBookByQuantity.Where(x => x.Title == book.Title).ToList();
+                if (!string.IsNullOrEmpty(bvm.Title))
+                {
+                    bookList = bookList.Where(x => x.Title == bvm.Title).ToList();
+                }
+                if (!string.IsNullOrEmpty(bvm.AuthorName))
+                {
+                    bookList = bookList.Where(x => x.AuthorName == bvm.AuthorName).ToList();
+                }
+                if (!string.IsNullOrEmpty(bvm.AuthorSurname))
+                {
+                    bookList = bookList.Where(x => x.AuthorSurname == bvm.AuthorSurname).ToList();
+                }
+                if (!string.IsNullOrEmpty(bvm.PublishingHouse))
+                {
+                    bookList = bookList.Where(x => x.PublishingHouse == bvm.PublishingHouse).ToList();
+                }
             }
-            if (!string.IsNullOrEmpty(book.AuthorName))
+
+            // alla fine ho la lista di tutti i libri cercati
+            var reservationList = this.Repository.ReadReservations();
+            DateTime? firstAvailabilityDate = DateTime.Now;
+            bool availability = true;
+            var bookId = 0;
+            var bookQuantity = 0;
+
+            foreach (var book in bookList)
+            // qui ho tutti gli eventuali libri, ma devo trovare per ognuno l'id e la disponibilità
             {
-                filteredBookByQuantity = filteredBookByQuantity.Where(x => x.AuthorName == book.AuthorName).ToList();
-            }
-            if (!string.IsNullOrEmpty(book.AuthorSurname))
-            {
-                filteredBookByQuantity = filteredBookByQuantity.Where(x => x.AuthorSurname == book.AuthorSurname).ToList();
-            }
-            if (!string.IsNullOrEmpty(book.PublishingHouse))
-            {
-                filteredBookByQuantity = filteredBookByQuantity.Where(x => x.PublishingHouse == book.PublishingHouse).ToList();
-            }
-            foreach(var books in filteredBookByQuantity)
-            {
-                var bvm = new BookViewModel(books.Title, books.AuthorName, books.AuthorSurname, books.PublishingHouse,true);
-                bookWithAvaiabilityInfosList.Add(bvm);
+                bookList.Where(b => b.Title == book.Title && b.AuthorName == book.AuthorName
+                        && b.AuthorSurname == book.AuthorSurname && b.PublishingHouse == book.PublishingHouse).ToList();
+                bookId = bookList[0].BookId;
+                bookQuantity = bookList[0].Quantity;
+
+
+                if (reservationList.Where(r => r.Book.BookId == bookId && r.EndDate > DateTime.Today).Count() >= bookQuantity)
+                {
+                    availability = false;
+                    firstAvailabilityDate = reservationList.Where(r => r.Book.BookId == bookId && r.EndDate > DateTime.Today).OrderBy(r => r.EndDate).FirstOrDefault().EndDate;
+                }
+                else
+                {
+                    availability = true;
+                }
+                var bookWithAvaiabilityInfos = new SearchingBookViewModel(
+                    bookId, book.Title, book.AuthorName, book.AuthorSurname,
+                    book.PublishingHouse, book.Quantity, availability, firstAvailabilityDate
+
+                    );
+
+                bookWithAvaiabilityInfosList.Add(bookWithAvaiabilityInfos);
             }
             return bookWithAvaiabilityInfosList;
+
+        }
 
 
             //if (book.Title == "" && book.AuthorName == "" && book.AuthorSurname == ""
@@ -221,7 +291,7 @@ namespace BusinessLogic.Library
 
 
 
-        }
+        
 
         public void ReserveBook(int bookId, int userId)
         {
@@ -299,7 +369,7 @@ namespace BusinessLogic.Library
             //var reservationResult = new ReservationResult( userList[userId],bookList[bookId],false);
 
 
-            if (bookList[bookId].Quantity > 0)
+            if (bookList[--bookId].Quantity > 0)
             { // vedo se questo libro ha quantità >0
 
                 if (queryReservedBookByUser.Count == 0)

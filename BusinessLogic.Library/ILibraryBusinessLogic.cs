@@ -1,4 +1,5 @@
 ﻿using BusinessLogic.Library.ViewModels;
+using ConsoleApp.Library.Options;
 using Model.Library;
 using System;
 using System.Collections.Generic;
@@ -23,11 +24,11 @@ namespace BusinessLogic.Library
         //da controlare il login
         User Login(LoginViewModel lvm); //prendi user da UserDAO e verifica
 
-        void AddBook(Book book);
+        void AddBook(AddingBookViewModel BVM);
 
-        List<Book> SearchBook(Book book);
+        List<Book> SearchBook(Book book);// non lo chiaom mai
         // sotto metti come paramentro searchbookviewmodel
-        List<BookViewModel> SearchBookWithAvailabilityInfos(Book book); //uguale al book ma senza quantità(?)
+        List<SearchingBookViewModel> SearchBookWithAvailabilityInfos(BookViewModel bvm); //uguale al book ma senza quantità(?)
         BookViewModel SearchBookWithAvailabilityInfos2(Book book); //uguale al book ma senza quantità(?)
 
         void UpdateBook(int bookId, Book bookWithNewValues);// perchè devo passare un oggetto book, non posso passare solo le stringhe che mi servono?

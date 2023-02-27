@@ -139,6 +139,8 @@ namespace BusinessLogic.Library
             var book = new Book(Id, bvm.Title, bvm.AuthorName, bvm.AuthorSurname, bvm.PublishingHouse, quantity);
             return book;
         }
+       
+        }
 
         //public Reservation MapperReservationStatusToReservation(ReservationStatus reservationStatus)
         //{
@@ -150,5 +152,5 @@ namespace BusinessLogic.Library
         //        reservationList = reservat
         //    }
         //}
-    }
+    
 }
