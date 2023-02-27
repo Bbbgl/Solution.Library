@@ -33,7 +33,7 @@ namespace BusinessLogic.Library
 
         void UpdateBook(int bookId, Book bookWithNewValues);// perchè devo passare un oggetto book, non posso passare solo le stringhe che mi servono?
 
-        void DeleteBook(Book book); //ricalcolare tutti gli id, sovrascriverli
+        bool DeleteBook(BookViewModel bvm); //ricalcolare tutti gli id, sovrascriverli
         //CHIAMALA deletebyID e passa ID nel DAO. Posso fare una ricerca dell'id nel delete o filtrare tutto escludendo l'id
         // l'id non è noto all'admin, sul documento c'è scritto di inserire tutta l'anagrafica
 

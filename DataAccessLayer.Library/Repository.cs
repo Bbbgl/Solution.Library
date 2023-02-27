@@ -73,6 +73,11 @@ namespace DataAccessLayer.Library
             this.ReservationDAO.Update(reservation,reservation_id);
         }
 
+        public void DeleteReservation(int reservationId)
+        {
+            this.ReservationDAO.Delete(reservationId);
+        }
+
         public static string ApplicationName
         {
             get;

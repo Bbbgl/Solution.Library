@@ -30,5 +30,6 @@ namespace DataAccessLayer.Library
         //List<Reservation> GetReservationHistory(int? bookId, int? userId, ReservationStatus? reservationStatus);
         void CreateReservation(Book book, User user);
         void UpdateReservation(Reservation reservation, int reservation_id);
+        void DeleteReservation(int reservationId);
     }
 }

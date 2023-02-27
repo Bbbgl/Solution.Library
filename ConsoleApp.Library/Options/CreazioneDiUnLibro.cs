@@ -37,7 +37,7 @@ namespace ConsoleApp.Library
             Console.WriteLine("inserisci quantità");
             var quantity = Console.ReadLine();
 
-            var addingBVM = new AddingBookViewModel(title, authorName, authorSurname, publishingHouse, Int16.Parse(quantity));
+            var addingBVM = new AddingBookViewModel(title, authorName, authorSurname, publishingHouse, Int16.Parse(quantity));//try-catch la quantità deve essere un numero
             // var queryId = book_list.Where(b => b.Title == title).Select(e => e.BookId).Take(1).ToList();
             this.LibraryBusinessLogic.AddBook(addingBVM);
 

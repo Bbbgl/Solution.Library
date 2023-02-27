@@ -22,5 +22,7 @@ namespace DataAccessLayer.Library
         void Create(Book book, User user);
 
         void Update(Reservation reservation, int reservation_id);
+
+        void Delete(int reservationId);
     }
 }

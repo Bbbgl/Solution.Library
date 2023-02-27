@@ -16,10 +16,18 @@ namespace BusinessLogic.Library
     {// ci metto la bookList per riconoscere il libro? senno come faccio a ricavare l'id e la quanrity?
         public Book MapperBVMtoBOOK (BookViewModel bvm)
         {
+            var bookList = new BookDAO().Read();
+            var Id = 0;
+            // c'è un problema, se voglio cambiare ad esempio solo la casa editrice, non so come ricercare un libro, faccio ricerca per titolo?
+            // messa così mi modifica solo la quantità
+            var queryId = bookList.Where(b => b.Title == bvm.Title && b.AuthorName == bvm.AuthorName
+         && b.AuthorSurname == bvm.AuthorSurname && b.PublishingHouse == bvm.PublishingHouse).Select(e => e.BookId).ToList();
+            Id = queryId[0];//la ricerca di un libro da modificare può lanciare un'eccezione,need try-catch
+            var queryQuantity = bookList.Where(b => b.Title == bvm.Title && b.AuthorName == bvm.AuthorName
+            && b.AuthorSurname == bvm.AuthorSurname && b.PublishingHouse == bvm.PublishingHouse).Select(e => e.Quantity).ToList();
+            var quantity = queryQuantity[0];
 
-            // se facessi qui la queryID e la queryQuantity?
-            
-            var book = new Book(0, bvm.Title, bvm.AuthorName, bvm.AuthorSurname, bvm.PublishingHouse, 0);
+            var book = new Book(Id, bvm.Title, bvm.AuthorName, bvm.AuthorSurname, bvm.PublishingHouse, quantity);
             return book;
 
         }

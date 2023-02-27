@@ -62,6 +62,27 @@ namespace DataAccessLayer.Library
             }
         }
 
+        public void Delete(int reservationId)
+        {
+            using (SqlConnection conn = DB.GetSqlConnection())
+            {
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"DeleteReservation";
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+                  cmd.Parameters.AddWithValue(@"ReservationId",reservationId);
+
+
+
+                    cmd.ExecuteNonQuery();
+
+                }
+                conn.Close();
+            }
+;
+        }
+
         public List<Reservation> Read()
         {
             var userDAO = new UserDAO();
@@ -86,9 +107,10 @@ namespace DataAccessLayer.Library
                         var userId = Int32.Parse(reader["UserId"].ToString());
                         var startDate = DateTime.Parse(reader["StartDate"].ToString());
                         var endDate = DateTime.Parse(reader["EndDate"].ToString());
+                        //var provaDebug = bookList.Where(b => b.BookId == bookId).First();
 
 
-                        var res = new Reservation(reservationId,userList[--userId],bookList[ --bookId], startDate, endDate);
+                        var res = new Reservation(reservationId,userList[--userId],bookList.Where(b=>b.BookId==bookId).First(), startDate, endDate);
                         reservationList.Add(res);
                     }
 
