@@ -44,7 +44,7 @@ namespace ConsoleApp.Library
             //var bookToAdd = mapper.MapperAddingBVMtoBOOK(addingBvm);
             //var id_book = book_list.Count();
             //var libro = new Book(id_book++, title, authorName, authorSurname, publishingHouse, Int16.Parse(quantity));
-          ;// se il libro è presente deve essere aggiornata la quantità
+          // se il libro è presente deve essere aggiornata la quantità
 
         }
     }

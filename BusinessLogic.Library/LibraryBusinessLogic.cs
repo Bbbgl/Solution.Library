@@ -447,7 +447,7 @@ namespace BusinessLogic.Library
             
              if (queryBookToReturn.Count > 0)// questo utente ha questo libro attualmente in prestito
             {
-                var reservationResult = new ReservationResult(userList[--userId], bookList[bookId], 0);
+                var reservationResult = new ReservationResult(userList[--userId], bookList[--bookId], 0);
                 // questo sotto potrei farlo con un mapper
                 var reservationToUpdate = new Reservation(queryBookToReturn[0].ResId, queryBookToReturn[0].User,
                     queryBookToReturn[0].Book, queryBookToReturn[0].StartDate, DateTime.Now);
@@ -459,7 +459,7 @@ namespace BusinessLogic.Library
 
              else
             {
-                var reservationResult = new ReservationResult(userList[userId], bookList[bookId], 1);
+                var reservationResult = new ReservationResult(userList[--userId], bookList[--bookId], 1);
                 return reservationResult;
             }
             // si restutisce un libro, quindi si deve modificare il valore della quantity del libro (+1) e cancellare la reservation

@@ -126,24 +126,47 @@ namespace DataAccessLayer.Library
 
         public void Update(Reservation reservation, int reservation_id)
         {
-            XmlDocument xmlDoc = new XmlDocument();
-            xmlDoc.Load(path);
-            XmlNodeList resNodes = xmlDoc.SelectNodes("//Library/Reservations/Reservation");
 
-            // resNodes[reservation_id].Attributes["ReservationId"].Value = reservation.ResId.ToString(); non serve aggiornare l'id tanto è lo stesso
-            //resNodes[reservation_id].Attributes["AuthorName"].Value = book.AuthorName;
-            //resNodes[reservation_id].Attributes["AuthorSurname"].Value = book.AuthorSurname;
-            //resNodes[reservation_id].Attributes["Publisher"].Value = book.PublishingHouse;
+            using (SqlConnection conn = DB.GetSqlConnection())
+            {
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"UpdateReservation";
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
-            // si aggiorna solo EndDate ??
-            var newTime = DateTime.Now;
-            resNodes[reservation_id].Attributes["EndDate"].Value = newTime.ToString();
-            //DateTime.Parse(resNodes[reservation_id].Attributes["EndDate"].Value = reservation.EndDate;
+                    cmd.Parameters.AddWithValue(@"ReservationId", reservation_id);
+                    cmd.Parameters.AddWithValue(@"EndDate",DateTime.Now);   
+
+                    cmd.ExecuteNonQuery();
+
+                }
+                conn.Close();
+            }
 
 
-            
 
-            xmlDoc.Save(path);
+
+
+
+
+            //XmlDocument xmlDoc = new XmlDocument();
+            //xmlDoc.Load(path);
+            //XmlNodeList resNodes = xmlDoc.SelectNodes("//Library/Reservations/Reservation");
+
+            //// resNodes[reservation_id].Attributes["ReservationId"].Value = reservation.ResId.ToString(); non serve aggiornare l'id tanto è lo stesso
+            ////resNodes[reservation_id].Attributes["AuthorName"].Value = book.AuthorName;
+            ////resNodes[reservation_id].Attributes["AuthorSurname"].Value = book.AuthorSurname;
+            ////resNodes[reservation_id].Attributes["Publisher"].Value = book.PublishingHouse;
+
+            //// si aggiorna solo EndDate ??
+            //var newTime = DateTime.Now;
+            //resNodes[reservation_id].Attributes["EndDate"].Value = newTime.ToString();
+            ////DateTime.Parse(resNodes[reservation_id].Attributes["EndDate"].Value = reservation.EndDate;
+
+
+
+
+            //xmlDoc.Save(path);
         }
     }
 }
