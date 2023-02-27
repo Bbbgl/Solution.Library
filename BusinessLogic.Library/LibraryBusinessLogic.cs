@@ -31,12 +31,13 @@ namespace BusinessLogic.Library
             this.Repository = repository;
         }
 
-        public static int GetTheBookRow (int id, List<Book> list)
+        public int GetTheBookRow (int id, List<Book> list)
         {
             var row = 0;
             foreach(var book in list)
             {
-                row = list.Where(b => b.BookId == id).ToList().First().BookId;
+                if (book.BookId != id) row++;
+                else break;
                 
             }return row;
         }
@@ -400,7 +401,7 @@ namespace BusinessLogic.Library
             //var reservationResult = new ReservationResult( userList[userId],bookList[bookId],false);
 
 
-            if (bookList[--bookId].Quantity > 0)
+            if (bookList[this.GetTheBookRow(bookId,bookList)].Quantity > 0)
             { // vedo se questo libro ha quantità >0
 
                 if (queryReservedBookByUser.Count == 0)
@@ -413,13 +414,13 @@ namespace BusinessLogic.Library
                     ).Select(e => e).ToList();
 
                     // se il numero di prenotazioni attive è minore della quantità del libro
-                    if (queryBookReservations.Count < bookList[bookId].Quantity)
+                    if (queryBookReservations.Count < bookList[this.GetTheBookRow(bookId, bookList)].Quantity)
                     {
                         // prenotazione success
 
 
-                        this.Repository.CreateReservation(bookList[bookId], userList[--userId]);// userId è decrementato perchè sul db parte da 1 (invece che da 0)
-                        var reservationResult = new ReservationResult(userList[userId], bookList[bookId], 0);
+                        this.Repository.CreateReservation(bookList[this.GetTheBookRow(bookId, bookList)], userList[--userId]);// userId è decrementato perchè sul db parte da 1 (invece che da 0)
+                        var reservationResult = new ReservationResult(userList[userId], bookList[this.GetTheBookRow(bookId, bookList)], 0);
                         // decrementare quantita di questo libro NOOOOOOOOOOO
 
 
@@ -503,7 +504,7 @@ namespace BusinessLogic.Library
             var resultList = new List<ReservationViewModel>();
 
 
-            if (userId != 0 && userId!=1)// perchè tanto l'admin non ha prenotazioni attive,però può leggerle
+            if (userId != 0 && userId!=1)// CORREGGERE!! ANCHE L'ADMIN PUò PRENOTARE E RESTITUIRe
             {
                 reservationList = reservationList.Where(r => r.User.UserId == userId).Select(e => e).ToList();
             }
