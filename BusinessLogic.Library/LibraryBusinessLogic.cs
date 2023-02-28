@@ -227,32 +227,29 @@ namespace BusinessLogic.Library
             }
 
             // alla fine ho la lista di tutti i libri cercati
+
             var reservationList = this.Repository.ReadReservations();
             DateTime? firstAvailabilityDate = DateTime.Now;
             bool availability = true;
-            var bookId = 0;
-            var bookQuantity = 0;
+            
 
             foreach (var book in bookList)
             // qui ho tutti gli eventuali libri, ma devo trovare per ognuno l'id e la disponibilità
             {
-                bookList.Where(b => b.Title == book.Title && b.AuthorName == book.AuthorName
-                        && b.AuthorSurname == book.AuthorSurname && b.PublishingHouse == book.PublishingHouse).ToList();
-                bookId = bookList[0].BookId;
-                bookQuantity = bookList[0].Quantity;
+                
 
 
-                if (reservationList.Where(r => r.Book.BookId == bookId && r.EndDate > DateTime.Today).Count() >= bookQuantity)
-                {
+                if (reservationList.Where(r => r.Book.BookId == book.BookId && r.EndDate > DateTime.Today).Count() >= book.Quantity)
+                {//prenotazioni attive > quantità del libro
                     availability = false;
-                    firstAvailabilityDate = reservationList.Where(r => r.Book.BookId == bookId && r.EndDate > DateTime.Today).OrderBy(r => r.EndDate).FirstOrDefault().EndDate;
+                    firstAvailabilityDate = reservationList.Where(r => r.Book.BookId == book.BookId && r.EndDate > DateTime.Today).OrderBy(r => r.EndDate).FirstOrDefault().EndDate;
                 }
                 else
                 {
                     availability = true;
                 }
                 var bookWithAvaiabilityInfos = new SearchingBookViewModel(
-                    bookId, book.Title, book.AuthorName, book.AuthorSurname,
+                    book.BookId, book.Title, book.AuthorName, book.AuthorSurname,
                     book.PublishingHouse, book.Quantity, availability, firstAvailabilityDate
 
                     );
