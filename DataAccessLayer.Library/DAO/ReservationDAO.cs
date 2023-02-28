@@ -30,7 +30,7 @@ namespace DataAccessLayer.Library
                     //SqlParameter p1 = new SqlParameter("BookId", System.Data.SqlDbType.Int);
                     //p1.Value = numBooks++;
                     //cmd.Parameters.Add(p1);
-                    cmd.Parameters.AddWithValue("@ReservationId", this.Read().Count + 1);
+                    cmd.Parameters.AddWithValue("@ReservationId", this.Read().Last().ResId + 1);
                     cmd.Parameters.AddWithValue("@UserId", user.UserId);
                     cmd.Parameters.AddWithValue("@BookId", book.BookId);
                     cmd.Parameters.AddWithValue("@StartDate", DateTime.Now);

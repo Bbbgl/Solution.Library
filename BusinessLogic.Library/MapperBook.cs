@@ -134,6 +134,7 @@ namespace BusinessLogic.Library
             var Id = 0;
             var quantity = 0;
 
+            //da gestire ricerca per filtri
             var queryId = bookList.Where(b => b.Title == bvm.Title && b.AuthorName == bvm.AuthorName
              && b.AuthorSurname == bvm.AuthorSurname && b.PublishingHouse == bvm.PublishingHouse).Select(e => e.BookId).ToList();
 

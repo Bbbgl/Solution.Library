@@ -395,13 +395,13 @@ namespace BusinessLogic.Library
 
             && r.Book.BookId == bookId// ottengo tutte le prenotazioni di questo utente per questo libro
 
-            && r.EndDate > DateTime.Now // vedo se le prenotazioni di questo utente per questo libro sono scadute
+            && r.EndDate > DateTime.Now // vedo se l'utente ha prenotazioni attive per questo libro
 
             ).Select(e => e).ToList();
             //var reservationResult = new ReservationResult( userList[userId],bookList[bookId],false);
 
-
-            if (bookList[this.GetTheBookRow(bookId,bookList)].Quantity > 0)
+            var row = this.GetTheBookRow(bookId, bookList);
+            if (bookList[row].Quantity > 0)
             { // vedo se questo libro ha quantità >0
 
                 if (queryReservedBookByUser.Count == 0)
@@ -410,17 +410,17 @@ namespace BusinessLogic.Library
                     // calcolo quante prenotazioni attive ha quel libro
                     var queryBookReservations = reservationList.Where(r =>
                     r.Book.BookId == bookId// reservation di questo libro IL PROBLEMA QUI é CHE STE RESERVATION RIMANGONO SEMPRE QUINDI DEVO CONTROLLARE ENDTIME
-                    && r.EndDate < DateTime.Now// se l'end date non è oggi allora prenotazione attiva
+                    && r.EndDate > DateTime.Now// se l'end date maggiore di oggi allora prenotazione attiva
                     ).Select(e => e).ToList();
 
                     // se il numero di prenotazioni attive è minore della quantità del libro
-                    if (queryBookReservations.Count < bookList[this.GetTheBookRow(bookId, bookList)].Quantity)
+                    if (queryBookReservations.Count < bookList[row].Quantity)
                     {
                         // prenotazione success
 
 
-                        this.Repository.CreateReservation(bookList[this.GetTheBookRow(bookId, bookList)], userList[--userId]);// userId è decrementato perchè sul db parte da 1 (invece che da 0)
-                        var reservationResult = new ReservationResult(userList[userId], bookList[this.GetTheBookRow(bookId, bookList)], 0);
+                        this.Repository.CreateReservation(bookList[row], userList[--userId]);// userId è decrementato perchè sul db parte da 1 (invece che da 0)
+                        var reservationResult = new ReservationResult(userList[--userId], bookList[row], 0);
                         // decrementare quantita di questo libro NOOOOOOOOOOO
 
 
@@ -430,7 +430,7 @@ namespace BusinessLogic.Library
                     }
                     else
                     {
-                        var reservationResult = new ReservationResult(userList[userId], bookList[bookId], 2);// il libro non è disponibile
+                        var reservationResult = new ReservationResult(userList[--userId], bookList[row], 1);// il libro non è disponibile
                         return reservationResult;
 
                     }
@@ -438,7 +438,7 @@ namespace BusinessLogic.Library
 
                 }else
                 {
-                    var reservationResult = new ReservationResult(userList[userId], bookList[bookId], 2);// l'utente ha già prenotato questo libro
+                    var reservationResult = new ReservationResult(userList[--userId], bookList[row], 2);// l'utente ha già prenotato questo libro
                     return reservationResult;
                 }
 
@@ -446,7 +446,7 @@ namespace BusinessLogic.Library
             }
             else
             {
-                var reservationResult = new ReservationResult(userList[userId], bookList[bookId], 1);// il libro non è disponibile
+                var reservationResult = new ReservationResult(userList[--userId], bookList[row], 1);// il libro non è disponibile
                 return reservationResult;
             }
         }

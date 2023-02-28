@@ -65,7 +65,7 @@ namespace ConsoleApp.Library.Options
             var bookForFiltering = mapper.MapperBVMtoBOOKforGetReservationsHistory(bookViewModel);
                 bookForFilteringId = bookForFiltering.BookId;
             }
-            Console.WriteLine("inserisci stato prenotazione (attiva/non attiva");
+            Console.WriteLine("inserisci stato prenotazione (attiva/non attiva)");
             var statoPrenotazione = Console.ReadLine();
 
             var reservationStatus = new ReservationStatus(statoPrenotazione);
