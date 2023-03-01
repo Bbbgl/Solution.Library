@@ -47,9 +47,8 @@ namespace ConsoleApp.Library.Options
 
             var bookAvailableList = this.LibraryBusinessLogic.SearchBookWithAvailabilityInfos(bookToSearch);
 
-            //TODOE : se il libro inserito non esiste if (bookAvailableList == null) Console.WriteLine("il libro non esiste");
-            else
-            {
+            //TODO : se il libro inserito non esiste if (bookAvailableList == null) Console.WriteLine("il libro non esiste");
+
 
                 foreach (var books in bookAvailableList)
                 {
@@ -57,9 +56,9 @@ namespace ConsoleApp.Library.Options
                         $"{books.AuthorSurname} {books.PublishingHouse}");
 
                     if (books.Avaiability == true) Console.WriteLine("il libro è disponibile");
-                    else Console.WriteLine("libro non disponibile");
+                    else Console.WriteLine($"libro non disponibile, sarà disponibile in data {books.FirstAvailability} ");
                 }
-            }
+            
 
 
             //deve essere una lista di tutti i libri con il titolo inserito, ok

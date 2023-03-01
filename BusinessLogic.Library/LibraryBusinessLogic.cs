@@ -493,7 +493,19 @@ namespace BusinessLogic.Library
             }
             // si restutisce un libro, quindi si deve modificare il valore della quantity del libro (+1) e cancellare la reservation
         }
+        // Voglio creare un metodo che restituisce solo un resvm, devo metterlo anche nell'interfaccia e se funziona cancellare quello sotto
 
+      
+
+
+            
+
+        
+
+
+
+
+    
         public List<ReservationViewModel> GetReservationHistory(int? bookId, int? userId, ReservationStatus? reservationStatus)
         {
             var reservationList = this.Repository.ReadReservations();
@@ -501,7 +513,7 @@ namespace BusinessLogic.Library
             var resultList = new List<ReservationViewModel>();
 
 
-            if (userId != 0 && userId!=1)// CORREGGERE!! ANCHE L'ADMIN PUò PRENOTARE E RESTITUIRe
+            if (userId != 0)// CORREGGERE!! ANCHE L'ADMIN PUò PRENOTARE E RESTITUIRe
             {
                 reservationList = reservationList.Where(r => r.User.UserId == userId).Select(e => e).ToList();
             }
