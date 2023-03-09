@@ -24,6 +24,9 @@ namespace BusinessLogic.Library
         //da controlare il login
         User Login(LoginViewModel lvm); //prendi user da UserDAO e verifica
 
+        int GetTheBookRow(int id, List<Book> list);
+
+
         void AddBook(AddingBookViewModel BVM);
 
         List<Book> SearchBook(Book book);// non lo chiaom mai
