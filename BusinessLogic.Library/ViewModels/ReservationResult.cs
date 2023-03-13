@@ -2,18 +2,20 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace BusinessLogic.Library.ViewModels
 {
+    [DataContract]
     public class ReservationResult
     {
         //public Book book;
         //public User user;
-        int Id { get; set; }
-        public User User { get; set; } // foreign key
-        public Book Book { get; set; } // foreign key
+        [DataMember] int Id { get; set; }
+        [DataMember] public User User { get; set; } // foreign key
+        [DataMember] public Book Book { get; set; } // foreign key
 
         public int FlagResult { get; set; }
 

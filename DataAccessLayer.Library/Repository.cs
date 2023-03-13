@@ -4,18 +4,22 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace DataAccessLayer.Library
 {
-    
-    
-    
+
+
+    [DataContract]
     public class Repository: IRepository
     {
+        [DataMember]
         public IUserDAO UserDAO { get; set; }
+        [DataMember]
         public IBookDAO BookDAO { get; set; }
+        [DataMember]
         public IReservationDAO ReservationDAO { get; set; }
 
         public Repository(IUserDAO userDAO, IBookDAO bookDAO, IReservationDAO reservationDAO)

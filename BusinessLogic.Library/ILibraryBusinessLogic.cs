@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using static System.Net.Mime.MediaTypeNames;
@@ -16,7 +17,7 @@ namespace BusinessLogic.Library
     //se invece facessi una classe per metodo? ES. una classe login, una classe add book, ecc...
 
 
-
+    
     public interface ILibraryBusinessLogic
     {
 
@@ -24,7 +25,7 @@ namespace BusinessLogic.Library
         //da controlare il login
         User Login(LoginViewModel lvm); //prendi user da UserDAO e verifica
 
-        int GetTheBookRow(int id, List<Book> list);
+        //int GetTheBookRow(int id, List<Book> list);
 
 
         void AddBook(AddingBookViewModel BVM);

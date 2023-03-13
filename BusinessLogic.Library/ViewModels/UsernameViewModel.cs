@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace BusinessLogic.Library.ViewModels
 {
+    [DataContract]
     public class UsernameViewModel
     {
-        public string Userame { get; set; }
+        [DataMember] public string Userame { get; set; }
 
         public UsernameViewModel(string userame)
         {

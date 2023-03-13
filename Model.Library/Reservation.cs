@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -25,17 +26,21 @@ namespace Model.Library
     {
         //public Book book;
         //public User user;
-        public int ResId { get; set; }
+        [DataMember]
+       public int ResId { get; set; }
+        [DataMember] 
         public User User { get; set; } // foreign key
+        [DataMember] 
         public Book Book { get; set; } // foreign key
 
         //serve BOokDAO e UserDAO
 
-        
 
+
+        [DataMember]
         public DateTime StartDate { get; set; }
-
-      public DateTime EndDate { get; set; }
+        [DataMember]
+        public DateTime EndDate { get; set; }
 
         //public DateTime EndDate
         //{

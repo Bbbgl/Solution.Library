@@ -42,6 +42,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -61,14 +62,14 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Service1.svc" />
+    <Content Include="ServiceLibrary.svc" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Service1.svc.cs">
-      <DependentUpon>Service1.svc</DependentUpon>
+    <Compile Include="ServiceLibrary.svc.cs">
+      <DependentUpon>ServiceLibrary.svc</DependentUpon>
     </Compile>
-    <Compile Include="IService1.cs" />
+    <Compile Include="IServiceLibrary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -81,6 +82,23 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BusinessLogic.Library\BusinessLogic.Library.csproj">
+      <Project>{f130de58-806b-4ede-8eed-4dcd011926d6}</Project>
+      <Name>BusinessLogic.Library</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataAccessLayer.Library\DataAccessLayer.Library.csproj">
+      <Project>{53d29e24-d83d-4de2-9f45-f3ba42750375}</Project>
+      <Name>DataAccessLayer.Library</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Model.Library\Model.Library.csproj">
+      <Project>{047b2f72-7be1-4962-844a-c8381a0e3ce9}</Project>
+      <Name>Model.Library</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

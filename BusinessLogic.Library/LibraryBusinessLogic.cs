@@ -9,6 +9,7 @@ using System.Linq;
 using System.Net;
 using System.Runtime.CompilerServices;
 using System.Runtime.ConstrainedExecution;
+using System.Runtime.Serialization;
 using System.Security.Cryptography.X509Certificates;
 using System.Security.Policy;
 using System.Text;
@@ -16,16 +17,17 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic.Library
 {
+    [DataContract]
     public class LibraryBusinessLogic : ILibraryBusinessLogic
     {
 
         //•	Login: Dovrà essere valutata l’esistenza o meno dello User sulla base dei dati
         //specificati dall’utente (Username, Password)
 
-
+        [DataMember]
         public IRepository Repository { get; set; }
 
-      
+        
         public LibraryBusinessLogic (IRepository repository)
         {
             this.Repository = repository;
@@ -41,7 +43,7 @@ namespace BusinessLogic.Library
                 
             }return row;
         }
-
+        
         public User Login(LoginViewModel lvm)
         {
             //query id e query role
@@ -65,34 +67,7 @@ namespace BusinessLogic.Library
             }
         }
 
-        //public bool LoginUserCheck(string username, string password, List<User> userList)
-        //{
-
-        //    var check = true;
-        //    for (int i = 0; i < userList.Count(); i++)
-        //    {
-        //        if ((username.Equals(userList[i].Username)) && (password.Equals(userList[i].Password)))
-        //        {
-        //            check = true;
-        //            break;
-        //        }
-        //        else check = false;
-        //    }
-        //    return check;
-        //}// prova LINQ
-
-
-        //public bool AdminCheck(string username, List<User> userList)
-        //{
-        //    var userIndex = 0;
-        //    for (int i = 0; i < userList.Count(); i++)
-        //    {
-        //        if (username.Equals(userList[i].Username)) { userIndex = i; break; }// metto solo username ora, perchè non ci sono utenti con stesso username
-        //    }
-        //    if (userList[userIndex].Role.Equals("Admin")) return true;
-        //    else return false;
-        //}
-
+     
 
         public void AddBook(AddingBookViewModel addingBVM)
         {

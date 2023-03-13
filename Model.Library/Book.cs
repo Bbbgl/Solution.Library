@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,13 +19,18 @@ using System.Threading.Tasks;
 
 namespace Model.Library
 {
+    [DataContract]
     public class Book
     {
+        [DataMember]
         public int BookId { get; set; }
-        public string Title { get; set; }
-        public string AuthorName { get; set; }
+        [DataMember] public string Title { get; set; }
+        [DataMember] public string AuthorName { get; set; }
+        [DataMember] 
         public string AuthorSurname { get; set; }
+        [DataMember] 
         public string PublishingHouse { get; set; }
+        [DataMember] 
         public int Quantity { get; set; }
 
         public Book (int id,string title, string authorName, string authorSurname, string publishingHouse, int quantity)
