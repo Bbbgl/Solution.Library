@@ -63,6 +63,7 @@ namespace SOAPService.Library
 
 
     // Use a data contract as illustrated in the sample below to add composite types to service operations.
+    // to delete
     [DataContract]
     public class CompositeType
     {
