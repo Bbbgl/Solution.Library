@@ -23,29 +23,42 @@ namespace ConsoleApp.Library
             IRepository repository = new Repository(userDAO,bookDAO,reservationDAO);
 
             LibraryBusinessLogic lbl = new LibraryBusinessLogic(repository);
-            
-            
 
-            Console.WriteLine("nome utente : ");
-            var username = Console.ReadLine();
-            Console.WriteLine("password : ");
-            var password = Console.ReadLine(); // pensa a come mettere le *
 
-            var userViewModel = new LoginViewModel(username, password);
+            // LOGIN
+            User currentUser;
+            string username, password;
 
-           
-            var currentUser = lbl.Login(userViewModel);
+            do {
+                do
+                {
+                    Console.WriteLine("nome utente : ");
+                    username = Console.ReadLine();
+                } while (username == "");
 
-            if (currentUser.Username == null) {
-                Console.WriteLine("Nome utente o password errati");
-                Console.WriteLine("Press any key to quit");
-                Console.ReadLine();
-                System.Environment.Exit(1);
-            }
-           
-           
+                do
+                {
+                    Console.WriteLine("password : ");
+                    password = Console.ReadLine();
+                } while (password == "");
 
-            else Console.WriteLine("Login avvenuto con successo");
+                var userViewModel = new LoginViewModel(username, password);
+
+
+                currentUser = lbl.Login(userViewModel);
+
+                if (currentUser.Username == null) {
+                    Console.WriteLine("Nome utente o password errati");
+                    // Console.WriteLine("Press any key to quit");
+                    //Console.ReadLine();
+                    //System.Environment.Exit(1);
+                }
+            } while (currentUser.Username == null);
+
+
+
+
+            Console.WriteLine("Login avvenuto con successo");
 
             while (currentUser.Role == "Admin")
             {
