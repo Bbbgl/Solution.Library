@@ -22,8 +22,10 @@ using System.Threading.Tasks;
 
 namespace Model.Library
 {
+    [DataContract]
     public class Reservation
     {
+
         //public Book book;
         //public User user;
         [DataMember]

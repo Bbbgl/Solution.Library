@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/BusinessLogic.Library.ViewModels" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/BusinessLogic.Library.ViewModels" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:50030/ServiceLibrary.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Model.Library" />
+  <xs:import schemaLocation="http://localhost:50030/ServiceLibrary.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="LoginViewModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Username" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="LoginViewModel" nillable="true" type="tns:LoginViewModel" />
+  <xs:complexType name="ArrayOfSearchingBookViewModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SearchingBookViewModel" nillable="true" type="tns:SearchingBookViewModel" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfSearchingBookViewModel" nillable="true" type="tns:ArrayOfSearchingBookViewModel" />
+  <xs:complexType name="SearchingBookViewModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AuthorName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="AuthorSurname" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Avaiability" type="xs:boolean" />
+      <xs:element minOccurs="0" name="BookId" type="xs:int" />
+      <xs:element minOccurs="0" name="FirstAvailability" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="PublishingHouse" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Quantity" type="xs:int" />
+      <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SearchingBookViewModel" nillable="true" type="tns:SearchingBookViewModel" />
+  <xs:complexType name="ReservationResult">
+    <xs:sequence>
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Model.Library" minOccurs="0" name="Book" nillable="true" type="q1:Book" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Model.Library" minOccurs="0" name="User" nillable="true" type="q2:User" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ReservationResult" nillable="true" type="tns:ReservationResult" />
+  <xs:complexType name="ReservationStatus">
+    <xs:annotation>
+      <xs:appinfo>
+        <IsValueType xmlns="http://schemas.microsoft.com/2003/10/Serialization/">true</IsValueType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Status" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ReservationStatus" nillable="true" type="tns:ReservationStatus" />
+  <xs:complexType name="ArrayOfReservationViewModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ReservationViewModel" nillable="true" type="tns:ReservationViewModel" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfReservationViewModel" nillable="true" type="tns:ArrayOfReservationViewModel" />
+  <xs:complexType name="ReservationViewModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BookTitle" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EndDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ReservationFlag" type="xs:int" />
+      <xs:element minOccurs="0" name="StartDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Username" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ReservationViewModel" nillable="true" type="tns:ReservationViewModel" />
+</xs:schema>
