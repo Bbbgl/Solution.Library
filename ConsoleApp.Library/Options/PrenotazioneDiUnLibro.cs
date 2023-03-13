@@ -48,9 +48,10 @@ namespace ConsoleApp.Library.Options
             //Console.WriteLine("inserisci quantità");
             //var quantity = Console.ReadLine();
 
-            var bookToReserveViewModel = new ReservingBookViewModel(title,authorName,authorSurname,publishingHouse);
+            var bookToReserveViewModel = new ReservingBookViewModel(title,authorName,authorSurname,publishingHouse);// posso mettere sempre BookViewModel perchè tanto si inseriscono sempre quelle 4 cose
+
             
-            var bookToReserve = mapper.MapperReservingBVMtoBOOK(bookToReserveViewModel);
+            var bookToReserve = mapper.MapperReservingBVMtoBOOK(bookToReserveViewModel);//lo devo fare dopo
 
             // lbl.ReserveBook(bookToReserve.BookId, currentUser.UserId );
             var reservation = this.LibraryBusinessLogic.ReserveBookPROVA(bookToReserve.BookId, this.User.UserId);

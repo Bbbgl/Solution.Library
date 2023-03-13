@@ -1,9 +1,11 @@
 ﻿using BusinessLogic.Library.ViewModels;
+using ConsoleApp.Library.Options;
 using Model.Library;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using static System.Net.Mime.MediaTypeNames;
@@ -15,7 +17,7 @@ namespace BusinessLogic.Library
     //se invece facessi una classe per metodo? ES. una classe login, una classe add book, ecc...
 
 
-
+    
     public interface ILibraryBusinessLogic
     {
 
@@ -23,16 +25,19 @@ namespace BusinessLogic.Library
         //da controlare il login
         User Login(LoginViewModel lvm); //prendi user da UserDAO e verifica
 
-        void AddBook(Book book);
+        //int GetTheBookRow(int id, List<Book> list);
 
-        List<Book> SearchBook(Book book);
+
+        void AddBook(AddingBookViewModel BVM);
+
+        List<Book> SearchBook(Book book);// non lo chiaom mai
         // sotto metti come paramentro searchbookviewmodel
-        List<BookViewModel> SearchBookWithAvailabilityInfos(Book book); //uguale al book ma senza quantità(?)
+        List<SearchingBookViewModel> SearchBookWithAvailabilityInfos(BookViewModel bvm); //uguale al book ma senza quantità(?)
         BookViewModel SearchBookWithAvailabilityInfos2(Book book); //uguale al book ma senza quantità(?)
 
         void UpdateBook(int bookId, Book bookWithNewValues);// perchè devo passare un oggetto book, non posso passare solo le stringhe che mi servono?
 
-        void DeleteBook(Book book); //ricalcolare tutti gli id, sovrascriverli
+        bool DeleteBook(BookViewModel bvm); //ricalcolare tutti gli id, sovrascriverli
         //CHIAMALA deletebyID e passa ID nel DAO. Posso fare una ricerca dell'id nel delete o filtrare tutto escludendo l'id
         // l'id non è noto all'admin, sul documento c'è scritto di inserire tutta l'anagrafica
 
@@ -45,5 +50,7 @@ namespace BusinessLogic.Library
         ReservationResult BookReturn(int bookId, int userId);
 
         List<ReservationViewModel> GetReservationHistory(int? bookId, int? userId, ReservationStatus? reservationStatus);
+
+       // List<ReservationViewModel> GetReservationHistorySQL(int? bookId, int? userId, ReservationStatus? reservationStatus);
     }
 }

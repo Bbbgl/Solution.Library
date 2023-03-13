@@ -4,18 +4,22 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace DataAccessLayer.Library
 {
-    
-    
-    
+
+
+    [DataContract]
     public class Repository: IRepository
     {
+        [DataMember]
         public IUserDAO UserDAO { get; set; }
+        [DataMember]
         public IBookDAO BookDAO { get; set; }
+        [DataMember]
         public IReservationDAO ReservationDAO { get; set; }
 
         public Repository(IUserDAO userDAO, IBookDAO bookDAO, IReservationDAO reservationDAO)
@@ -61,6 +65,7 @@ namespace DataAccessLayer.Library
         {
             return this.ReservationDAO.Read();
         }
+        
 
         public void CreateReservation(Book book, User user)
         {
@@ -70,6 +75,11 @@ namespace DataAccessLayer.Library
         public void UpdateReservation(Reservation reservation, int reservation_id)
         {
             this.ReservationDAO.Update(reservation,reservation_id);
+        }
+
+        public void DeleteReservation(int reservationId)
+        {
+            this.ReservationDAO.Delete(reservationId);
         }
 
         public static string ApplicationName

@@ -33,6 +33,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -54,6 +55,7 @@
     <Compile Include="ViewModels\ReservationViewModel.cs" />
     <Compile Include="ViewModels\ReservingBookViewModel.cs" />
     <Compile Include="ViewModels\ReturningBookViewModel.cs" />
+    <Compile Include="ViewModels\SearchingBookViewModel.cs" />
     <Compile Include="ViewModels\UsernameViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,19 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace BusinessLogic.Library.ViewModels
 {
+    [DataContract]
     public class ReservationViewModel
     {
-        public string BookTitle { get; set; }
-        public string Username {get; set; }
+        [DataMember] public string BookTitle { get; set; }
+        [DataMember] public string Username {get; set; }
 
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
-        public int ReservationFlag { get; set; }
+        [DataMember] public DateTime StartDate { get; set; }
+        [DataMember] public DateTime EndDate { get; set; }
+        [DataMember] public int ReservationFlag { get; set; }
 
 
         public ReservationViewModel (string bookTitle, string username, DateTime startDate, DateTime endDate,

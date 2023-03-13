@@ -34,8 +34,8 @@ namespace ConsoleApp.Library.Options
             var authorSurname = Console.ReadLine();
             Console.WriteLine("inserire casa editrice");
             var publishingHouse = Console.ReadLine();
-            Console.WriteLine("inserisci quantità");
-            var quantity = Console.ReadLine();
+            //Console.WriteLine("inserisci quantità");
+            //var quantity = Console.ReadLine();
 
             var bookToModifyViewModel = new ModifyingBookViewModel(title, authorName, authorSurname, publishingHouse/*,Int32.Parse(quantity)*/);
 

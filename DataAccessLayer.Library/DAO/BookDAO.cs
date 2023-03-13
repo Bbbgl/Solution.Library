@@ -23,7 +23,7 @@ namespace DataAccessLayer.Library
 
             // INIZIO PROVA CON SQL
 
-            var numBooks = this.Read().Count;// problema!!! L'id deve essere deciso in sql,
+            //var numBooks = this.Read().Count;// problema!!! L'id deve essere deciso in sql,
                                              // se cancello un libro si sballa la conta, provo a mettere l'id non come variabile della storeproc
 
 
@@ -34,9 +34,9 @@ namespace DataAccessLayer.Library
                     cmd.CommandText = @"CreateBook";
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
-                    //SqlParameter p1 = new SqlParameter("BookId", System.Data.SqlDbType.Int);
-                    //p1.Value = numBooks++;
-                    //cmd.Parameters.Add(p1);
+                    SqlParameter p1 = new SqlParameter("BookId", System.Data.SqlDbType.Int);
+                    p1.Value = book.BookId;
+                    cmd.Parameters.Add(p1);
 
                     SqlParameter p2 = new SqlParameter("Title", System.Data.SqlDbType.NVarChar, 100);
                     p2.Value = book.Title;
@@ -61,7 +61,7 @@ namespace DataAccessLayer.Library
                     cmd.ExecuteNonQuery();
 
                 }
-                //conn.Close();
+                conn.Close();
             }
 
 
@@ -251,7 +251,7 @@ namespace DataAccessLayer.Library
 
         }
 
-        public void Delete (int id_book)
+        public void Delete (int id_book)// considera la cascade delete per elimiare le righe
         {
 
             using (SqlConnection conn = DB.GetSqlConnection())

@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessLayer.Library", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp.Library", "ConsoleApp.Library\ConsoleApp.Library.csproj", "{0ACFFEDE-546C-429F-8351-AB8C011D06CF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SOAPService.Library", "SOAPService.Library\SOAPService.Library.csproj", "{721BEEC7-4F0D-47D5-B2F1-22975BFD1B5C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{0ACFFEDE-546C-429F-8351-AB8C011D06CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0ACFFEDE-546C-429F-8351-AB8C011D06CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0ACFFEDE-546C-429F-8351-AB8C011D06CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{721BEEC7-4F0D-47D5-B2F1-22975BFD1B5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{721BEEC7-4F0D-47D5-B2F1-22975BFD1B5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{721BEEC7-4F0D-47D5-B2F1-22975BFD1B5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{721BEEC7-4F0D-47D5-B2F1-22975BFD1B5C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

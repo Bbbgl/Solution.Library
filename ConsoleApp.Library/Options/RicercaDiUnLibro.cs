@@ -37,26 +37,28 @@ namespace ConsoleApp.Library.Options
             Console.WriteLine("Casa Editrice");
             var bookPublishingHouseToSearch = Console.ReadLine();
 
-            var bookViewModel = new BookViewModel(bookTitleToSearch, bookAuthorNameToSearch,
+            var bookToSearch = new BookViewModel(bookTitleToSearch, bookAuthorNameToSearch,
                 bookAuthorSurnameToSearch, bookPublishingHouseToSearch);
 
-            var mapper = new MapperBook();// non serve se facessi MapperBook STATIC
+            // non serve se facessi MapperBook STATIC
 
-            var book = mapper.MapperBVMtoBOOK(bookViewModel);// se nel metodo search utilizzassi un bvm (o meglio un search bvm) non avrei bisogno di chiamare il mapper qui
 
             // posso provare qui a creare la lbl, oppure usarla come parametro
 
-            var bookAvailableList = this.LibraryBusinessLogic.SearchBookWithAvailabilityInfos(book);
+            var bookAvailableList = this.LibraryBusinessLogic.SearchBookWithAvailabilityInfos(bookToSearch);
 
-            foreach (var books in bookAvailableList)
-            {
-                Console.WriteLine($"Libro : {books.Title} {books.AuthorName} " +
-                    $"{books.AuthorSurname} {books.PublishingHouse}");
+            //TODO : se il libro inserito non esiste if (bookAvailableList == null) Console.WriteLine("il libro non esiste");
 
-                if (books.Avaiability == true) Console.WriteLine("il libro è disponibile");
-                // todo: libro non disponibile
-            }
 
+                foreach (var books in bookAvailableList)
+                {
+                    Console.WriteLine($"Libro : {books.Title} {books.AuthorName} " +
+                        $"{books.AuthorSurname} {books.PublishingHouse}");
+
+                    if (books.Avaiability == true) Console.WriteLine("il libro è disponibile");
+                    else Console.WriteLine($"libro non disponibile, sarà disponibile in data {books.FirstAvailability} ");
+                }
+            
 
 
             //deve essere una lista di tutti i libri con il titolo inserito, ok

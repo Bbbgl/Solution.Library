@@ -23,7 +23,13 @@ namespace ConsoleApp.Library.Options
         public User User { get; set; }
         public LibraryBusinessLogic LibraryBusinessLogic { get; set; }
 
+        public List<Book> BookList
+        {
+            get { return BookList; }
+            set { BookList = this.LibraryBusinessLogic.Repository.ReadBooks(); }
+        }
 
+        // l'admin credo possa vedere le prenotazioni di tutti gli utenti
         public VisualizzazioneStoricoPrenotazioniAdmin(User currentUser, LibraryBusinessLogic lbl)
         {
             this.User = currentUser;
@@ -37,17 +43,23 @@ namespace ConsoleApp.Library.Options
             var usernameForFilter = Console.ReadLine();
 
             int? userForFilteringId=0;
-            if(usernameForFilter != "") { 
+            //if(usernameForFilter != "") { 
             var usernameViewModel = new UsernameViewModel(usernameForFilter);
 
-            var userForFiltering = mapper.MapperUsernameVMtoUser(usernameViewModel);
-                //TODO try { } se l'utente inserito non esiste c'è un eccezione
-                userForFilteringId = userForFiltering.UserId;
-                
-            }
+            var usersFilterList = mapper.MapperUsernameVMtoUserList(usernameViewModel);
+            if (usersFilterList.Count == 0) Console.WriteLine("l'utente non esiste!!");
+            // se la lista utenti è uguale 1 significa che è stato inserito un utente specifico
+            if (usersFilterList.Count == 1) userForFilteringId = usersFilterList[0].UserId;
 
 
 
+
+            // userForFilteringId = userForFiltering.UserId;
+
+            // }
+
+
+            List<int?> bookForFilteringId = new List<int?>();
             Console.WriteLine("inserisci libro");
             Console.WriteLine("inserire titolo del libro");
             var title = Console.ReadLine();
@@ -58,24 +70,55 @@ namespace ConsoleApp.Library.Options
             Console.WriteLine("inserire casa editrice");
             var publishingHouse = Console.ReadLine();
             //DEVO GESTIRE IL FILTRO SE L'UTENTE NON INSERISCE IL LIBRO
-            var bookForFilteringId = 0;
-            if (title != "") { // anche gli altri parametri
 
+
+            
+            
             var bookViewModel=new BookViewModel(title, authorName, authorSurname, publishingHouse);
-            var bookForFiltering = mapper.MapperBVMtoBOOKforGetReservationsHistory(bookViewModel);
-                bookForFilteringId = bookForFiltering.BookId;
-            }
-            Console.WriteLine("inserisci stato prenotazione (attiva/non attiva");
+            
+            //var bookFilterList = this.LibraryBusinessLogic.SearchBookWithAvailabilityInfos(bookViewModel);  
+            
+            var booksFilterList = mapper.MapperBVMtoBOOKforGetReservationsHistory(bookViewModel);
+
+
+            if (booksFilterList.Count.Equals(this.LibraryBusinessLogic.Repository.ReadBooks())) bookForFilteringId[0] = 0;
+            else
+            {
+                foreach (var book in booksFilterList)
+                {
+                    bookForFilteringId.Add(book.BookId);
+                }
+
+
+             }           
+
+            Console.WriteLine("inserisci stato prenotazione (attiva/non attiva)");
             var statoPrenotazione = Console.ReadLine();
 
             var reservationStatus = new ReservationStatus(statoPrenotazione);
 
             //var reservationStatusForFiltering = mapper.MapperReservationStatusToReservation(reservationStatus);
+            var result = new List<ReservationViewModel>();
+            for (int i = 0; i < bookForFilteringId.Count; i++)
+            {
+                var newList = this.LibraryBusinessLogic.GetReservationHistory(bookForFilteringId[i], userForFilteringId, reservationStatus);
+                result.AddRange(newList);
+            }
 
 
-           var result = this.LibraryBusinessLogic.GetReservationHistory(bookForFilteringId, userForFilteringId, reservationStatus);
+            //foreach (var user in usersFilterList)
+            //{
+            //    foreach (var book in booksFilterList)
+            //    {
+                   
+            //        result = this.LibraryBusinessLogic.GetReservationHistory(book.BookId, user.UserId, reservationStatus);
+            //    }
+            //}
 
-            foreach(var reservation in result)
+
+            // var result = this.LibraryBusinessLogic.GetReservationHistory(bookForFilteringId, userForFilteringId, reservationStatus);
+
+            foreach (var reservation in result)
             {
                 if (reservation.ReservationFlag == 0)
                     Console.WriteLine($" l'utente {reservation.Username} ha prenotato il libro {reservation.BookTitle} fino al giorno {reservation.EndDate}");// meetti i giorni

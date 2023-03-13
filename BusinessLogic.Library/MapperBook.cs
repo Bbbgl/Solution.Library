@@ -16,10 +16,18 @@ namespace BusinessLogic.Library
     {// ci metto la bookList per riconoscere il libro? senno come faccio a ricavare l'id e la quanrity?
         public Book MapperBVMtoBOOK (BookViewModel bvm)
         {
+            var bookList = new BookDAO().Read();
+            var Id = 0;
+            // c'è un problema, se voglio cambiare ad esempio solo la casa editrice, non so come ricercare un libro, faccio ricerca per titolo?
+            // messa così mi modifica solo la quantità
+            var queryId = bookList.Where(b => b.Title == bvm.Title && b.AuthorName == bvm.AuthorName
+         && b.AuthorSurname == bvm.AuthorSurname && b.PublishingHouse == bvm.PublishingHouse).Select(e => e.BookId).ToList();
+            Id = queryId[0];//la ricerca di un libro da modificare può lanciare un'eccezione,need try-catch
+            var queryQuantity = bookList.Where(b => b.Title == bvm.Title && b.AuthorName == bvm.AuthorName
+            && b.AuthorSurname == bvm.AuthorSurname && b.PublishingHouse == bvm.PublishingHouse).Select(e => e.Quantity).ToList();
+            var quantity = queryQuantity[0];
 
-            // se facessi qui la queryID e la queryQuantity?
-            
-            var book = new Book(0, bvm.Title, bvm.AuthorName, bvm.AuthorSurname, bvm.PublishingHouse, 0);
+            var book = new Book(Id, bvm.Title, bvm.AuthorName, bvm.AuthorSurname, bvm.PublishingHouse, quantity);
             return book;
 
         }
@@ -100,44 +108,66 @@ namespace BusinessLogic.Library
             return book;
         }
 
-        public User MapperUsernameVMtoUser(UsernameViewModel uvm)
+        public List<User> MapperUsernameVMtoUserList(UsernameViewModel uvm)
         {
             var userDAO = new UserDAO();
             var userList = userDAO.Read();
+            var filteredUserList = new List<User>();
 
-            var queryByUsername = userList.Where(u => u.Username == uvm.Userame).Select(e => e).ToList();// se l'utente non inserisce un nome utente c'è un'eccezione
-            try
+            foreach (var user in userList)
             {
-                return new User(queryByUsername[0].UserId, queryByUsername[0].Username, queryByUsername[0].Password, queryByUsername[0].Role);
+                if (!string.IsNullOrEmpty(uvm.Userame))
+                {
+                    userList = userList.Where(u => u.Username == uvm.Userame).ToList();
 
+                }
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine("utente non riconosciuto");
-                return null;
-            }
+
+            return userList;
+           
         }
 
-        public Book MapperBVMtoBOOKforGetReservationsHistory(BookViewModel bvm)
+        public List<Book> MapperBVMtoBOOKforGetReservationsHistory(BookViewModel bvm)
         {
 
             var book_db = new BookDAO();
             var bookList = book_db.Read();
-            var Id = 0;
-            var quantity = 0;
+            //var Id = 0;
+            //var quantity = 0;
 
-            var queryId = bookList.Where(b => b.Title == bvm.Title && b.AuthorName == bvm.AuthorName
-             && b.AuthorSurname == bvm.AuthorSurname && b.PublishingHouse == bvm.PublishingHouse).Select(e => e.BookId).ToList();
+            if (!string.IsNullOrEmpty(bvm.Title))
+            {
+                bookList = bookList.Where(b=>b.Title == bvm.Title).ToList();
+            }
+            if (!string.IsNullOrEmpty(bvm.AuthorName))
+            {
+                bookList = bookList.Where(b=>b.AuthorName == bvm.AuthorName).ToList();
+            }
+            if (!string.IsNullOrEmpty(bvm.AuthorSurname))
+            {
+                bookList = bookList.Where(b=>b.AuthorSurname == bvm.AuthorSurname).ToList();
+            }
+            if (!string.IsNullOrEmpty(bvm.PublishingHouse))
+            {
+                bookList = bookList.Where(b => b.PublishingHouse == bvm.PublishingHouse).ToList();
+            }
+            return bookList;
 
-            // devo gestire se il libro non esiste
-            Id = queryId[0];
+            //da gestire ricerca per filtri
+            //var queryId = bookList.Where(b => b.Title == bvm.Title && b.AuthorName == bvm.AuthorName
+            // && b.AuthorSurname == bvm.AuthorSurname && b.PublishingHouse == bvm.PublishingHouse).Select(e => e.BookId).ToList();
 
-            var queryQuantity = bookList.Where(b => b.Title == bvm.Title && b.AuthorName == bvm.AuthorName
-             && b.AuthorSurname == bvm.AuthorSurname && b.PublishingHouse == bvm.PublishingHouse).Select(e => e.Quantity).ToList();
-            quantity = queryQuantity[0];
+            //// devo gestire se il libro non esiste
+            //Id = queryId[0];
 
-            var book = new Book(Id, bvm.Title, bvm.AuthorName, bvm.AuthorSurname, bvm.PublishingHouse, quantity);
-            return book;
+            //var queryQuantity = bookList.Where(b => b.Title == bvm.Title && b.AuthorName == bvm.AuthorName
+            // && b.AuthorSurname == bvm.AuthorSurname && b.PublishingHouse == bvm.PublishingHouse).Select(e => e.Quantity).ToList();
+            //quantity = queryQuantity[0];
+
+            //var book = new Book(Id, bvm.Title, bvm.AuthorName, bvm.AuthorSurname, bvm.PublishingHouse, quantity);
+            //return book;
+        }
+       
         }
 
         //public Reservation MapperReservationStatusToReservation(ReservationStatus reservationStatus)
@@ -150,5 +180,5 @@ namespace BusinessLogic.Library
         //        reservationList = reservat
         //    }
         //}
-    }
+    
 }
