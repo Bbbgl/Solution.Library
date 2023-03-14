@@ -26,11 +26,11 @@ namespace Model.Library
         public int BookId { get; set; }
         [DataMember] public string Title { get; set; }
         [DataMember] public string AuthorName { get; set; }
-        [DataMember] 
+        [DataMember]
         public string AuthorSurname { get; set; }
-        [DataMember] 
+        [DataMember]
         public string PublishingHouse { get; set; }
-        [DataMember] 
+        [DataMember]
         public int Quantity { get; set; }
 
         public Book (int id,string title, string authorName, string authorSurname, string publishingHouse, int quantity)
