@@ -64,17 +64,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BusinessLogic.Library\BusinessLogic.Library.csproj">
-      <Project>{f130de58-806b-4ede-8eed-4dcd011926d6}</Project>
-      <Name>BusinessLogic.Library</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DataAccessLayer.Library\DataAccessLayer.Library.csproj">
-      <Project>{53d29e24-d83d-4de2-9f45-f3ba42750375}</Project>
-      <Name>DataAccessLayer.Library</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Model.Library\Model.Library.csproj">
       <Project>{047b2f72-7be1-4962-844a-c8381a0e3ce9}</Project>
       <Name>Model.Library</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ProxyLibrary\Proxy.Library.csproj">
+      <Project>{c5c204c8-617a-4712-8172-ddd4267cd77e}</Project>
+      <Name>Proxy.Library</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

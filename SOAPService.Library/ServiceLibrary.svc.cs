@@ -37,10 +37,10 @@ namespace SOAPService.Library
             var lblfs = new LibraryBusinessLogicForService();
             return lblfs.lbl;
         }
-        
 
-       // public ServiceLibrary() { }
-     
+
+        // public ServiceLibrary() { }
+
 
 
 
@@ -82,7 +82,7 @@ namespace SOAPService.Library
         {
             return lbl().SearchBookWithAvailabilityInfos(bvm);
         }
-
+        
         public void UpdateBook(int bookId, Book bookWithNewValues)
         {
             lbl().UpdateBook(bookId, bookWithNewValues);
