@@ -1,11 +1,12 @@
 ﻿using Model.Library;
 using Proxy.Library.ServiceViewModels;
 using Proxy.Library.SOAPLibrary;
-using SOAPService.Library;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,20 +17,20 @@ namespace Proxy.Library
 
         
     {
+        public static ServiceLibraryClient slc = new ServiceLibraryClient();
 
 
-        public SOAPService.Library.ServiceLibrary SL { get; set; }
-        public static SOAPLibrary.AddingBookViewModel MapperAddingBSVMtoAddingBVM(AddingBookServiceViewModel bsvm)
+        public static AddingBookViewModel MapperAddingBSVMtoAddingBVM(AddingBookServiceViewModel absvm)
         {
-            var bvm = new SOAPLibrary.AddingBookViewModel();
+            var abvm = new AddingBookViewModel();
 
-            bvm.Title = bsvm.Title;
-            bvm.AuthorName = bsvm.AuthorName;
-            bvm.AuthorSurname = bsvm.AuthorSurname;
-            bvm.PublishingHouse = bsvm.PublishingHouse;
-            bvm.Quantity = bsvm.Quantity;
+            abvm.Title = absvm.Title;
+            abvm.AuthorName = absvm.AuthorName;
+            abvm.AuthorSurname = absvm.AuthorSurname;
+            abvm.PublishingHouse = absvm.PublishingHouse;
+            abvm.Quantity = absvm.Quantity;
 
-            return bvm;
+            return abvm;
         }
 
         public static LoginViewModel MapperLSVMtoLVM(LoginServiceViewModel lsvm)
@@ -45,27 +46,135 @@ namespace Proxy.Library
         }
 
 
-        public static ModifyingBookViewModel MapperMBSVMtoMBVM(ModifyingBookServiceViewModel mbsvm)
+        public static ModifyingBookViewModel MapperMBSVMtoMBVM (ModifyingBookServiceViewModel mbsvm)
         {
 
-            var mbvm = new SOAPLibrary.ModifyingBookViewModel(); // il search bvm è praticamente come il modify, con titolo autore e casa
-
+            var mbvm = new ModifyingBookViewModel();
 
             mbvm.Title = mbsvm.Title;
             mbvm.AuthorName = mbsvm.AuthorName;
             mbvm.AuthorSurname = mbsvm.AuthorSurname;
             mbvm.PublishingHouse = mbsvm.PublishingHouse;
-
+            
 
             return mbvm;
+        }
+
+
+        public static Book MapperMBVMtoBOOK(ModifyingBookViewModel mbvm)
+        {
+            return slc.MapperModifyingBVMtoBOOK(mbvm);
+        }
+
+        public static Book MapperABVMtoBOOK(AddingBookViewModel abvm)
+        {
+            return slc.MapperABVMtoBOOK(abvm);
+        }
+
+        public static BookViewModel MapperBSVMtoBVM(BookServiceViewModel bsvm)
+        {
+            var bvm = new BookViewModel();
+
+            bvm.Title = bsvm.Title;
+            bvm.AuthorName = bsvm.AuthorName;
+            bvm.AuthorSurname = bsvm.AuthorSurname;
+            bvm.PublishingHouse = bsvm.PublishingHouse;
+
+
+            return bvm;
+        }
+
+        public static Book MapperBVMtoBOOK(BookViewModel bvm)
+        {
+            return slc.MapperBVMtoBOOK(bvm);
+        }
+
+        public static ReservationStatus MapperSRStoRS(ServiceReservationStatus serviceReservationStatus)
+        {
+            var reservationStatus = new ReservationStatus();
+
+            reservationStatus.Status = serviceReservationStatus.Status;
+
+            return reservationStatus;
+        }
+
+        public static ReservingBookViewModel MapperRBSVMtoRBVM(ReservingBookServiceViewModel bookToReserveServiceViewModel)
+        {
+            var rbvm = new ReservingBookViewModel();
+
+            rbvm.Title = bookToReserveServiceViewModel.Title;
+            rbvm.AuthorName = bookToReserveServiceViewModel.AuthorName;
+            rbvm.AuthorSurname = bookToReserveServiceViewModel.AuthorSurname;
+            rbvm.PublishingHouse = bookToReserveServiceViewModel.PublishingHouse;
+            
+            return rbvm;
+        }
+
+        public static Book MapperReservingBVMtoBOOK(ReservingBookViewModel rbvm)
+        {
+            return slc.MapperReservingBVMtoBOOK(rbvm);
+        }
+
+        public static ReturningBookViewModel MapperReturningBSVMtoRBVM(ReturningBookServiceViewModel bookToReturnServiceViewModel)
+        {
+            var rbvm = new ReturningBookViewModel();
+
+            rbvm.Title=bookToReturnServiceViewModel.Title;
+            rbvm.AuthorName=bookToReturnServiceViewModel.AuthorName;
+            rbvm.AuthorSurname=bookToReturnServiceViewModel.AuthorSurname;
+            rbvm.PublishingHouse=bookToReturnServiceViewModel.PublishingHouse;
+
+            return rbvm;
+
 
         }
 
-        public  Book MapperSBVMtoBOOK(SOAPLibrary.SearchingBookViewModel sbvm)
-        {
 
-            
-            
+        public static Book MapperReturningBVMtoBOOK(ReturningBookViewModel rbvm)
+        {
+            return slc.MapperReturningBVMtoBOOK(rbvm);
+        }
+
+        public static UsernameViewModel MapperUSVMtoUVM(UsernameServiceViewModel usvm)
+        {
+            var uvm = new UsernameViewModel();
+            uvm.Userame = usvm.Userame;
+            return uvm;
+        }
+
+        public static List<User> MapperUsernameVMtoUserList(UsernameViewModel uvm)
+        {
+            return slc.MapperUsernameVMtoUserList(uvm);
+
+        }
+
+        public static List<Book> MapperBVMtoBOOKforGetReservationsHistory(BookViewModel bvm)
+        {
+            return slc.MapperBVMtoBOOKforGetReservationsHistory(bvm);
+        }
+
+        public static ReservationViewModel MapperRSVMtoRVM ( ReservationServiceViewModel rsvm)
+        {
+            var rvm = new ReservationViewModel();
+
+            rvm.Username = rsvm.Username;
+            rvm.StartDate = rsvm.StartDate; 
+            rvm.EndDate=rsvm.EndDate;
+            rvm.BookTitle = rsvm.BookTitle;
+            rvm.ReservationFlag= rsvm.ReservationFlag;
+
+            return rvm;
+        }
+
+        public static List<ReservationViewModel> MapperListRSVMtoListRVM(List<ReservationServiceViewModel> serviceResult)
+        {
+            var list = new List<ReservationViewModel>();
+
+            foreach (var rsvm in serviceResult)
+            {
+                list.Add(MapperRSVMtoRVM(rsvm));
+            }
+            return list;
         }
     }
 }

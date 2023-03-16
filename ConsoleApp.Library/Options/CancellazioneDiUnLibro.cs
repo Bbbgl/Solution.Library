@@ -1,6 +1,7 @@
-﻿using BusinessLogic.Library;
-using BusinessLogic.Library.ViewModels;
+﻿
 using Model.Library;
+using Proxy.Library;
+using Proxy.Library.ServiceViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,19 +13,19 @@ namespace ConsoleApp.Library.Options
     public class CancellazioneDiUnLibro : IOptionSelected
     {
         public User User { get; set; }
-        public LibraryBusinessLogic LibraryBusinessLogic { get; set; }
+        public WCFBookProxy BookProxy { get; set; }
 
 
-        public CancellazioneDiUnLibro(User currentUser, LibraryBusinessLogic lbl)
+        public CancellazioneDiUnLibro(User currentUser, WCFBookProxy bookProxy)
         {
             this.User = currentUser;
-            this.LibraryBusinessLogic = lbl;
+            this.BookProxy = bookProxy;
 
         }
         public void Doing()
         {
             //var lbl = new LibraryBusinessLogic();
-            var mapper = new MapperBook();
+            
 
             Console.WriteLine("inserire titolo del libro");
             var title = Console.ReadLine();
@@ -35,19 +36,25 @@ namespace ConsoleApp.Library.Options
             Console.WriteLine("inserire casa editrice");
             var publishingHouse = Console.ReadLine();
 
-            var bvm = new BookViewModel(title, authorName, authorSurname, publishingHouse);
+            var bsvm = new BookServiceViewModel(title, authorName, authorSurname, publishingHouse);
 
             //var queryId = book_list.Where(b => b.Title == title).Select(e => e.BookId).ToList();
 
             //var libro = new Book(queryId[0], title, authorName, authorSurname, casaEditrice, Int16.Parse(quantity));
 
             //attenzione ai duplicati, metti tutti i campi per cercare il libro
-            var bookDeletedCheck = this.LibraryBusinessLogic.DeleteBook(bvm);
+            var bvm = Mapper.MapperBSVMtoBVM(bsvm);
+
+
+
+            var bookDeletedCheck = this.BookProxy.DeleteBook((Proxy.Library.SOAPLibrary.BookViewModel)bvm);
             if (bookDeletedCheck == false)
             {
-                var book = mapper.MapperBVMtoBOOK(bvm);
-                var reservationStatus = new ReservationStatus("attiva");
-                var reservationOfThisBook = this.LibraryBusinessLogic.GetReservationHistory(book.BookId, this.User.UserId, reservationStatus);
+                var reservationProxy = new WCFReservationProxy();
+                var book = Mapper.MapperBVMtoBOOK(bvm);
+                var serviceReservationStatus = new ServiceReservationStatus("attiva");
+                var reservationStatus = Mapper.MapperSRStoRS(serviceReservationStatus);
+                var reservationOfThisBook = reservationProxy.GetReservationHistory(book.BookId, this.User.UserId, reservationStatus);
 
                 foreach (var reservation in reservationOfThisBook)
                 {

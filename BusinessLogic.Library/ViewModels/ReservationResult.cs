@@ -17,6 +17,7 @@ namespace BusinessLogic.Library.ViewModels
         [DataMember] public User User { get; set; } // foreign key
         [DataMember] public Book Book { get; set; } // foreign key
 
+        [DataMember]
         public int FlagResult { get; set; }
 
         //serve BOokDAO e UserDAO

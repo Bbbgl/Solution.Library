@@ -1,7 +1,7 @@
 ﻿
 using Model.Library;
 using Proxy.Library.ServiceViewModels;
-using SOAPService.Library;
+using Proxy.Library.SOAPLibrary;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -12,26 +12,22 @@ using System.Threading.Tasks;
 namespace Proxy.Library
 { // 3 interfacce una per entità user book reserv...
 
-    public interface IProxy
-    {
-        SOAPService.Library.ServiceLibrary LibraryBusinessLogicForService();
-        
-    }
+    
 
     public interface IBookProxy
     {
-        void AddBook(AddingBookViewModel BVM);
+        void AddBook(AddingBookServiceViewModel bsvm);
 
         // List<Book> SearchBook(Book book);
 
-        //List<SearchingBookViewModel> SearchBookWithAvailabilityInfos(BookViewModel bvm);
+        List<SearchingBookViewModel> SearchBookWithAvailabilityInfos(BookViewModel bvm);
 
 
 
-        void UpdateBook(int bookId, SOAPLibrary.Book bookWithNewValues);
+        void UpdateBook(int bookId, Book bookWithNewValues);
 
 
-        //bool DeleteBook(BookViewModel bvm);
+        bool DeleteBook(BookViewModel bvm);
     }
 
 
@@ -40,7 +36,7 @@ namespace Proxy.Library
         User Login(LoginServiceViewModel lvm);
     }
 
-    public interface IReservationProxy 
+    public interface IReservationProxy
     {
         ReservationResult ReserveBookPROVA(int bookId, int userId);
         void ReserveBook(int bookId, int userId);

@@ -1,7 +1,7 @@
-﻿using BusinessLogic.Library;
-using BusinessLogic.Library.ViewModels;
-using DataAccessLayer.Library;
+﻿
 using Model.Library;
+using Proxy.Library;
+using Proxy.Library.ServiceViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,16 +13,15 @@ namespace ConsoleApp.Library.Options
     public class PrenotazioneDiUnLibro: IOptionSelected
     {
         public User User { get; set; }
-        public LibraryBusinessLogic LibraryBusinessLogic { get; set; }
+        public WCFBookProxy BookProxy { get; set; }
 
 
-        public PrenotazioneDiUnLibro(User currentUser, LibraryBusinessLogic lbl)
+        public PrenotazioneDiUnLibro(User currentUser, WCFBookProxy bookProxy)
         {
             this.User = currentUser;
-            this.LibraryBusinessLogic = lbl;
+            this.BookProxy = bookProxy;
 
         }
-
         public void Doing()// potrei fare un'altra interfaccia per le opt. riguardandi le reservations...
         {
 
@@ -35,7 +34,7 @@ namespace ConsoleApp.Library.Options
             //var lbl = new LibraryBusinessLogic(userDAO, bookDAO, reservationDAO);
             //sta cosa sopra non va bene, dovrei istanziare tutto una volta sola
 
-            var mapper = new MapperBook();
+            
 
             Console.WriteLine("inserire titolo del libro");
             var title = Console.ReadLine();
@@ -48,13 +47,14 @@ namespace ConsoleApp.Library.Options
             //Console.WriteLine("inserisci quantità");
             //var quantity = Console.ReadLine();
 
-            var bookToReserveViewModel = new ReservingBookViewModel(title,authorName,authorSurname,publishingHouse);// posso mettere sempre BookViewModel perchè tanto si inseriscono sempre quelle 4 cose
-
+            var bookToReserveServiceViewModel = new ReservingBookServiceViewModel(title,authorName,authorSurname,publishingHouse);// posso mettere sempre BookViewModel perchè tanto si inseriscono sempre quelle 4 cose
+            var bookToReserveViewModel = Mapper.MapperRBSVMtoRBVM(bookToReserveServiceViewModel);
             
-            var bookToReserve = mapper.MapperReservingBVMtoBOOK(bookToReserveViewModel);//lo devo fare dopo
+            var bookToReserve = Mapper.MapperReservingBVMtoBOOK(bookToReserveViewModel);//lo devo fare dopo
 
             // lbl.ReserveBook(bookToReserve.BookId, currentUser.UserId );
-            var reservation = this.LibraryBusinessLogic.ReserveBookPROVA(bookToReserve.BookId, this.User.UserId);
+            var reservationProxy = new WCFReservationProxy();
+            var reservation = reservationProxy.ReserveBookPROVA(bookToReserve.BookId, this.User.UserId);
 
             if (reservation.FlagResult == 0)
             {

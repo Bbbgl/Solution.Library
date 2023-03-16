@@ -9,6 +9,28 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="LoginViewModel" nillable="true" type="tns:LoginViewModel" />
+  <xs:complexType name="AddingBookViewModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AuthorName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="AuthorSurname" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PublishingHouse" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Quantity" type="xs:int" />
+      <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AddingBookViewModel" nillable="true" type="tns:AddingBookViewModel" />
+  <xs:complexType name="BookViewModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AuthorName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="AuthorSurname" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Avaiability" type="xs:boolean" />
+      <xs:element minOccurs="0" name="BookId" type="xs:int" />
+      <xs:element minOccurs="0" name="PublishingHouse" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Quantity" type="xs:int" />
+      <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="BookViewModel" nillable="true" type="tns:BookViewModel" />
   <xs:complexType name="ArrayOfSearchingBookViewModel">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="SearchingBookViewModel" nillable="true" type="tns:SearchingBookViewModel" />
@@ -31,6 +53,7 @@
   <xs:complexType name="ReservationResult">
     <xs:sequence>
       <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Model.Library" minOccurs="0" name="Book" nillable="true" type="q1:Book" />
+      <xs:element minOccurs="0" name="FlagResult" type="xs:int" />
       <xs:element minOccurs="0" name="Id" type="xs:int" />
       <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Model.Library" minOccurs="0" name="User" nillable="true" type="q2:User" />
     </xs:sequence>
@@ -63,4 +86,37 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ReservationViewModel" nillable="true" type="tns:ReservationViewModel" />
+  <xs:complexType name="ModifyingBookViewModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AuthorName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="AuthorSurname" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PublishingHouse" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ModifyingBookViewModel" nillable="true" type="tns:ModifyingBookViewModel" />
+  <xs:complexType name="ReservingBookViewModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AuthorName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="AuthorSurname" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PublishingHouse" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ReservingBookViewModel" nillable="true" type="tns:ReservingBookViewModel" />
+  <xs:complexType name="ReturningBookViewModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AuthorName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="AuthorSurname" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PublishingHouse" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ReturningBookViewModel" nillable="true" type="tns:ReturningBookViewModel" />
+  <xs:complexType name="UsernameViewModel">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Userame" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="UsernameViewModel" nillable="true" type="tns:UsernameViewModel" />
 </xs:schema>

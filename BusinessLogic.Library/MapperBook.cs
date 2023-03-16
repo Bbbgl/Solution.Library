@@ -1,5 +1,5 @@
 ﻿using BusinessLogic.Library.ViewModels;
-using ConsoleApp.Library.Options;
+
 using DataAccessLayer.Library;
 using Model.Library;
 using System;
@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic.Library
 {
-    [DataContract]
+    
     public class MapperBook
         //FALLO STATICO
     {// ci metto la bookList per riconoscere il libro? senno come faccio a ricavare l'id e la quanrity?

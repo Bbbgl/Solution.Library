@@ -1,4 +1,4 @@
-﻿using BusinessLogic.Library;
+﻿
 using Model.Library;
 using System;
 using System.Collections.Generic;
@@ -13,7 +13,7 @@ namespace ConsoleApp.Library
         IOptionSelected optionSelected;
 
         public User User { get; set; }
-        public LibraryBusinessLogic LibraryBusinessLogic{ get; set; }
+        
 
         public OptionSelected(IOptionSelected optionSelected)
         {

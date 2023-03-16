@@ -1,6 +1,7 @@
-﻿using BusinessLogic.Library;
-using BusinessLogic.Library.ViewModels;
+﻿
 using Model.Library;
+using Proxy.Library;
+using Proxy.Library.ServiceViewModels;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,40 +14,35 @@ namespace ConsoleApp.Library.Options
 {
     public class VisualizzazioneStoricoPrenotazioniAdmin : IOptionSelected
     {
-//        •	Visualizzare lo storico delle prenotazioni:
-//        questa ricerca può essere effettuata filtrando per Utente(Username) (solo admin)
-//        e/o Libro(Anagrafica) e/o Stato Prenotazione(Attiva/Non Attiva).
-//Le informazioni da mostrare sono:
-//titolo del libro – nome utente – data di inizio prestito – data di fine prestito –
-//info su stato prenotazione(attiva/non attiva)
+        //        •	Visualizzare lo storico delle prenotazioni:
+        //        questa ricerca può essere effettuata filtrando per Utente(Username) (solo admin)
+        //        e/o Libro(Anagrafica) e/o Stato Prenotazione(Attiva/Non Attiva).
+        //Le informazioni da mostrare sono:
+        //titolo del libro – nome utente – data di inizio prestito – data di fine prestito –
+        //info su stato prenotazione(attiva/non attiva)
 
         public User User { get; set; }
-        public LibraryBusinessLogic LibraryBusinessLogic { get; set; }
+        public WCFBookProxy BookProxy { get; set; }
 
-        public List<Book> BookList
-        {
-            get { return BookList; }
-            set { BookList = this.LibraryBusinessLogic.Repository.ReadBooks(); }
-        }
 
-        // l'admin credo possa vedere le prenotazioni di tutti gli utenti
-        public VisualizzazioneStoricoPrenotazioniAdmin(User currentUser, LibraryBusinessLogic lbl)
+        public VisualizzazioneStoricoPrenotazioniAdmin(User currentUser, WCFBookProxy bookProxy)
         {
             this.User = currentUser;
-            this.LibraryBusinessLogic = lbl;
+            this.BookProxy = bookProxy;
 
         }
+        // l'admin credo possa vedere le prenotazioni di tutti gli utenti
+        
         public void Doing()
         {
-            var mapper = new MapperBook(); // probabilmente lo dovrò passare nel costruttore e toglierlo senza istanziarlo ogni volta
             Console.WriteLine("Inserisci username");
             var usernameForFilter = Console.ReadLine();
 
             int? userForFilteringId=0;
             //if(usernameForFilter != "") { 
-            var usernameViewModel = new UsernameViewModel(usernameForFilter);
+            var usernameServiceViewModel = new UsernameServiceViewModel(usernameForFilter);
 
-            var usersFilterList = mapper.MapperUsernameVMtoUserList(usernameViewModel);
+            var usersFilterList = Mapper.MapperUsernameVMtoUserList(Mapper.MapperUSVMtoUVM(usernameServiceViewModel));
             if (usersFilterList.Count == 0) Console.WriteLine("l'utente non esiste!!");
             // se la lista utenti è uguale 1 significa che è stato inserito un utente specifico
             if (usersFilterList.Count == 1) userForFilteringId = usersFilterList[0].UserId;
@@ -74,14 +70,14 @@ namespace ConsoleApp.Library.Options
 
             
             
-            var bookViewModel=new BookViewModel(title, authorName, authorSurname, publishingHouse);
+            var bookServiceViewModel=new BookServiceViewModel(title, authorName, authorSurname, publishingHouse);
             
             //var bookFilterList = this.LibraryBusinessLogic.SearchBookWithAvailabilityInfos(bookViewModel);  
             
-            var booksFilterList = mapper.MapperBVMtoBOOKforGetReservationsHistory(bookViewModel);
+            var booksFilterList = Mapper.MapperBVMtoBOOKforGetReservationsHistory(Mapper.MapperBSVMtoBVM(bookServiceViewModel));
 
 
-            if (booksFilterList.Count.Equals(this.LibraryBusinessLogic.Repository.ReadBooks())) bookForFilteringId[0] = 0;
+            if (booksFilterList.Count.Equals(this.BookProxy.ReadBooks())) bookForFilteringId[0] = 0;
             else
             {
                 foreach (var book in booksFilterList)
@@ -95,13 +91,23 @@ namespace ConsoleApp.Library.Options
             Console.WriteLine("inserisci stato prenotazione (attiva/non attiva)");
             var statoPrenotazione = Console.ReadLine();
 
-            var reservationStatus = new ReservationStatus(statoPrenotazione);
+            var serviceReservationStatus = new ServiceReservationStatus(statoPrenotazione);
 
             //var reservationStatusForFiltering = mapper.MapperReservationStatusToReservation(reservationStatus);
-            var result = new List<ReservationViewModel>();
+            var serviceResult = new List<ReservationServiceViewModel>();
+            var result = Mapper.MapperListRSVMtoListRVM(serviceResult);
+            var reservationProxy = new WCFReservationProxy();
             for (int i = 0; i < bookForFilteringId.Count; i++)
             {
-                var newList = this.LibraryBusinessLogic.GetReservationHistory(bookForFilteringId[i], userForFilteringId, reservationStatus);
+               
+                
+                
+                var newList = reservationProxy.GetReservationHistory(bookForFilteringId[i], userForFilteringId, Mapper.MapperSRStoRS(serviceReservationStatus));
+                
+                
+                
+                // da rivedere sta cosa, forse è da fare un mapper tra una lista resServiceVM a resVM
+                
                 result.AddRange(newList);
             }
 

@@ -1,6 +1,6 @@
 ﻿using BusinessLogic.Library;
 using BusinessLogic.Library.ViewModels;
-using ConsoleApp.Library.Options;
+
 using DataAccessLayer.Library;
 using Model.Library;
 using System;
@@ -38,6 +38,8 @@ namespace SOAPService.Library
             return lblfs.lbl;
         }
 
+       
+
 
         // public ServiceLibrary() { }
 
@@ -66,7 +68,9 @@ namespace SOAPService.Library
         public User Login(LoginViewModel lvm)
         {
             return lbl().Login(lvm);
+            
         }
+
 
         public void AddBook(AddingBookViewModel BVM)
         {
@@ -76,6 +80,11 @@ namespace SOAPService.Library
         public List<Book> SearchBook(Book book)
         {
             return lbl().SearchBook(book);
+        }
+
+        public List<Book> ReadBooks()
+        {
+            return lbl().Repository.ReadBooks();
         }
 
         public List<SearchingBookViewModel> SearchBookWithAvailabilityInfos(BookViewModel bvm)
@@ -111,6 +120,49 @@ namespace SOAPService.Library
         public List<ReservationViewModel> GetReservationHistory(int? bookId, int? userId, ReservationStatus? reservationStatus)
         {
             return lbl().GetReservationHistory(bookId, userId, reservationStatus);
+        }
+
+        public Book MapperBVMtoBOOK(BookViewModel bvm)
+        {
+
+            var mapper = new MapperBook();
+            return mapper.MapperBVMtoBOOK(bvm);
+        }
+
+        public Book MapperModifyingBVMtoBOOK(ModifyingBookViewModel modifyingBVM)
+        {
+            var mapper = new MapperBook();
+            return mapper.MapperModifyingBVMtoBOOK(modifyingBVM);
+        }
+
+        public Book MapperABVMtoBOOK (AddingBookViewModel abvm)
+        {
+            var mapper = new MapperBook();
+            return mapper.MapperAddingBVMtoBOOK(abvm);
+        }
+
+        public Book MapperReservingBVMtoBOOK(ReservingBookViewModel rbvm)
+        {
+            var mapper = new MapperBook();
+            return mapper.MapperReservingBVMtoBOOK(rbvm);
+        }
+
+        public Book MapperReturningBVMtoBOOK(ReturningBookViewModel returningBVM)
+        {
+            var mapper = new MapperBook();
+            return mapper.MapperReturningBVMtoBOOK(returningBVM);
+        }
+
+        public List<User> MapperUsernameVMtoUserList(UsernameViewModel uvm)
+        {
+            var mapper = new MapperBook();
+            return mapper.MapperUsernameVMtoUserList(uvm);
+        }
+
+        public List<Book> MapperBVMtoBOOKforGetReservationsHistory(BookViewModel bvm)
+        {
+            var mapper = new MapperBook();
+            return mapper.MapperBVMtoBOOKforGetReservationsHistory(bvm);
         }
     }
 }

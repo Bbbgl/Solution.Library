@@ -1,6 +1,8 @@
-﻿using BusinessLogic.Library;
+﻿
 using ConsoleApp.Library.Options;
 using Model.Library;
+using Proxy.Library;
+using Proxy.Library.ServiceViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,19 +14,19 @@ namespace ConsoleApp.Library
     public class CreazioneDiUnLibro : IOptionSelected
     {
         public User User { get; set; }
-        public LibraryBusinessLogic LibraryBusinessLogic { get; set; }
+        public WCFBookProxy BookProxy { get; set; }
 
 
-        public CreazioneDiUnLibro(User currentUser, LibraryBusinessLogic lbl)
+        public CreazioneDiUnLibro(User currentUser, WCFBookProxy bookProxy)
         {
             this.User = currentUser;
-            this.LibraryBusinessLogic = lbl;
+            this.BookProxy = bookProxy;
 
         }
         public void Doing()
         {
             //var lbl = new LibraryBusinessLogic();
-            var mapper = new MapperBook();
+            
 
             Console.WriteLine("inserire titolo del libro");
             var title = Console.ReadLine();
@@ -37,9 +39,9 @@ namespace ConsoleApp.Library
             Console.WriteLine("inserisci quantità");
             var quantity = Console.ReadLine();
 
-            var addingBVM = new AddingBookViewModel(title, authorName, authorSurname, publishingHouse, Int16.Parse(quantity));//try-catch la quantità deve essere un numero
+            var addingBVM = new AddingBookServiceViewModel(title, authorName, authorSurname, publishingHouse, Int16.Parse(quantity));//try-catch la quantità deve essere un numero
             // var queryId = book_list.Where(b => b.Title == title).Select(e => e.BookId).Take(1).ToList();
-            this.LibraryBusinessLogic.AddBook(addingBVM);
+           this.BookProxy.AddBook(addingBVM);
 
             //var bookToAdd = mapper.MapperAddingBVMtoBOOK(addingBvm);
             //var id_book = book_list.Count();

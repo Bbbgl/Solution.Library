@@ -30,8 +30,6 @@
     <MetadataFile FileName="ServiceLibrary2.xsd" MetadataType="Schema" ID="bbb1130e-c889-4c4a-82f9-4726fba94e17" SourceId="1" SourceUrl="http://localhost:50030/ServiceLibrary.svc?xsd=xsd2" />
     <MetadataFile FileName="ServiceLibrary3.xsd" MetadataType="Schema" ID="40bbd407-aeae-4490-8b5e-1f391408637d" SourceId="1" SourceUrl="http://localhost:50030/ServiceLibrary.svc?xsd=xsd1" />
     <MetadataFile FileName="ServiceLibrary4.xsd" MetadataType="Schema" ID="fc7e00bf-21c3-40e9-834d-19642015e77c" SourceId="1" SourceUrl="http://localhost:50030/ServiceLibrary.svc?xsd=xsd3" />
-    <MetadataFile FileName="ServiceLibrary5.xsd" MetadataType="Schema" ID="53577e0c-8a17-424a-a32a-e25f8ce2ad02" SourceId="1" SourceUrl="http://localhost:50030/ServiceLibrary.svc?xsd=xsd5" />
-    <MetadataFile FileName="ServiceLibrary6.xsd" MetadataType="Schema" ID="b4840e55-a63d-4b15-951b-375739475794" SourceId="1" SourceUrl="http://localhost:50030/ServiceLibrary.svc?xsd=xsd6" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
