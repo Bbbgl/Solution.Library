@@ -1,8 +1,8 @@
-﻿using BusinessLogic.Library.ViewModels;
+﻿
 using Model.Library;
 using Proxy.Library.ServiceViewModels;
 using Proxy.Library.SOAPLibrary;
-using SOAPService.Library;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;

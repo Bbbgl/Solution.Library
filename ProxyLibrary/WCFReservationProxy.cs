@@ -1,4 +1,4 @@
-﻿using BusinessLogic.Library.ViewModels;
+﻿
 using Proxy.Library.SOAPLibrary;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Proxy.Library
 {
-    public class WCFReservationProxy : IReservationProxy
+    public class WCFReservationProxy //: IReservationProxy
     {
         public static ServiceLibraryClient slc = new ServiceLibraryClient();
         public ReservationResult BookReturn(int bookId, int userId)

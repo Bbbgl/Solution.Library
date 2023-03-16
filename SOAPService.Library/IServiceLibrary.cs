@@ -1,7 +1,7 @@
 ﻿
 using BusinessLogic.Library;
 using BusinessLogic.Library.ViewModels;
-using ConsoleApp.Library.Options;
+
 using Model.Library;
 using System;
 using System.Collections.Generic;
@@ -55,7 +55,22 @@ namespace SOAPService.Library
         [OperationContract]
         List<ReservationViewModel> GetReservationHistory(int? bookId, int? userId, ReservationStatus? reservationStatus);
 
-
+        [OperationContract]
+        Book MapperBVMtoBOOK(BookViewModel bvm);
+        [OperationContract]
+        Book MapperModifyingBVMtoBOOK(ModifyingBookViewModel modifyingBVM);
+        [OperationContract]
+        Book MapperABVMtoBOOK(AddingBookViewModel abvm);
+        [OperationContract]
+        Book MapperReservingBVMtoBOOK(ReservingBookViewModel rbvm);
+        [OperationContract]
+        Book MapperReturningBVMtoBOOK(ReturningBookViewModel returningBVM);
+        [OperationContract]
+        List<User> MapperUsernameVMtoUserList(UsernameViewModel uvm);
+        [OperationContract]
+        List<Book> MapperBVMtoBOOKforGetReservationsHistory(BookViewModel bvm);
+        [OperationContract]
+        List<Book> ReadBooks();
 
 
         // TODO: Add your service operations here

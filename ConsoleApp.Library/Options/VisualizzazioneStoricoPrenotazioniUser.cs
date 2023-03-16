@@ -1,6 +1,7 @@
-﻿using BusinessLogic.Library;
-using BusinessLogic.Library.ViewModels;
+﻿
 using Model.Library;
+using Proxy.Library;
+using Proxy.Library.ServiceViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,18 +13,18 @@ namespace ConsoleApp.Library.Options
     public class VisualizzazioneStoricoPrenotazioniUser : IOptionSelected
     {
         public User User { get; set; }
-        public LibraryBusinessLogic LibraryBusinessLogic { get; set; }
+        public WCFBookProxy BookProxy { get; set; }
 
 
-        public VisualizzazioneStoricoPrenotazioniUser(User currentUser, LibraryBusinessLogic lbl)
+        public VisualizzazioneStoricoPrenotazioniUser(User currentUser, WCFBookProxy bookProxy)
         {
             this.User = currentUser;
-            this.LibraryBusinessLogic = lbl;
+            this.BookProxy = bookProxy;
 
         }
         public void Doing()
         {
-            var mapper = new MapperBook(); // probabilmente lo dovrò passare nel costruttore e toglierlo senza istanziarlo ogni volta
+             // probabilmente lo dovrò passare nel costruttore e toglierlo senza istanziarlo ogni volta
             //Console.WriteLine("Inserisci username");
             //var usernameForFilter = Console.ReadLine();
 
@@ -54,14 +55,14 @@ namespace ConsoleApp.Library.Options
 
 
 
-            var bookViewModel = new BookViewModel(title, authorName, authorSurname, publishingHouse);
+            var bookServiceViewModel = new BookServiceViewModel(title, authorName, authorSurname, publishingHouse);
 
             //var bookFilterList = this.LibraryBusinessLogic.SearchBookWithAvailabilityInfos(bookViewModel);  
 
-            var booksFilterList = mapper.MapperBVMtoBOOKforGetReservationsHistory(bookViewModel);
+            var booksFilterList = Mapper.MapperBVMtoBOOKforGetReservationsHistory(Mapper.MapperBSVMtoBVM(bookServiceViewModel));
 
 
-            if (booksFilterList.Count.Equals(this.LibraryBusinessLogic.Repository.ReadBooks())) bookForFilteringId[0] = 0;
+            if (booksFilterList.Count.Equals(this.BookProxy.ReadBooks())) bookForFilteringId[0] = 0;
             else
             {
                 foreach (var book in booksFilterList)
@@ -75,13 +76,15 @@ namespace ConsoleApp.Library.Options
             Console.WriteLine("inserisci stato prenotazione (attiva/non attiva)");
             var statoPrenotazione = Console.ReadLine();
 
-            var reservationStatus = new ReservationStatus(statoPrenotazione);
+            var serviceReservationStatus = new ServiceReservationStatus(statoPrenotazione);
 
             //var reservationStatusForFiltering = mapper.MapperReservationStatusToReservation(reservationStatus);
-            var result = new List<ReservationViewModel>();
+            var serviceResult = new List<ReservationServiceViewModel>();
+            var result = Mapper.MapperListRSVMtoListRVM(serviceResult);
+            var reservationProxy = new WCFReservationProxy();
             for (int i = 0; i < bookForFilteringId.Count; i++)
             {
-                var newList = this.LibraryBusinessLogic.GetReservationHistory(bookForFilteringId[i], userId, reservationStatus);
+                var newList = reservationProxy.GetReservationHistory(bookForFilteringId[i], userId, Mapper.MapperSRStoRS(serviceReservationStatus));
                 result.AddRange(newList);
             }
 
@@ -148,6 +151,6 @@ namespace ConsoleApp.Library.Options
 
 //            }
 //        }
-//    }
+//    }*/
 //}
 

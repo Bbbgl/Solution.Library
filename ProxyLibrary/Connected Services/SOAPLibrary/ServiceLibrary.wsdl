@@ -7,8 +7,6 @@
       <xsd:import schemaLocation="http://localhost:50030/ServiceLibrary.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/SOAPService.Library" />
       <xsd:import schemaLocation="http://localhost:50030/ServiceLibrary.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/BusinessLogic.Library.ViewModels" />
       <xsd:import schemaLocation="http://localhost:50030/ServiceLibrary.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Model.Library" />
-      <xsd:import schemaLocation="http://localhost:50030/ServiceLibrary.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/ConsoleApp.Library.Options" />
-      <xsd:import schemaLocation="http://localhost:50030/ServiceLibrary.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/BusinessLogic.Library" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IServiceLibrary_GetData_InputMessage">
@@ -83,6 +81,54 @@
   <wsdl:message name="IServiceLibrary_GetReservationHistory_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetReservationHistoryResponse" />
   </wsdl:message>
+  <wsdl:message name="IServiceLibrary_MapperBVMtoBOOK_InputMessage">
+    <wsdl:part name="parameters" element="tns:MapperBVMtoBOOK" />
+  </wsdl:message>
+  <wsdl:message name="IServiceLibrary_MapperBVMtoBOOK_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MapperBVMtoBOOKResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceLibrary_MapperModifyingBVMtoBOOK_InputMessage">
+    <wsdl:part name="parameters" element="tns:MapperModifyingBVMtoBOOK" />
+  </wsdl:message>
+  <wsdl:message name="IServiceLibrary_MapperModifyingBVMtoBOOK_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MapperModifyingBVMtoBOOKResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceLibrary_MapperABVMtoBOOK_InputMessage">
+    <wsdl:part name="parameters" element="tns:MapperABVMtoBOOK" />
+  </wsdl:message>
+  <wsdl:message name="IServiceLibrary_MapperABVMtoBOOK_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MapperABVMtoBOOKResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceLibrary_MapperReservingBVMtoBOOK_InputMessage">
+    <wsdl:part name="parameters" element="tns:MapperReservingBVMtoBOOK" />
+  </wsdl:message>
+  <wsdl:message name="IServiceLibrary_MapperReservingBVMtoBOOK_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MapperReservingBVMtoBOOKResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceLibrary_MapperReturningBVMtoBOOK_InputMessage">
+    <wsdl:part name="parameters" element="tns:MapperReturningBVMtoBOOK" />
+  </wsdl:message>
+  <wsdl:message name="IServiceLibrary_MapperReturningBVMtoBOOK_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MapperReturningBVMtoBOOKResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceLibrary_MapperUsernameVMtoUserList_InputMessage">
+    <wsdl:part name="parameters" element="tns:MapperUsernameVMtoUserList" />
+  </wsdl:message>
+  <wsdl:message name="IServiceLibrary_MapperUsernameVMtoUserList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MapperUsernameVMtoUserListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceLibrary_MapperBVMtoBOOKforGetReservationsHistory_InputMessage">
+    <wsdl:part name="parameters" element="tns:MapperBVMtoBOOKforGetReservationsHistory" />
+  </wsdl:message>
+  <wsdl:message name="IServiceLibrary_MapperBVMtoBOOKforGetReservationsHistory_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MapperBVMtoBOOKforGetReservationsHistoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="IServiceLibrary_ReadBooks_InputMessage">
+    <wsdl:part name="parameters" element="tns:ReadBooks" />
+  </wsdl:message>
+  <wsdl:message name="IServiceLibrary_ReadBooks_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ReadBooksResponse" />
+  </wsdl:message>
   <wsdl:portType name="IServiceLibrary">
     <wsdl:operation name="GetData">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceLibrary/GetData" message="tns:IServiceLibrary_GetData_InputMessage" />
@@ -131,6 +177,38 @@
     <wsdl:operation name="GetReservationHistory">
       <wsdl:input wsaw:Action="http://tempuri.org/IServiceLibrary/GetReservationHistory" message="tns:IServiceLibrary_GetReservationHistory_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IServiceLibrary/GetReservationHistoryResponse" message="tns:IServiceLibrary_GetReservationHistory_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MapperBVMtoBOOK">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceLibrary/MapperBVMtoBOOK" message="tns:IServiceLibrary_MapperBVMtoBOOK_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceLibrary/MapperBVMtoBOOKResponse" message="tns:IServiceLibrary_MapperBVMtoBOOK_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MapperModifyingBVMtoBOOK">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceLibrary/MapperModifyingBVMtoBOOK" message="tns:IServiceLibrary_MapperModifyingBVMtoBOOK_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceLibrary/MapperModifyingBVMtoBOOKResponse" message="tns:IServiceLibrary_MapperModifyingBVMtoBOOK_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MapperABVMtoBOOK">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceLibrary/MapperABVMtoBOOK" message="tns:IServiceLibrary_MapperABVMtoBOOK_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceLibrary/MapperABVMtoBOOKResponse" message="tns:IServiceLibrary_MapperABVMtoBOOK_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MapperReservingBVMtoBOOK">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceLibrary/MapperReservingBVMtoBOOK" message="tns:IServiceLibrary_MapperReservingBVMtoBOOK_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceLibrary/MapperReservingBVMtoBOOKResponse" message="tns:IServiceLibrary_MapperReservingBVMtoBOOK_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MapperReturningBVMtoBOOK">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceLibrary/MapperReturningBVMtoBOOK" message="tns:IServiceLibrary_MapperReturningBVMtoBOOK_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceLibrary/MapperReturningBVMtoBOOKResponse" message="tns:IServiceLibrary_MapperReturningBVMtoBOOK_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MapperUsernameVMtoUserList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceLibrary/MapperUsernameVMtoUserList" message="tns:IServiceLibrary_MapperUsernameVMtoUserList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceLibrary/MapperUsernameVMtoUserListResponse" message="tns:IServiceLibrary_MapperUsernameVMtoUserList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MapperBVMtoBOOKforGetReservationsHistory">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceLibrary/MapperBVMtoBOOKforGetReservationsHistory" message="tns:IServiceLibrary_MapperBVMtoBOOKforGetReservationsHistory_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceLibrary/MapperBVMtoBOOKforGetReservationsHistoryResponse" message="tns:IServiceLibrary_MapperBVMtoBOOKforGetReservationsHistory_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ReadBooks">
+      <wsdl:input wsaw:Action="http://tempuri.org/IServiceLibrary/ReadBooks" message="tns:IServiceLibrary_ReadBooks_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IServiceLibrary/ReadBooksResponse" message="tns:IServiceLibrary_ReadBooks_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IServiceLibrary" type="tns:IServiceLibrary">
@@ -236,6 +314,78 @@
     </wsdl:operation>
     <wsdl:operation name="GetReservationHistory">
       <soap:operation soapAction="http://tempuri.org/IServiceLibrary/GetReservationHistory" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MapperBVMtoBOOK">
+      <soap:operation soapAction="http://tempuri.org/IServiceLibrary/MapperBVMtoBOOK" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MapperModifyingBVMtoBOOK">
+      <soap:operation soapAction="http://tempuri.org/IServiceLibrary/MapperModifyingBVMtoBOOK" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MapperABVMtoBOOK">
+      <soap:operation soapAction="http://tempuri.org/IServiceLibrary/MapperABVMtoBOOK" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MapperReservingBVMtoBOOK">
+      <soap:operation soapAction="http://tempuri.org/IServiceLibrary/MapperReservingBVMtoBOOK" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MapperReturningBVMtoBOOK">
+      <soap:operation soapAction="http://tempuri.org/IServiceLibrary/MapperReturningBVMtoBOOK" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MapperUsernameVMtoUserList">
+      <soap:operation soapAction="http://tempuri.org/IServiceLibrary/MapperUsernameVMtoUserList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MapperBVMtoBOOKforGetReservationsHistory">
+      <soap:operation soapAction="http://tempuri.org/IServiceLibrary/MapperBVMtoBOOKforGetReservationsHistory" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ReadBooks">
+      <soap:operation soapAction="http://tempuri.org/IServiceLibrary/ReadBooks" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

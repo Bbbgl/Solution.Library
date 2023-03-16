@@ -33,6 +33,8 @@ namespace ConsoleApp.Library
             var userProxy = new WCFUserProxy();
             var bookProxy = new WCFBookProxy();
             var reservationProxy = new WCFReservationProxy();
+
+            
             
 
             do {
@@ -96,7 +98,7 @@ namespace ConsoleApp.Library
                     Console.WriteLine("Modifica di un libro");
 
                     IOptionSelected optionSelected = new ModificaDiUnLibro(currentUser, bookProxy);
-                    OptionSelected optionToDo = new OptionSelected(optionSelected );
+                    OptionSelected optionToDo = new OptionSelected(optionSelected);
                     optionToDo.Doing();
 
                     continue;
@@ -115,25 +117,26 @@ namespace ConsoleApp.Library
                 {
                     Console.WriteLine("Ricerca di un libro");
 
-                    IOptionSelected optionSelected = new RicercaDiUnLibro(currentUser,bookProxy);
+                    IOptionSelected optionSelected = new RicercaDiUnLibro(currentUser, bookProxy);
                     OptionSelected optionToDo = new OptionSelected(optionSelected);
                     optionToDo.Doing();
                 }
-                if(decision == "5")
+                if (decision == "5")
                 {
                     Console.WriteLine("Prenotazione di un libro");
 
-                    IOptionSelected optionSelected = new PrenotazioneDiUnLibro(currentUser, reservationProxy);
+                    IOptionSelected optionSelected = new PrenotazioneDiUnLibro(currentUser, bookProxy);
                     OptionSelected optionToDo = new OptionSelected(optionSelected);
                     optionToDo.Doing();
 
                     continue;
 
-                }if (decision == "6")
+                }
+                if (decision == "6")
                 {
                     Console.WriteLine("Restituzione di un libro");
 
-                    IOptionSelected optionSelected = new RestituzioneDiUnLibro(currentUser, reservationProxy);
+                    IOptionSelected optionSelected = new RestituzioneDiUnLibro(currentUser, bookProxy);
                     OptionSelected optionToDo = new OptionSelected(optionSelected);
                     optionToDo.Doing();
 
@@ -143,7 +146,7 @@ namespace ConsoleApp.Library
                 {
                     Console.WriteLine("Visualizzazione Storico Prenotazioni");
 
-                    IOptionSelected optionSelected = new VisualizzazioneStoricoPrenotazioniAdmin(currentUser, reservationProxy);
+                    IOptionSelected optionSelected = new VisualizzazioneStoricoPrenotazioniAdmin(currentUser, bookProxy);
                     OptionSelected optionToDo = new OptionSelected(optionSelected);
                     optionToDo.Doing();
 
@@ -169,11 +172,11 @@ namespace ConsoleApp.Library
                 ////var foundAvaiableBooks = libraryBusinessLogic.SearchBookWithAvailabilityInfos(book);
                 //libraryBusinessLogic.ReserveBook(book.BookId, currentUser.UserId);
 
-            
+
 
             }
 
-            while(currentUser.Role == "User")
+            while (currentUser.Role == "User")
             {
                 Console.WriteLine("Utilizzatore");
 
@@ -187,7 +190,7 @@ namespace ConsoleApp.Library
                 {
                     Console.WriteLine("Ricerca di un libro");
 
-                    IOptionSelected optionSelected = new RicercaDiUnLibro(currentUser, lbl);
+                    IOptionSelected optionSelected = new RicercaDiUnLibro(currentUser, bookProxy);
                     OptionSelected optionToDo = new OptionSelected(optionSelected);
                     optionToDo.Doing();
 
@@ -200,7 +203,7 @@ namespace ConsoleApp.Library
 
 
                     //IOptionSelected optionSelected = new PrenotazioneDiUnLibro();
-                    IOptionSelected optionSelected = new PrenotazioneDiUnLibro(currentUser, lbl);
+                    IOptionSelected optionSelected = new PrenotazioneDiUnLibro(currentUser, bookProxy);
                     OptionSelected optionToDo = new OptionSelected(optionSelected);
                     optionToDo.Doing();
 
@@ -223,7 +226,7 @@ namespace ConsoleApp.Library
 
 
                     //IOptionSelected optionSelected = new PrenotazioneDiUnLibro();
-                    IOptionSelected optionSelected = new RestituzioneDiUnLibro(currentUser, lbl);
+                    IOptionSelected optionSelected = new RestituzioneDiUnLibro(currentUser, bookProxy);
                     OptionSelected optionToDo = new OptionSelected(optionSelected);
                     optionToDo.Doing();
 
@@ -233,7 +236,7 @@ namespace ConsoleApp.Library
                 {
                     Console.WriteLine("Visualizzazione Storico Prenotazioni");
 
-                    IOptionSelected optionSelected = new VisualizzazioneStoricoPrenotazioniUser(currentUser, lbl);
+                    IOptionSelected optionSelected = new VisualizzazioneStoricoPrenotazioniUser(currentUser, bookProxy);
                     OptionSelected optionToDo = new OptionSelected(optionSelected);
                     optionToDo.Doing();
 
@@ -247,12 +250,12 @@ namespace ConsoleApp.Library
 
             }
 
-            
 
-            }
-        
-            
+
         }
+
+
     }
+}
 
 

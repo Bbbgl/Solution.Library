@@ -14,11 +14,10 @@ namespace Proxy.Library
     public class WCFBookProxy : IBookProxy
     {
         public static ServiceLibraryClient slc = new ServiceLibraryClient();
-        public void AddBook(AddingBookViewModel BVM)
+        public void AddBook(AddingBookServiceViewModel bsvm)
         {           
-            //var slc = new ServiceLibraryClient();
-            //slc.AddBook(BVM);
-            slc.AddBook(BVM);
+            
+            slc.AddBook(Mapper.MapperAddingBSVMtoAddingBVM(bsvm));
         }
 
         public bool DeleteBook(BookViewModel bvm)
@@ -27,7 +26,6 @@ namespace Proxy.Library
         }
 
        
-
         public List<SearchingBookViewModel> SearchBookWithAvailabilityInfos(BookViewModel bvm)
         {
             return slc.SearchBookWithAvailabilityInfos(bvm);
@@ -36,6 +34,12 @@ namespace Proxy.Library
         public void UpdateBook(int bookId, Book bookWithNewValues)
         {
             slc.UpdateBook(bookId,bookWithNewValues);
+           
+        }
+
+        public List<Book> ReadBooks()
+        {
+            return slc.ReadBooks();    
         }
     }
 

@@ -1,5 +1,7 @@
-﻿using BusinessLogic.Library;
+﻿
 using Model.Library;
+using Proxy.Library;
+using Proxy.Library.ServiceViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,19 +13,19 @@ namespace ConsoleApp.Library.Options
     public class ModificaDiUnLibro : IOptionSelected
     {
         public User User { get; set; }
-        public LibraryBusinessLogic LibraryBusinessLogic { get; set; }
+        public WCFBookProxy BookProxy { get; set; }
 
 
-        public ModificaDiUnLibro(User currentUser, LibraryBusinessLogic lbl)
+        public ModificaDiUnLibro(User currentUser, WCFBookProxy bookProxy)
         {
             this.User = currentUser;
-            this.LibraryBusinessLogic = lbl;
+            this.BookProxy = bookProxy;
 
         }
         public void Doing()
         {
             //var lbl = new LibraryBusinessLogic();
-            var mapper = new MapperBook();
+         
             //Console.WriteLine("Id libro da modificare");
             //var id = Console.ReadLine();
             Console.WriteLine("inserire titolo del libro");
@@ -37,9 +39,11 @@ namespace ConsoleApp.Library.Options
             //Console.WriteLine("inserisci quantità");
             //var quantity = Console.ReadLine();
 
-            var bookToModifyViewModel = new ModifyingBookViewModel(title, authorName, authorSurname, publishingHouse/*,Int32.Parse(quantity)*/);
-
-           var bookToModify = mapper.MapperModifyingBVMtoBOOK(bookToModifyViewModel);// e qui ricavo l'id
+            var bookToModifyServiceViewModel = new ModifyingBookServiceViewModel(title, authorName, authorSurname, publishingHouse);
+            
+           var bookToModifyViewModel = Mapper.MapperMBSVMtoMBVM(bookToModifyServiceViewModel);
+            
+            var bookToModify = Mapper.MapperMBVMtoBOOK(bookToModifyViewModel);
 
             Console.WriteLine("inserire nuovo titolo del libro");
             var newTitle = Console.ReadLine();
@@ -53,12 +57,12 @@ namespace ConsoleApp.Library.Options
             var newQuantity = Console.ReadLine();
             //var queryId = book_list.Where(b => b.Title == title).Select(e => e.BookId).Take(1).ToList();
             
-            var bookWithNewValuesViewModel = new AddingBookViewModel(newTitle,newAuthorName,newAuthorSurname,newPublishingHouse, Int16.Parse(newQuantity));
-
+            var bookWithNewValuesServiceViewModel = new AddingBookServiceViewModel(newTitle,newAuthorName,newAuthorSurname,newPublishingHouse, Int16.Parse(newQuantity));
+            var bookWithNewValuesViewModel = Mapper.MapperAddingBSVMtoAddingBVM(bookWithNewValuesServiceViewModel);
             //var libro = new Book(queryId[0], title, authorName, authorSurname, casaEditrice, Int16.Parse(quantity));
-            var bookWithNewValues = mapper.MapperAddingBVMtoBOOK(bookWithNewValuesViewModel);
+            var bookWithNewValues = Mapper.MapperABVMtoBOOK(bookWithNewValuesViewModel);
 
-            this.LibraryBusinessLogic.UpdateBook(bookToModify.BookId, bookWithNewValues);
+            this.BookProxy.UpdateBook(bookToModify.BookId, bookWithNewValues);
         }
     }
 }
