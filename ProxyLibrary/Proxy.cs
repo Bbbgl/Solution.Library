@@ -1,34 +1,43 @@
-﻿using BusinessLogic.Library;
-using BusinessLogic.Library.ViewModels;
-using ConsoleApp.Library.Options;
+﻿
 using Model.Library;
-using System;
+using Proxy.Library.ServiceViewModels;
+using SOAPService.Library;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Proxy.Library
 { // 3 interfacce una per entità user book reserv...
+
+    public interface IProxy
+    {
+        SOAPService.Library.ServiceLibrary LibraryBusinessLogicForService();
+        
+    }
+
     public interface IBookProxy
     {
         void AddBook(AddingBookViewModel BVM);
 
-       // List<Book> SearchBook(Book book);
-        
-        List<SearchingBookViewModel> SearchBookWithAvailabilityInfos(BookViewModel bvm);
+        // List<Book> SearchBook(Book book);
 
-        
+        //List<SearchingBookViewModel> SearchBookWithAvailabilityInfos(BookViewModel bvm);
+
+
+
         void UpdateBook(int bookId, SOAPLibrary.Book bookWithNewValues);
 
-      
-        bool DeleteBook(BookViewModel bvm);
+
+        //bool DeleteBook(BookViewModel bvm);
     }
+
 
     public interface IUserProxy 
     {
-        SOAPLibrary.User Login(LoginViewModel lvm);
+        User Login(LoginServiceViewModel lvm);
     }
 
     public interface IReservationProxy 

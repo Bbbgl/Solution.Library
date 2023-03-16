@@ -1,11 +1,11 @@
-﻿using BusinessLogic.Library;
-using BusinessLogic.Library.ViewModels;
-
-using ConsoleApp.Library.Options;
+﻿
+using Model.Library;
+using Proxy.Library.ServiceViewModels;
 using Proxy.Library.SOAPLibrary;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,7 +15,7 @@ namespace Proxy.Library
     {
         public static ServiceLibraryClient slc = new ServiceLibraryClient();
         public void AddBook(AddingBookViewModel BVM)
-        {
+        {           
             //var slc = new ServiceLibraryClient();
             //slc.AddBook(BVM);
             slc.AddBook(BVM);

@@ -5,10 +5,10 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusinessLogic.Library.ViewModels
+namespace Proxy.Library.ServiceViewModels
 {
     [DataContract]
-    public class ModifyingBookViewModel
+    public class ModifyingBookServiceViewModel
     {
         [DataMember]
         public string Title { get; set; }
@@ -17,7 +17,7 @@ namespace BusinessLogic.Library.ViewModels
         [DataMember] public string PublishingHouse { get; set; }
         //public int Quantity { get; set; }
 
-        public ModifyingBookViewModel(string title, string authorName, string authorSurname,
+        public ModifyingBookServiceViewModel(string title, string authorName, string authorSurname,
             string publishingHouse) //, int quantity)
         {
 

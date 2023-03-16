@@ -15,82 +15,15 @@ namespace Proxy.Library.SOAPLibrary {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="CompositeType", Namespace="http://schemas.datacontract.org/2004/07/SOAPService.Library")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="LoginViewModel", Namespace="http://schemas.datacontract.org/2004/07/BusinessLogic.Library.ViewModels")]
     [System.SerializableAttribute()]
-    public partial class CompositeType : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool BoolValueField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string StringValueField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool BoolValue {
-            get {
-                return this.BoolValueField;
-            }
-            set {
-                if ((this.BoolValueField.Equals(value) != true)) {
-                    this.BoolValueField = value;
-                    this.RaisePropertyChanged("BoolValue");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string StringValue {
-            get {
-                return this.StringValueField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.StringValueField, value) != true)) {
-                    this.StringValueField = value;
-                    this.RaisePropertyChanged("StringValue");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="User", Namespace="http://schemas.datacontract.org/2004/07/Model.Library")]
-    [System.SerializableAttribute()]
-    public partial class User : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class LoginViewModel : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string PasswordField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string RoleField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int UserIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string UsernameField;
@@ -114,32 +47,6 @@ namespace Proxy.Library.SOAPLibrary {
                 if ((object.ReferenceEquals(this.PasswordField, value) != true)) {
                     this.PasswordField = value;
                     this.RaisePropertyChanged("Password");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Role {
-            get {
-                return this.RoleField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.RoleField, value) != true)) {
-                    this.RoleField = value;
-                    this.RaisePropertyChanged("Role");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int UserId {
-            get {
-                return this.UserIdField;
-            }
-            set {
-                if ((this.UserIdField.Equals(value) != true)) {
-                    this.UserIdField = value;
-                    this.RaisePropertyChanged("UserId");
                 }
             }
         }
@@ -169,9 +76,9 @@ namespace Proxy.Library.SOAPLibrary {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Book", Namespace="http://schemas.datacontract.org/2004/07/Model.Library")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="AddingBookViewModel", Namespace="http://schemas.datacontract.org/2004/07/ConsoleApp.Library.Options")]
     [System.SerializableAttribute()]
-    public partial class Book : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class AddingBookViewModel : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
@@ -181,6 +88,118 @@ namespace Proxy.Library.SOAPLibrary {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string AuthorSurnameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PublishingHouseField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int QuantityField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string TitleField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string AuthorName {
+            get {
+                return this.AuthorNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.AuthorNameField, value) != true)) {
+                    this.AuthorNameField = value;
+                    this.RaisePropertyChanged("AuthorName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string AuthorSurname {
+            get {
+                return this.AuthorSurnameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.AuthorSurnameField, value) != true)) {
+                    this.AuthorSurnameField = value;
+                    this.RaisePropertyChanged("AuthorSurname");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string PublishingHouse {
+            get {
+                return this.PublishingHouseField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PublishingHouseField, value) != true)) {
+                    this.PublishingHouseField = value;
+                    this.RaisePropertyChanged("PublishingHouse");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Quantity {
+            get {
+                return this.QuantityField;
+            }
+            set {
+                if ((this.QuantityField.Equals(value) != true)) {
+                    this.QuantityField = value;
+                    this.RaisePropertyChanged("Quantity");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Title {
+            get {
+                return this.TitleField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TitleField, value) != true)) {
+                    this.TitleField = value;
+                    this.RaisePropertyChanged("Title");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="BookViewModel", Namespace="http://schemas.datacontract.org/2004/07/BusinessLogic.Library")]
+    [System.SerializableAttribute()]
+    public partial class BookViewModel : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string AuthorNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string AuthorSurnameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool AvaiabilityField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int BookIdField;
@@ -226,6 +245,19 @@ namespace Proxy.Library.SOAPLibrary {
                 if ((object.ReferenceEquals(this.AuthorSurnameField, value) != true)) {
                     this.AuthorSurnameField = value;
                     this.RaisePropertyChanged("AuthorSurname");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Avaiability {
+            get {
+                return this.AvaiabilityField;
+            }
+            set {
+                if ((this.AvaiabilityField.Equals(value) != true)) {
+                    this.AvaiabilityField = value;
+                    this.RaisePropertyChanged("Avaiability");
                 }
             }
         }
@@ -292,6 +324,393 @@ namespace Proxy.Library.SOAPLibrary {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SearchingBookViewModel", Namespace="http://schemas.datacontract.org/2004/07/BusinessLogic.Library.ViewModels")]
+    [System.SerializableAttribute()]
+    public partial class SearchingBookViewModel : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string AuthorNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string AuthorSurnameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool AvaiabilityField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int BookIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<System.DateTime> FirstAvailabilityField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PublishingHouseField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int QuantityField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string TitleField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string AuthorName {
+            get {
+                return this.AuthorNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.AuthorNameField, value) != true)) {
+                    this.AuthorNameField = value;
+                    this.RaisePropertyChanged("AuthorName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string AuthorSurname {
+            get {
+                return this.AuthorSurnameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.AuthorSurnameField, value) != true)) {
+                    this.AuthorSurnameField = value;
+                    this.RaisePropertyChanged("AuthorSurname");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Avaiability {
+            get {
+                return this.AvaiabilityField;
+            }
+            set {
+                if ((this.AvaiabilityField.Equals(value) != true)) {
+                    this.AvaiabilityField = value;
+                    this.RaisePropertyChanged("Avaiability");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int BookId {
+            get {
+                return this.BookIdField;
+            }
+            set {
+                if ((this.BookIdField.Equals(value) != true)) {
+                    this.BookIdField = value;
+                    this.RaisePropertyChanged("BookId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Nullable<System.DateTime> FirstAvailability {
+            get {
+                return this.FirstAvailabilityField;
+            }
+            set {
+                if ((this.FirstAvailabilityField.Equals(value) != true)) {
+                    this.FirstAvailabilityField = value;
+                    this.RaisePropertyChanged("FirstAvailability");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string PublishingHouse {
+            get {
+                return this.PublishingHouseField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PublishingHouseField, value) != true)) {
+                    this.PublishingHouseField = value;
+                    this.RaisePropertyChanged("PublishingHouse");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Quantity {
+            get {
+                return this.QuantityField;
+            }
+            set {
+                if ((this.QuantityField.Equals(value) != true)) {
+                    this.QuantityField = value;
+                    this.RaisePropertyChanged("Quantity");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Title {
+            get {
+                return this.TitleField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TitleField, value) != true)) {
+                    this.TitleField = value;
+                    this.RaisePropertyChanged("Title");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ReservationResult", Namespace="http://schemas.datacontract.org/2004/07/BusinessLogic.Library.ViewModels")]
+    [System.SerializableAttribute()]
+    public partial class ReservationResult : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Model.Library.Book BookField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private Model.Library.User UserField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Model.Library.Book Book {
+            get {
+                return this.BookField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.BookField, value) != true)) {
+                    this.BookField = value;
+                    this.RaisePropertyChanged("Book");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public Model.Library.User User {
+            get {
+                return this.UserField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.UserField, value) != true)) {
+                    this.UserField = value;
+                    this.RaisePropertyChanged("User");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ReservationStatus", Namespace="http://schemas.datacontract.org/2004/07/BusinessLogic.Library.ViewModels")]
+    [System.SerializableAttribute()]
+    public partial struct ReservationStatus : System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string StatusField;
+        
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Status {
+            get {
+                return this.StatusField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.StatusField, value) != true)) {
+                    this.StatusField = value;
+                    this.RaisePropertyChanged("Status");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ReservationViewModel", Namespace="http://schemas.datacontract.org/2004/07/BusinessLogic.Library.ViewModels")]
+    [System.SerializableAttribute()]
+    public partial class ReservationViewModel : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string BookTitleField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime EndDateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int ReservationFlagField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime StartDateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string UsernameField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string BookTitle {
+            get {
+                return this.BookTitleField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.BookTitleField, value) != true)) {
+                    this.BookTitleField = value;
+                    this.RaisePropertyChanged("BookTitle");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime EndDate {
+            get {
+                return this.EndDateField;
+            }
+            set {
+                if ((this.EndDateField.Equals(value) != true)) {
+                    this.EndDateField = value;
+                    this.RaisePropertyChanged("EndDate");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ReservationFlag {
+            get {
+                return this.ReservationFlagField;
+            }
+            set {
+                if ((this.ReservationFlagField.Equals(value) != true)) {
+                    this.ReservationFlagField = value;
+                    this.RaisePropertyChanged("ReservationFlag");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime StartDate {
+            get {
+                return this.StartDateField;
+            }
+            set {
+                if ((this.StartDateField.Equals(value) != true)) {
+                    this.StartDateField = value;
+                    this.RaisePropertyChanged("StartDate");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Username {
+            get {
+                return this.UsernameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.UsernameField, value) != true)) {
+                    this.UsernameField = value;
+                    this.RaisePropertyChanged("Username");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="SOAPLibrary.IServiceLibrary")]
     public interface IServiceLibrary {
@@ -300,37 +719,37 @@ namespace Proxy.Library.SOAPLibrary {
         string GetData(int value);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceLibrary/GetDataUsingDataContract", ReplyAction="http://tempuri.org/IServiceLibrary/GetDataUsingDataContractResponse")]
-        Proxy.Library.SOAPLibrary.CompositeType GetDataUsingDataContract(Proxy.Library.SOAPLibrary.CompositeType composite);
+        SOAPService.Library.CompositeType GetDataUsingDataContract(SOAPService.Library.CompositeType composite);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceLibrary/Login", ReplyAction="http://tempuri.org/IServiceLibrary/LoginResponse")]
-        Proxy.Library.SOAPLibrary.User Login(BusinessLogic.Library.ViewModels.LoginViewModel lvm);
+        Model.Library.User Login(Proxy.Library.SOAPLibrary.LoginViewModel lvm);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceLibrary/AddBook", ReplyAction="http://tempuri.org/IServiceLibrary/AddBookResponse")]
-        void AddBook(ConsoleApp.Library.Options.AddingBookViewModel BVM);
+        void AddBook(Proxy.Library.SOAPLibrary.AddingBookViewModel BVM);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceLibrary/SearchBook", ReplyAction="http://tempuri.org/IServiceLibrary/SearchBookResponse")]
-        System.Collections.Generic.List<Proxy.Library.SOAPLibrary.Book> SearchBook(Proxy.Library.SOAPLibrary.Book book);
+        System.Collections.Generic.List<Model.Library.Book> SearchBook(Model.Library.Book book);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceLibrary/SearchBookWithAvailabilityInfos", ReplyAction="http://tempuri.org/IServiceLibrary/SearchBookWithAvailabilityInfosResponse")]
-        System.Collections.Generic.List<BusinessLogic.Library.ViewModels.SearchingBookViewModel> SearchBookWithAvailabilityInfos(BusinessLogic.Library.BookViewModel bvm);
+        System.Collections.Generic.List<Proxy.Library.SOAPLibrary.SearchingBookViewModel> SearchBookWithAvailabilityInfos(Proxy.Library.SOAPLibrary.BookViewModel bvm);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceLibrary/UpdateBook", ReplyAction="http://tempuri.org/IServiceLibrary/UpdateBookResponse")]
-        void UpdateBook(int bookId, Proxy.Library.SOAPLibrary.Book bookWithNewValues);
+        void UpdateBook(int bookId, Model.Library.Book bookWithNewValues);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceLibrary/DeleteBook", ReplyAction="http://tempuri.org/IServiceLibrary/DeleteBookResponse")]
-        bool DeleteBook(BusinessLogic.Library.BookViewModel bvm);
+        bool DeleteBook(Proxy.Library.SOAPLibrary.BookViewModel bvm);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceLibrary/ReserveBookPROVA", ReplyAction="http://tempuri.org/IServiceLibrary/ReserveBookPROVAResponse")]
-        BusinessLogic.Library.ViewModels.ReservationResult ReserveBookPROVA(int bookId, int userId);
+        Proxy.Library.SOAPLibrary.ReservationResult ReserveBookPROVA(int bookId, int userId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceLibrary/ReserveBook", ReplyAction="http://tempuri.org/IServiceLibrary/ReserveBookResponse")]
         void ReserveBook(int bookId, int userId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceLibrary/BookReturn", ReplyAction="http://tempuri.org/IServiceLibrary/BookReturnResponse")]
-        BusinessLogic.Library.ViewModels.ReservationResult BookReturn(int bookId, int userId);
+        Proxy.Library.SOAPLibrary.ReservationResult BookReturn(int bookId, int userId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IServiceLibrary/GetReservationHistory", ReplyAction="http://tempuri.org/IServiceLibrary/GetReservationHistoryResponse")]
-        System.Collections.Generic.List<BusinessLogic.Library.ViewModels.ReservationViewModel> GetReservationHistory(System.Nullable<int> bookId, System.Nullable<int> userId, System.Nullable<BusinessLogic.Library.ViewModels.ReservationStatus> reservationStatus);
+        System.Collections.Generic.List<Proxy.Library.SOAPLibrary.ReservationViewModel> GetReservationHistory(System.Nullable<int> bookId, System.Nullable<int> userId, System.Nullable<Proxy.Library.SOAPLibrary.ReservationStatus> reservationStatus);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -364,35 +783,35 @@ namespace Proxy.Library.SOAPLibrary {
             return base.Channel.GetData(value);
         }
         
-        public Proxy.Library.SOAPLibrary.CompositeType GetDataUsingDataContract(Proxy.Library.SOAPLibrary.CompositeType composite) {
+        public SOAPService.Library.CompositeType GetDataUsingDataContract(SOAPService.Library.CompositeType composite) {
             return base.Channel.GetDataUsingDataContract(composite);
         }
         
-        public Proxy.Library.SOAPLibrary.User Login(BusinessLogic.Library.ViewModels.LoginViewModel lvm) {
+        public Model.Library.User Login(Proxy.Library.SOAPLibrary.LoginViewModel lvm) {
             return base.Channel.Login(lvm);
         }
         
-        public void AddBook(ConsoleApp.Library.Options.AddingBookViewModel BVM) {
+        public void AddBook(Proxy.Library.SOAPLibrary.AddingBookViewModel BVM) {
             base.Channel.AddBook(BVM);
         }
         
-        public System.Collections.Generic.List<Proxy.Library.SOAPLibrary.Book> SearchBook(Proxy.Library.SOAPLibrary.Book book) {
+        public System.Collections.Generic.List<Model.Library.Book> SearchBook(Model.Library.Book book) {
             return base.Channel.SearchBook(book);
         }
         
-        public System.Collections.Generic.List<BusinessLogic.Library.ViewModels.SearchingBookViewModel> SearchBookWithAvailabilityInfos(BusinessLogic.Library.BookViewModel bvm) {
+        public System.Collections.Generic.List<Proxy.Library.SOAPLibrary.SearchingBookViewModel> SearchBookWithAvailabilityInfos(Proxy.Library.SOAPLibrary.BookViewModel bvm) {
             return base.Channel.SearchBookWithAvailabilityInfos(bvm);
         }
         
-        public void UpdateBook(int bookId, Proxy.Library.SOAPLibrary.Book bookWithNewValues) {
+        public void UpdateBook(int bookId, Model.Library.Book bookWithNewValues) {
             base.Channel.UpdateBook(bookId, bookWithNewValues);
         }
         
-        public bool DeleteBook(BusinessLogic.Library.BookViewModel bvm) {
+        public bool DeleteBook(Proxy.Library.SOAPLibrary.BookViewModel bvm) {
             return base.Channel.DeleteBook(bvm);
         }
         
-        public BusinessLogic.Library.ViewModels.ReservationResult ReserveBookPROVA(int bookId, int userId) {
+        public Proxy.Library.SOAPLibrary.ReservationResult ReserveBookPROVA(int bookId, int userId) {
             return base.Channel.ReserveBookPROVA(bookId, userId);
         }
         
@@ -400,11 +819,11 @@ namespace Proxy.Library.SOAPLibrary {
             base.Channel.ReserveBook(bookId, userId);
         }
         
-        public BusinessLogic.Library.ViewModels.ReservationResult BookReturn(int bookId, int userId) {
+        public Proxy.Library.SOAPLibrary.ReservationResult BookReturn(int bookId, int userId) {
             return base.Channel.BookReturn(bookId, userId);
         }
         
-        public System.Collections.Generic.List<BusinessLogic.Library.ViewModels.ReservationViewModel> GetReservationHistory(System.Nullable<int> bookId, System.Nullable<int> userId, System.Nullable<BusinessLogic.Library.ViewModels.ReservationStatus> reservationStatus) {
+        public System.Collections.Generic.List<Proxy.Library.SOAPLibrary.ReservationViewModel> GetReservationHistory(System.Nullable<int> bookId, System.Nullable<int> userId, System.Nullable<Proxy.Library.SOAPLibrary.ReservationStatus> reservationStatus) {
             return base.Channel.GetReservationHistory(bookId, userId, reservationStatus);
         }
     }

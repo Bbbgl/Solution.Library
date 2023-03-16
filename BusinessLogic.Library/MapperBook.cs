@@ -5,16 +5,17 @@ using Model.Library;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace BusinessLogic.Library
 {
-
+    [DataContract]
     public class MapperBook
         //FALLO STATICO
     {// ci metto la bookList per riconoscere il libro? senno come faccio a ricavare l'id e la quanrity?
-        public Book MapperBVMtoBOOK (BookViewModel bvm)
+      public Book MapperBVMtoBOOK (BookViewModel bvm)
         {
             var bookList = new BookDAO().Read();
             var Id = 0;
@@ -167,8 +168,28 @@ namespace BusinessLogic.Library
             //var book = new Book(Id, bvm.Title, bvm.AuthorName, bvm.AuthorSurname, bvm.PublishingHouse, quantity);
             //return book;
         }
-       
+
+        public Book MapperSBVMtoBOOK(SearchingBookViewModel sbvm)
+        {
+            var book_db = new BookDAO();
+            var bookList = book_db.Read();
+            var Id = 0;
+            var quantity = 0;
+
+            var queryId = bookList.Where(b => b.Title == sbvm.Title && b.AuthorName == sbvm.AuthorName
+             && b.AuthorSurname == sbvm.AuthorSurname && b.PublishingHouse == sbvm.PublishingHouse).Select(e => e.BookId).ToList();
+            Id = queryId[0];
+
+            var queryQuantity = bookList.Where(b => b.Title == sbvm.Title && b.AuthorName == sbvm.AuthorName
+             && b.AuthorSurname == sbvm.AuthorSurname && b.PublishingHouse == sbvm.PublishingHouse).Select(e => e.Quantity).ToList();
+            quantity = queryQuantity[0];
+
+            var book = new Book(Id, sbvm.Title, sbvm.AuthorName,
+                sbvm.AuthorSurname, sbvm.PublishingHouse, quantity);
+            return book;
+
         }
+    }
 
         //public Reservation MapperReservationStatusToReservation(ReservationStatus reservationStatus)
         //{

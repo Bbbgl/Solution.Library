@@ -1,5 +1,5 @@
 ﻿using BusinessLogic.Library.ViewModels;
-using ConsoleApp.Library.Options;
+
 using DataAccessLayer.Library;
 using Model.Library;
 using System;
@@ -23,14 +23,21 @@ namespace BusinessLogic.Library
 
         //•	Login: Dovrà essere valutata l’esistenza o meno dello User sulla base dei dati
         //specificati dall’utente (Username, Password)
+        public static IUserDAO userDAO = new UserDAO();
+        public static IBookDAO bookDAO = new BookDAO();
+        public static IReservationDAO reservationDAO = new ReservationDAO();
 
-        [DataMember]
-        public IRepository Repository { get; set; }
+       // public static IRepository Repository = new Repository(userDAO, bookDAO, reservationDAO);
 
-        
-        public LibraryBusinessLogic (IRepository repository)
+        public IRepository Repository = new Repository(userDAO, bookDAO, reservationDAO);
+
+        //[DataMember]
+        //public IRepository Repository { get; set; }
+
+  
+        public LibraryBusinessLogic(IRepository repository)
         {
-            this.Repository = repository;
+            Repository = repository;
         }
 
         public int GetTheBookRow (int id, List<Book> list)

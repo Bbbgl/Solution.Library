@@ -1,22 +1,28 @@
 ﻿using BusinessLogic.Library.ViewModels;
 using Model.Library;
+using Proxy.Library.ServiceViewModels;
 using Proxy.Library.SOAPLibrary;
+using SOAPService.Library;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using User = Proxy.Library.SOAPLibrary.User;
+using User = Model.Library.User;
 
 namespace Proxy.Library
 {
     public class WCFUserProxy : IUserProxy
     {
-        public static ServiceLibraryClient slc = new ServiceLibraryClient();
-        public User Login(LoginViewModel lvm)
-        {
+      
+        
 
-            return slc.Login(lvm);
+        public static ServiceLibraryClient slc = new ServiceLibraryClient();
+        public User Login(LoginServiceViewModel lsvm)
+        {
+            
+
+            return slc.Login(Mapper.MapperLSVMtoLVM(lsvm));
         }
 
        

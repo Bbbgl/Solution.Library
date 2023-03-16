@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleApp.Library.Options
+namespace BusinessLogic.Library.ViewModels
 {
     [DataContract]
     public class AddingBookViewModel

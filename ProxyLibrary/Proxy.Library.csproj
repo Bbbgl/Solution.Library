@@ -48,17 +48,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Mapper.cs" />
     <Compile Include="Proxy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceViewModels\AddingBookServiceViewModel.cs" />
+    <Compile Include="ServiceViewModels\LoginServiceViewModel.cs" />
+    <Compile Include="ServiceViewModels\ModifyingBookServiceViewModel.cs" />
     <Compile Include="WCFBookProxy.cs" />
     <Compile Include="WCFReservationProxy.cs" />
     <Compile Include="WCFUserProxy.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BusinessLogic.Library\BusinessLogic.Library.csproj">
-      <Project>{F130DE58-806B-4EDE-8EED-4DCD011926D6}</Project>
-      <Name>BusinessLogic.Library</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Model.Library\Model.Library.csproj">
       <Project>{047B2F72-7BE1-4962-844A-C8381A0E3CE9}</Project>
       <Name>Model.Library</Name>
@@ -69,13 +69,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Connected Services\SOAPLibrary\Proxy.Library.SOAPLibrary.Book.datasource">
+    <None Include="Connected Services\SOAPLibrary\Proxy.Library.SOAPLibrary.ReservationResult.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\SOAPLibrary\Proxy.Library.SOAPLibrary.CompositeType.datasource">
+    <None Include="Connected Services\SOAPLibrary\Proxy.Library.SOAPLibrary.ReservationViewModel.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\SOAPLibrary\Proxy.Library.SOAPLibrary.User.datasource">
+    <None Include="Connected Services\SOAPLibrary\Proxy.Library.SOAPLibrary.SearchingBookViewModel.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Connected Services\SOAPLibrary\ServiceLibrary.wsdl" />
@@ -103,6 +103,9 @@
     <None Include="Properties\DataSources\BusinessLogic.Library.ViewModels.ReservationResult.datasource" />
     <None Include="Properties\DataSources\BusinessLogic.Library.ViewModels.ReservationViewModel.datasource" />
     <None Include="Properties\DataSources\BusinessLogic.Library.ViewModels.SearchingBookViewModel.datasource" />
+    <None Include="Properties\DataSources\Model.Library.Book.datasource" />
+    <None Include="Properties\DataSources\Model.Library.User.datasource" />
+    <None Include="Properties\DataSources\SOAPService.Library.CompositeType.datasource" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Connected Services\SOAPLibrary\" />
