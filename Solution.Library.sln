@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Proxy.Library", "ProxyLibra
 		{721BEEC7-4F0D-47D5-B2F1-22975BFD1B5C} = {721BEEC7-4F0D-47D5-B2F1-22975BFD1B5C}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API.Library", "API.Library\API.Library.csproj", "{A4978EA7-7CEF-49A7-8C61-ED051CADBE9F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,6 +50,10 @@ Global
 		{C5C204C8-617A-4712-8172-DDD4267CD77E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C5C204C8-617A-4712-8172-DDD4267CD77E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C5C204C8-617A-4712-8172-DDD4267CD77E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4978EA7-7CEF-49A7-8C61-ED051CADBE9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4978EA7-7CEF-49A7-8C61-ED051CADBE9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4978EA7-7CEF-49A7-8C61-ED051CADBE9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4978EA7-7CEF-49A7-8C61-ED051CADBE9F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
