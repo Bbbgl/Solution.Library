@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
@@ -43,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API_BookProxy.cs" />
     <Compile Include="Connected Services\SOAPLibrary\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -103,6 +107,7 @@
     <None Include="Connected Services\SOAPLibrary\ServiceLibrary4.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="packages.config" />
     <None Include="Properties\DataSources\BusinessLogic.Library.ViewModels.ReservationResult.datasource" />
     <None Include="Properties\DataSources\BusinessLogic.Library.ViewModels.ReservationViewModel.datasource" />
     <None Include="Properties\DataSources\BusinessLogic.Library.ViewModels.SearchingBookViewModel.datasource" />

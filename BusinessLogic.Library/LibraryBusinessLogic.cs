@@ -35,10 +35,7 @@ namespace BusinessLogic.Library
         //public IRepository Repository { get; set; }
 
   
-        public LibraryBusinessLogic(IRepository repository)
-        {
-            Repository = repository;
-        }
+        
 
         public int GetTheBookRow (int id, List<Book> list)
         {
@@ -398,8 +395,8 @@ namespace BusinessLogic.Library
                         // prenotazione success
 
 
-                        this.Repository.CreateReservation(bookList[row], userList[--userId]);// userId è decrementato perchè sul db parte da 1 (invece che da 0)
-                        var reservationResult = new ReservationResult(userList[--userId], bookList[row], 0);
+                        this.Repository.CreateReservation(bookList[row], userList[userId-1]);// userId è decrementato perchè sul db parte da 1 (invece che da 0)
+                        var reservationResult = new ReservationResult(userList[userId-1], bookList[row], 0);
                         // decrementare quantita di questo libro NOOOOOOOOOOO
 
 

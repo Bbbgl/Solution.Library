@@ -110,7 +110,7 @@ namespace DataAccessLayer.Library
                         //var provaDebug = bookList.Where(b => b.BookId == bookId).First();
 
 
-                        var res = new Reservation(reservationId,userList[--userId],bookList.Where(b=>b.BookId==bookId).First(), startDate, endDate);
+                        var res = new Reservation(reservationId,userList.Where(u=>u.UserId==userId).First(),bookList.Where(b=>b.BookId==bookId).First(), startDate, endDate);
                         reservationList.Add(res);
                     }
 
