@@ -1,7 +1,7 @@
 ﻿using BusinessLogic.Library;
 using BusinessLogic.Library.ViewModels;
 
-using DataAccessLayer.Library;
+
 using Model.Library;
 using System;
 using System.Collections.Generic;
@@ -21,13 +21,8 @@ namespace SOAPService.Library
        public class LibraryBusinessLogicForService
         {
 
-            public static IUserDAO userDAO = new UserDAO();
-            public static IBookDAO bookDAO = new BookDAO();
-            public static IReservationDAO reservationDAO = new ReservationDAO();
 
-            public static IRepository repository = new Repository(userDAO, bookDAO, reservationDAO);
-
-            public LibraryBusinessLogic lbl = new LibraryBusinessLogic(repository);
+            public LibraryBusinessLogic lbl = new LibraryBusinessLogic();
 
 
         }
@@ -82,10 +77,7 @@ namespace SOAPService.Library
             return lbl().SearchBook(book);
         }
 
-        public List<Book> ReadBooks()
-        {
-            return lbl().Repository.ReadBooks();
-        }
+        
 
         public List<SearchingBookViewModel> SearchBookWithAvailabilityInfos(BookViewModel bvm)
         {
@@ -163,6 +155,11 @@ namespace SOAPService.Library
         {
             var mapper = new MapperBook();
             return mapper.MapperBVMtoBOOKforGetReservationsHistory(bvm);
+        }
+
+        public List<Book> ReadBooks()
+        {
+            return lbl().SearchBooks();
         }
     }
 }

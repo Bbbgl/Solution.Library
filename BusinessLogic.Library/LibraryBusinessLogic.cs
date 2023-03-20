@@ -153,7 +153,7 @@ namespace BusinessLogic.Library
 
         }
 
-        public List<Book> SearchBook(Book book)// non lo chiamo mai si può cancellare
+        public List<Book> SearchBook()// non lo chiamo mai si può cancellare
         {
             //var book_db = new BookDAO();
             //var bookList = book_db.Read();
@@ -541,8 +541,30 @@ namespace BusinessLogic.Library
 
         }
 
+        public List<Book> SearchBook(Book book)
+        {
+            var bookList = this.Repository.ReadBooks();
+
+            //var queryTitle =  bookList.Where(b => (b.Title == (book.Title)))
+            //     .Select(e => e);-----FACCIO TUTTO IN SQL
+
+            return bookList.ToList();
+
+        }
+
+        public List<Book> SearchBooks()
+        {
+            var bookList = this.Repository.ReadBooks();
+
+            //var queryTitle =  bookList.Where(b => (b.Title == (book.Title)))
+            //     .Select(e => e);-----FACCIO TUTTO IN SQL
+
+            return bookList.ToList();
+
+        }
+
         //public List<ReservationViewModel> GetReservationHistorySQL(int? bookId, int? userId, ReservationStatus? reservationStatus)
-       
+
     }
 
 

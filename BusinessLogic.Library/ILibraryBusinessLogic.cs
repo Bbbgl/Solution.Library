@@ -31,6 +31,7 @@ namespace BusinessLogic.Library
         void AddBook(AddingBookViewModel BVM);
 
         List<Book> SearchBook(Book book);// non lo chiaom mai
+        List<Book> SearchBooks();// serve per togliere il riferimento al DAO, roba del proxy, da rivedere
         // sotto metti come paramentro searchbookviewmodel
         List<SearchingBookViewModel> SearchBookWithAvailabilityInfos(BookViewModel bvm); //uguale al book ma senza quantità(?)
         BookViewModel SearchBookWithAvailabilityInfos2(Book book); //uguale al book ma senza quantità(?)
