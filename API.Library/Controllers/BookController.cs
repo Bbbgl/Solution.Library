@@ -22,7 +22,7 @@ namespace API.Library.Controllers
         // GET: api/Book/5
         public string Get(int id)
         {
-            return "value";
+            return lbl.SearchBooks().Where(b => b.BookId == id).Select(e => e.Title).First();
         }
 
         // POST: api/Book
@@ -40,6 +40,18 @@ namespace API.Library.Controllers
             lbl.AddBook(BVM);
 
         }
+
+        [HttpPost]
+        [Route("api/Book/SearchBook")]
+
+        public List<SearchingBookViewModel> SearchBookWithAvailabilityInfos(BookViewModel bvm)
+        {
+            return lbl.SearchBookWithAvailabilityInfos(bvm);
+
+        }
+
+
+
 
         // PUT: api/Book/5
         public void Put(int id, [FromBody]string value)
