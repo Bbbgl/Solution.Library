@@ -45,7 +45,7 @@ namespace DataAccessLayer.Library
                     }
 
                 }
-                conn.Close();
+                //conn.Close();
             }
             
             return userList;

@@ -13,10 +13,10 @@ namespace ConsoleApp.Library.Options
     public class PrenotazioneDiUnLibro: IOptionSelected
     {
         public User User { get; set; }
-        public WCFBookProxy BookProxy { get; set; }
+        public IBookProxy BookProxy { get; set; }
 
 
-        public PrenotazioneDiUnLibro(User currentUser, WCFBookProxy bookProxy)
+        public PrenotazioneDiUnLibro(User currentUser, IBookProxy bookProxy)
         {
             this.User = currentUser;
             this.BookProxy = bookProxy;

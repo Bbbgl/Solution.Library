@@ -15,7 +15,7 @@ namespace ConsoleApp.Library
 {
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             //IUserDAO userDAO = new UserDAO();
             //IBookDAO bookDAO = new BookDAO();
@@ -27,12 +27,12 @@ namespace ConsoleApp.Library
 
 
             // LOGIN
-            User currentUser;
+           User currentUser;
             string username, password;
 
-            var userProxy = new WCFUserProxy();
-            var bookProxy = new WCFBookProxy();
-            var reservationProxy = new WCFReservationProxy();
+            IBookProxy bookProxy = new API_BookProxy();
+             IUserProxy userProxy= new API_UserProxy();
+           IReservationProxy reservationProxy = new WCFReservationProxy();
 
             
             
@@ -53,7 +53,9 @@ namespace ConsoleApp.Library
                 var userViewModel = new LoginServiceViewModel(username, password);
 
                 
-                currentUser = userProxy.Login(userViewModel);
+             //  var currentUserRequest =  await userProxy.LoginAsync(userViewModel);
+                currentUser =userProxy.Login(userViewModel);
+               
                 
 
                 if (currentUser.Username == null) {

@@ -13,10 +13,10 @@ namespace ConsoleApp.Library.Options
     public class CancellazioneDiUnLibro : IOptionSelected
     {
         public User User { get; set; }
-        public WCFBookProxy BookProxy { get; set; }
+        public IBookProxy BookProxy { get; set; }
 
 
-        public CancellazioneDiUnLibro(User currentUser, WCFBookProxy bookProxy)
+        public CancellazioneDiUnLibro(User currentUser, IBookProxy bookProxy)
         {
             this.User = currentUser;
             this.BookProxy = bookProxy;

@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="API_BookProxy.cs" />
+    <Compile Include="API_ReservationProxy.cs" />
     <Compile Include="API_UserProxy.cs" />
     <Compile Include="Connected Services\SOAPLibrary\Reference.cs">
       <AutoGen>True</AutoGen>

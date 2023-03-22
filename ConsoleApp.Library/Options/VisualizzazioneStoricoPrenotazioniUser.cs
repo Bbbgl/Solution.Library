@@ -13,10 +13,10 @@ namespace ConsoleApp.Library.Options
     public class VisualizzazioneStoricoPrenotazioniUser : IOptionSelected
     {
         public User User { get; set; }
-        public WCFBookProxy BookProxy { get; set; }
+        public IBookProxy BookProxy { get; set; }
 
 
-        public VisualizzazioneStoricoPrenotazioniUser(User currentUser, WCFBookProxy bookProxy)
+        public VisualizzazioneStoricoPrenotazioniUser(User currentUser, IBookProxy bookProxy)
         {
             this.User = currentUser;
             this.BookProxy = bookProxy;

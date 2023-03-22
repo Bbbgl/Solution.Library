@@ -61,8 +61,10 @@ namespace Proxy.Library
         }
 
 
-        public static Book MapperMBVMtoBOOK(ModifyingBookViewModel mbvm)
+        public static Book MapperMBSVMtoBOOK(ModifyingBookServiceViewModel mbsvm)// fallo qui con il serviceviewmodel e restituisci il book
         {
+            var mbvm =  MapperMBSVMtoMBVM(mbsvm);
+           
             return slc.MapperModifyingBVMtoBOOK(mbvm);
         }
 
@@ -176,5 +178,7 @@ namespace Proxy.Library
             }
             return list;
         }
+
+       
     }
 }
