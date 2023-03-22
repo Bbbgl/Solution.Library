@@ -15,10 +15,10 @@ namespace ConsoleApp.Library.Options
 
      {
         public User User { get; set; }
-        public WCFBookProxy BookProxy { get; set; }
+        public IBookProxy BookProxy { get; set; }
 
 
-        public RicercaDiUnLibro(User currentUser, WCFBookProxy bookProxy)
+        public RicercaDiUnLibro(User currentUser, IBookProxy bookProxy)
         {
             this.User = currentUser;
             this.BookProxy = bookProxy;

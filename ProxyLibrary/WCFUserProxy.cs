@@ -18,13 +18,16 @@ namespace Proxy.Library
         
 
         public static ServiceLibraryClient slc = new ServiceLibraryClient();
-        public User Login(LoginServiceViewModel lsvm)
-        {
-            
 
-            return slc.Login(Mapper.MapperLSVMtoLVM(lsvm));
+        public User Login(LoginServiceViewModel lvm)
+        {
+            throw new NotImplementedException();
         }
 
        
+        Task<User> IUserProxy.LoginAsync(LoginServiceViewModel lvm)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

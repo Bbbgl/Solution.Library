@@ -1,5 +1,4 @@
-﻿
-using Proxy.Library.SOAPLibrary;
+﻿using Proxy.Library.SOAPLibrary;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,27 +7,26 @@ using System.Threading.Tasks;
 
 namespace Proxy.Library
 {
-    public class WCFReservationProxy : IReservationProxy
+    internal class API_ReservationProxy : IReservationProxy
     {
-        public static ServiceLibraryClient slc = new ServiceLibraryClient();
         public ReservationResult BookReturn(int bookId, int userId)
         {
-            return slc.BookReturn(bookId, userId);
+            throw new NotImplementedException();
         }
 
         public List<ReservationViewModel> GetReservationHistory(int? bookId, int? userId, ReservationStatus? reservationStatus)
         {
-            return slc.GetReservationHistory(bookId, userId, reservationStatus);
+            throw new NotImplementedException();
         }
 
         public void ReserveBook(int bookId, int userId)
         {
-            slc.ReserveBook(bookId, userId);
+            throw new NotImplementedException();
         }
 
         public ReservationResult ReserveBookPROVA(int bookId, int userId)
         {
-            return slc.ReserveBookPROVA(bookId, userId);
+            throw new NotImplementedException();
         }
     }
 }

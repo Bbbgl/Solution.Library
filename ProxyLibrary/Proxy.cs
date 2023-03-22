@@ -16,11 +16,12 @@ namespace Proxy.Library
 
     public interface IBookProxy
     {
+
         void AddBook(AddingBookServiceViewModel bsvm);
 
         // List<Book> SearchBook(Book book);
 
-        List<SearchingBookViewModel> SearchBookWithAvailabilityInfos(BookViewModel bvm);
+        List<SearchingBookViewModel> SearchBookWithAvailabilityInfos(BookViewModel bvm);//dovrebbe essere svm, per il soap, invece che alla console meglio farlo al proxy(WCF)
 
 
 
@@ -28,11 +29,15 @@ namespace Proxy.Library
 
 
         bool DeleteBook(BookViewModel bvm);
+
+        List<Book> ReadBooks();
     }
 
 
     public interface IUserProxy 
     {
+        Task<User> LoginAsync(LoginServiceViewModel lvm);
+
         User Login(LoginServiceViewModel lvm);
     }
 

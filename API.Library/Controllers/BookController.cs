@@ -1,5 +1,6 @@
 ﻿using BusinessLogic.Library;
 using BusinessLogic.Library.ViewModels;
+using Model.Library;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,9 +21,11 @@ namespace API.Library.Controllers
         }
 
         // GET: api/Book/5
-        public string Get(int id)
+        public Book Get(int id)
         {
-            return lbl.SearchBooks().Where(b => b.BookId == id).Select(e => e.Title).First();
+           Book book = lbl.SearchBooks().Where(b => b.BookId == id).Select(e => e).First();
+
+            return book;
         }
 
         // POST: api/Book
@@ -44,10 +47,17 @@ namespace API.Library.Controllers
         [HttpPost]
         [Route("api/Book/SearchBook")]
 
-        public List<SearchingBookViewModel> SearchBookWithAvailabilityInfos(BookViewModel bvm)
+        public List<SearchingBookViewModel> SearchBookWithAvailabilityInfos([FromBody] BookViewModel bvm)
         {
             return lbl.SearchBookWithAvailabilityInfos(bvm);
 
+        }
+
+        [HttpPost]
+        [Route("api/Book/DeleteBook")]
+        public bool DeleteBook(BookViewModel bvm)
+        {
+            return lbl.DeleteBook(bvm);
         }
 
 

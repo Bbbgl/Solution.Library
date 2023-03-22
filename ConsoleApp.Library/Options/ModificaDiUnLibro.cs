@@ -13,10 +13,10 @@ namespace ConsoleApp.Library.Options
     public class ModificaDiUnLibro : IOptionSelected
     {
         public User User { get; set; }
-        public WCFBookProxy BookProxy { get; set; }
+        public IBookProxy BookProxy { get; set; }
 
 
-        public ModificaDiUnLibro(User currentUser, WCFBookProxy bookProxy)
+        public ModificaDiUnLibro(User currentUser, IBookProxy bookProxy)
         {
             this.User = currentUser;
             this.BookProxy = bookProxy;
@@ -41,9 +41,9 @@ namespace ConsoleApp.Library.Options
 
             var bookToModifyServiceViewModel = new ModifyingBookServiceViewModel(title, authorName, authorSurname, publishingHouse);
             
-           var bookToModifyViewModel = Mapper.MapperMBSVMtoMBVM(bookToModifyServiceViewModel);
+           
             
-            var bookToModify = Mapper.MapperMBVMtoBOOK(bookToModifyViewModel);
+            var bookToModify = Mapper.MapperMBSVMtoBOOK(bookToModifyServiceViewModel);
 
             Console.WriteLine("inserire nuovo titolo del libro");
             var newTitle = Console.ReadLine();

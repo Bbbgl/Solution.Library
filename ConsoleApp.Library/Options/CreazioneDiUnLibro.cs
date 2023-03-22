@@ -14,10 +14,9 @@ namespace ConsoleApp.Library
     public class CreazioneDiUnLibro : IOptionSelected
     {
         public User User { get; set; }
-        public WCFBookProxy BookProxy { get; set; }
+        public IBookProxy BookProxy { get; set; }
 
-
-        public CreazioneDiUnLibro(User currentUser, WCFBookProxy bookProxy)
+        public CreazioneDiUnLibro(User currentUser, IBookProxy bookProxy)
         {
             this.User = currentUser;
             this.BookProxy = bookProxy;

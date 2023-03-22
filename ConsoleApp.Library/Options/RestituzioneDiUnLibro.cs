@@ -18,10 +18,10 @@ namespace ConsoleApp.Library.Options
      public class RestituzioneDiUnLibro : IOptionSelected
      {
         public User User { get; set; }
-        public WCFBookProxy BookProxy { get; set; }
+        public IBookProxy BookProxy { get; set; }
 
 
-        public RestituzioneDiUnLibro(User currentUser, WCFBookProxy bookProxy)
+        public RestituzioneDiUnLibro(User currentUser, IBookProxy bookProxy)
         {
             this.User = currentUser;
             this.BookProxy = bookProxy;

@@ -22,10 +22,10 @@ namespace ConsoleApp.Library.Options
         //info su stato prenotazione(attiva/non attiva)
 
         public User User { get; set; }
-        public WCFBookProxy BookProxy { get; set; }
+        public IBookProxy BookProxy { get; set; }
 
 
-        public VisualizzazioneStoricoPrenotazioniAdmin(User currentUser, WCFBookProxy bookProxy)
+        public VisualizzazioneStoricoPrenotazioniAdmin(User currentUser, IBookProxy bookProxy)
         {
             this.User = currentUser;
             this.BookProxy = bookProxy;

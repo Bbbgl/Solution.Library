@@ -21,7 +21,7 @@ namespace Proxy.Library
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri("http://localhost:44392/API.Library/api/");
 
-            var response = client.PostAsync($"Book", content).Result;
+            var response = client.PostAsync($"Book?", content).Result;
             if (response.IsSuccessStatusCode)
             { //.Result = deprecated 
                 //ci sono metodi migliori per gestire l'async
@@ -36,6 +36,29 @@ namespace Proxy.Library
 
         public bool DeleteBook(BookViewModel bvm)
         {
+            bool deleteCheck=false;
+            var serializedBVM = JsonConvert.SerializeObject(bvm);
+
+            StringContent content = new StringContent(serializedBVM);
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri("http://localhost:44392/API.Library/api/");
+            var response = client.PostAsync($"Book?", content).Result;
+            if (response.IsSuccessStatusCode)
+            { //.Result = deprecated 
+                //ci sono metodi migliori per gestire l'async
+                string jsonContent = response.Content.ReadAsStringAsync().Result;
+                deleteCheck = JsonConvert.DeserializeObject<bool>(jsonContent);
+            }
+            else
+            {
+
+                // controlla l'eccezione
+            }
+            return deleteCheck;
+        }
+
+        public List<Book> ReadBooks()
+        {
             throw new NotImplementedException();
         }
 
@@ -48,7 +71,7 @@ namespace Proxy.Library
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri("http://localhost:44392/API.Library/api/");
 
-            var response = client.PostAsync($"Book", content).Result;
+            var response = client.PostAsync($"Book?", content).Result;
             if (response.IsSuccessStatusCode)
             { //.Result = deprecated 
                 //ci sono metodi migliori per gestire l'async
@@ -70,7 +93,7 @@ namespace Proxy.Library
 
         public void UpdateBook(int bookId, Book bookWithNewValues)
         {
-            throw new NotImplementedException();
+           
         }
     }
 }
