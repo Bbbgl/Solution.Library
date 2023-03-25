@@ -50,7 +50,7 @@ namespace ConsoleApp.Library.Options
             var bookDeletedCheck = this.BookProxy.DeleteBook((Proxy.Library.SOAPLibrary.BookViewModel)bvm);
             if (bookDeletedCheck == false)
             {
-                var reservationProxy = new WCFReservationProxy();
+                var reservationProxy = new API_ReservationProxy();
                 var book = Mapper.MapperBVMtoBOOK(bvm);
                 var serviceReservationStatus = new ServiceReservationStatus("attiva");
                 var reservationStatus = Mapper.MapperSRStoRS(serviceReservationStatus);

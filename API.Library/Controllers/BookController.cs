@@ -27,6 +27,12 @@ namespace API.Library.Controllers
 
             return book;
         }
+        [HttpGet]
+        [Route("api/Book/SearchBooks")]
+        public List<Book> SearchBooks()
+        {
+           return lbl.SearchBooks();
+        }
 
         // POST: api/Book
         public void Post([FromBody]string value)
@@ -47,17 +53,26 @@ namespace API.Library.Controllers
         [HttpPost]
         [Route("api/Book/SearchBook")]
 
-        public List<SearchingBookViewModel> SearchBookWithAvailabilityInfos([FromBody] BookViewModel bvm)
+        public List<SearchingBookViewModel> SearchBookWithAvailabilityInfos([FromBody] BookViewModelDTO bvmDTO)
         {
+            var bvm = new BookViewModel(bvmDTO.Title, bvmDTO.AuthorName, bvmDTO.AuthorSurname, bvmDTO.PublishingHouse);
             return lbl.SearchBookWithAvailabilityInfos(bvm);
 
         }
 
         [HttpPost]
         [Route("api/Book/DeleteBook")]
-        public bool DeleteBook(BookViewModel bvm)
+        public bool DeleteBook([FromBody] BookViewModelDTO bvmDTO)
         {
+            var bvm = new BookViewModel(bvmDTO.Title, bvmDTO.AuthorName, bvmDTO.AuthorSurname, bvmDTO.PublishingHouse);
             return lbl.DeleteBook(bvm);
+        }
+
+        [HttpPost]
+        [Route("api/Book/UpdateBook")]
+        public void UpdateBook(UpdateBookDTO bookDTO)
+        {
+            lbl.UpdateBook(bookDTO.Id, bookDTO.Book);
         }
 
 
@@ -67,6 +82,8 @@ namespace API.Library.Controllers
         public void Put(int id, [FromBody]string value)
         {
         }
+
+       
 
         // DELETE: api/Book/5
         public void Delete(int id)
