@@ -8,20 +8,21 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.WebRequestMethods;
 
 namespace Proxy.Library
 {
     public class API_BookProxy : IBookProxy
     {
+        public string path = "http://localhost/API.Library/api/Book/";
         public void AddBook(AddingBookServiceViewModel bsvm)
         {
-            var serializedBook = JsonConvert.SerializeObject(bsvm);
+            StringContent content = new StringContent(JsonConvert.SerializeObject(bsvm), Encoding.UTF8, "application/json");
 
-            StringContent content = new StringContent(serializedBook);
             HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:44392/API.Library/api/");
+            client.BaseAddress = new Uri("http://localhost/API.Library/api/Book/");
 
-            var response = client.PostAsync($"Book?", content).Result;
+            var response = client.PostAsync($"CreateBook", content).Result;
             if (response.IsSuccessStatusCode)
             { //.Result = deprecated 
                 //ci sono metodi migliori per gestire l'async
@@ -37,12 +38,13 @@ namespace Proxy.Library
         public bool DeleteBook(BookViewModel bvm)
         {
             bool deleteCheck=false;
-            var serializedBVM = JsonConvert.SerializeObject(bvm);
+            var bvmDTO = new BookViewModelDTO(bvm.Title, bvm.AuthorName, bvm.AuthorSurname, bvm.PublishingHouse);
+            var serializedBVM = JsonConvert.SerializeObject(bvmDTO);
 
-            StringContent content = new StringContent(serializedBVM);
+            StringContent content = new StringContent((serializedBVM),Encoding.UTF8,"application/json");
             HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:44392/API.Library/api/");
-            var response = client.PostAsync($"Book?", content).Result;
+            client.BaseAddress = new Uri("http://localhost/API.Library/api/Book/");
+            var response = client.PostAsync($"DeleteBook", content).Result;
             if (response.IsSuccessStatusCode)
             { //.Result = deprecated 
                 //ci sono metodi migliori per gestire l'async
@@ -53,25 +55,49 @@ namespace Proxy.Library
             {
 
                 // controlla l'eccezione
+                
             }
             return deleteCheck;
         }
 
         public List<Book> ReadBooks()
         {
-            throw new NotImplementedException();
+            var list = new List<Book>();
+            
+
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri(path);
+
+            var response = client.GetAsync($"SearchBooks").Result;
+            if (response.IsSuccessStatusCode)
+            { //.Result = deprecated 
+                //ci sono metodi migliori per gestire l'async
+                string jsonContent = response.Content.ReadAsStringAsync().Result;
+
+                list = JsonConvert.DeserializeObject<List<Book>>(jsonContent);
+            }
+            else
+            {
+
+                // controlla l'eccezione
+            }
+            return list;
+
+
         }
+    
 
         public List<SearchingBookViewModel> SearchBookWithAvailabilityInfos(BookViewModel bvm)
         {
             var list = new List<SearchingBookViewModel>();
-            var serializedBVM = JsonConvert.SerializeObject(bvm);
+            var bvmDTO = new BookViewModelDTO(bvm.Title, bvm.AuthorName, bvm.AuthorSurname, bvm.PublishingHouse);
+            StringContent content = new StringContent(JsonConvert.SerializeObject(bvmDTO), Encoding.UTF8, "application/json");
 
-            StringContent content = new StringContent(serializedBVM);
+
             HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:44392/API.Library/api/");
+            client.BaseAddress = new Uri(path);
 
-            var response = client.PostAsync($"Book?", content).Result;
+            var response = client.PostAsync($"SearchBook", content).Result;
             if (response.IsSuccessStatusCode)
             { //.Result = deprecated 
                 //ci sono metodi migliori per gestire l'async
@@ -92,8 +118,34 @@ namespace Proxy.Library
     
 
         public void UpdateBook(int bookId, Book bookWithNewValues)
-        {
-           
+        {//DTO oggetti per contenere insieme l'insieme di dati che deve viaggiare verso un api (data transfer object)
+         // dovrò fare una classe di tipo book con due libri
+         // ( nel caso fosse necessario di passare due libri). Serve per fare come una classe per il json
+         //struttura json con le sue proprietà
+
+
+            var bookDTO = new UpdateBookDTO(bookId, bookWithNewValues);
+            StringContent content = new StringContent(JsonConvert.SerializeObject(bookDTO), Encoding.UTF8, "application/json");
+
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri(path);
+
+            var response = client.PostAsync($"UpdateBook", content).Result;
+            if (response.IsSuccessStatusCode)
+            { //.Result = deprecated 
+                //ci sono metodi migliori per gestire l'async
+                string jsonContent = response.Content.ReadAsStringAsync().Result;
+
+              // qua che dovrei gestire??
+            }
+            else
+            {
+
+                // controlla l'eccezione
+            }
+            
+
+
         }
     }
 }

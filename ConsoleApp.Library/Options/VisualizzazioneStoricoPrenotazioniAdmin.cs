@@ -96,7 +96,7 @@ namespace ConsoleApp.Library.Options
             //var reservationStatusForFiltering = mapper.MapperReservationStatusToReservation(reservationStatus);
             var serviceResult = new List<ReservationServiceViewModel>();
             var result = Mapper.MapperListRSVMtoListRVM(serviceResult);
-            var reservationProxy = new WCFReservationProxy();
+            var reservationProxy = new API_ReservationProxy();
             for (int i = 0; i < bookForFilteringId.Count; i++)
             {
                

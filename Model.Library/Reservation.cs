@@ -72,4 +72,42 @@ namespace Model.Library
 
 
     }
+
+    public class BookToReturnDTO
+    {
+        public int UserID { get; set; }
+        public int BookID { get; set; }
+
+        public BookToReturnDTO (int userID, int bookID)
+        {
+            UserID = userID;
+            BookID = bookID;
+        }
+    }
+
+    public class ReservationHistoryDTO
+    {
+        public int? UserID { get; set; }
+        public int? BookID { get; set; }
+
+        public ReservationStatusDTO? ReservationStatus { get; set; }
+
+        public ReservationHistoryDTO(int? userID, int? bookID, ReservationStatusDTO? reservationStatus)
+        {
+            UserID = userID;
+            BookID = bookID;
+            ReservationStatus = reservationStatus;
+        }
+    }
+
+
+public struct ReservationStatusDTO
+{
+    public string Status { get; set; }
+
+    public ReservationStatusDTO(string status)
+    {
+        this.Status = status;
+    }
+}
 }

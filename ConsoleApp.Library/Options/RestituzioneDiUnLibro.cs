@@ -51,7 +51,7 @@ namespace ConsoleApp.Library.Options
             var bookToReturnViewModel = Mapper.MapperReturningBSVMtoRBVM(bookToReturnServiceViewModel);
              var bookToReturn = Mapper.MapperReturningBVMtoBOOK(bookToReturnViewModel);
 
-            var reservationProxy = new WCFReservationProxy();
+            var reservationProxy = new API_ReservationProxy();
              var restitution = reservationProxy.BookReturn(bookToReturn.BookId, this.User.UserId);
              if (restitution.FlagResult ==0) Console.WriteLine("Libro restituito");
              else Console.WriteLine("il libro non risulta essere attualmente in prestito");

@@ -53,7 +53,7 @@ namespace ConsoleApp.Library.Options
             var bookToReserve = Mapper.MapperReservingBVMtoBOOK(bookToReserveViewModel);//lo devo fare dopo
 
             // lbl.ReserveBook(bookToReserve.BookId, currentUser.UserId );
-            var reservationProxy = new WCFReservationProxy();
+            var reservationProxy = new API_ReservationProxy();
             var reservation = reservationProxy.ReserveBookPROVA(bookToReserve.BookId, this.User.UserId);
 
             if (reservation.FlagResult == 0)

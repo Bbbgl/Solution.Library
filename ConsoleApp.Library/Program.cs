@@ -34,6 +34,8 @@ namespace ConsoleApp.Library
              IUserProxy userProxy= new API_UserProxy();
            IReservationProxy reservationProxy = new WCFReservationProxy();
 
+            IBookProxy wcfBook = new WCFBookProxy();
+
             
             
 

@@ -47,6 +47,33 @@ namespace Model.Library
 
 
     }
+    public class UpdateBookDTO
+    {
+        public int Id { get; set; }
+        public Book Book { get; set; }
+
+        public UpdateBookDTO(int id, Book book)
+        {
+            Id = id;
+            Book = book;
+        }   
+    }
+
+    public class BookViewModelDTO
+    {
+        public string Title { get; set; }
+        public string AuthorName { get; set; }
+        public string AuthorSurname { get; set; }
+        public string PublishingHouse { get; set; }
+
+        public BookViewModelDTO(string title, string authorName, string authorSurname, string publishingHouse)
+        {
+            Title = title;
+            AuthorName = authorName;
+            AuthorSurname = authorSurname;
+            PublishingHouse = publishingHouse;
+        }
+    }
 
    
 }

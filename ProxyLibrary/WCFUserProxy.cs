@@ -21,7 +21,7 @@ namespace Proxy.Library
 
         public User Login(LoginServiceViewModel lvm)
         {
-            throw new NotImplementedException();
+            return slc.Login(Mapper.MapperLSVMtoLVM(lvm));
         }
 
        
