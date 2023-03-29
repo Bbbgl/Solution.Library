@@ -1,0 +1,28 @@
+﻿@using Model.Library
+
+@{
+    List<Book> bookList = ViewData["BookList"] as List<Book>;
+}
+
+<table class="table table-hover">
+    <thead>
+        <tr class="table-active table-primary">
+            <th scope="col">Title</th>
+            <th scope="col">Author</th>
+            <th scope="col">Publisher</th>
+            <th scope="col">Quantity</th>
+           
+        </tr>
+    </thead>
+    <tbody>
+        @{ foreach (var item in bookList)
+            {
+                <tr class="table-active">
+                    <td>@item.Title</td>
+                    <td>@item.AuthorName @item.AuthorSurname</td>
+                    <td>@item.PublishingHouse</td>
+                    <td>@item.Quantity</td>
+                </tr>
+            } }
+    </tbody>
+</table>
