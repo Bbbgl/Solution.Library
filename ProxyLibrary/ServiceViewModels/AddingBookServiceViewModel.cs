@@ -35,6 +35,7 @@ namespace Proxy.Library.ServiceViewModels
             this.Quantity = quantity;
 
         }
+        public AddingBookServiceViewModel() { }
 
 
 

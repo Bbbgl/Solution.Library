@@ -1,7 +1,9 @@
 ﻿using Model.Library;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
@@ -42,6 +44,7 @@ namespace Model.Library
             this.PublishingHouse = publishingHouse;
             this.Quantity = quantity;
         }
+        public Book() { }
 
         // posso inserire un altro costruttore senza id e quanrtity?
 
@@ -75,6 +78,12 @@ namespace Model.Library
         }
     }
 
-   
+
+    public class AWConnection : DbContext
+    {
+        public DbSet<Book> Books { get; set; }
+    }
+
+
 }
 
