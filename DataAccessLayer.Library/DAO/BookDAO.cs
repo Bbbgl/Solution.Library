@@ -50,7 +50,7 @@ namespace DataAccessLayer.Library
                     p4.Value = book.AuthorSurname;
                     cmd.Parameters.Add(p4);
 
-                    SqlParameter p5 = new SqlParameter("Publisher", System.Data.SqlDbType.NVarChar, 100);
+                    SqlParameter p5 = new SqlParameter("PublishingHouse", System.Data.SqlDbType.NVarChar, 100);
                     p5.Value = book.PublishingHouse;
                     cmd.Parameters.Add(p5);
 
@@ -75,7 +75,7 @@ namespace DataAccessLayer.Library
 
         //newBook.SetAttributeValue("AuthorName", book.AuthorName);
         //newBook.SetAttributeValue("AuthorSurname", book.AuthorSurname);
-        //newBook.SetAttributeValue("Publisher", book.PublishingHouse);
+        //newBook.SetAttributeValue("PublishingHouse", book.PublishingHouse);
         //newBook.SetAttributeValue("Quantity",book.Quantity.ToString()); 
 
         //xDoc.Root.Element("Books").Add(newBook);
@@ -99,12 +99,12 @@ namespace DataAccessLayer.Library
                         var bookTitle = reader["Title"].ToString();
                         var bookAuthorName = reader["AuthorName"].ToString();
                         var bookAuthorSurame = reader["AuthorSurname"].ToString();
-                        var bookPublisher = reader["Publisher"].ToString();
+                        var bookPublishingHouse = reader["PublishingHouse"].ToString();
                         var bookQuantity = Int32.Parse(reader["Quantity"].ToString());
 
 
                         Book b = new Book(bookId, bookTitle, bookAuthorName,
-                            bookAuthorSurame, bookPublisher, bookQuantity);
+                            bookAuthorSurame, bookPublishingHouse, bookQuantity);
                         bookList.Add(b);
                     }
 
@@ -138,7 +138,7 @@ namespace DataAccessLayer.Library
         //        var titleDB = bookNode.Attributes["Title"];
         //        var authorNameDB = bookNode.Attributes["AuthorName"];
         //        var authorSurnameDB = bookNode.Attributes["AuthorSurname"];
-        //        var publisherDB = bookNode.Attributes["Publisher"];
+        //        var publisherDB = bookNode.Attributes["PublishingHouse"];
         //        var quantityDB = bookNode.Attributes["Quantity"].Value;
         //        //int quantityDBtoInt;
         //        //try
@@ -188,7 +188,7 @@ namespace DataAccessLayer.Library
                     p4.Value = book.AuthorSurname;
                     cmd.Parameters.Add(p4);
 
-                    SqlParameter p5 = new SqlParameter("Publisher", System.Data.SqlDbType.NVarChar, 100);
+                    SqlParameter p5 = new SqlParameter("PublishingHouse", System.Data.SqlDbType.NVarChar, 100);
                     p5.Value = book.PublishingHouse;
                     cmd.Parameters.Add(p5);
 
@@ -216,7 +216,7 @@ namespace DataAccessLayer.Library
             //bookNodes[id_book].Attributes["Title"].Value = book.Title;
             //bookNodes[id_book].Attributes["AuthorName"].Value = book.AuthorName;
             //bookNodes[id_book].Attributes["AuthorSurname"].Value = book.AuthorSurname;
-            //bookNodes[id_book].Attributes["Publisher"].Value = book.PublishingHouse;
+            //bookNodes[id_book].Attributes["PublishingHouse"].Value = book.PublishingHouse;
             //var quantity = Int32.Parse(bookNodes[id_book].Attributes["Quantity"].Value);
             //bookNodes[id_book].Attributes["Quantity"].Value = (quantity + book.Quantity).ToString();
             //for(int i = 0; i < bookNodes.Count; i++) {
