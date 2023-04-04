@@ -1,7 +1,7 @@
 ﻿@using Model.Library
 
 @{
-    List<Book> bookList = ViewData["BookList"] as List<Book>;
+    List<Proxy.Library.SOAPLibrary.SearchingBookViewModel> bookList = ViewData["BookList"] as List<Proxy.Library.SOAPLibrary.SearchingBookViewModel>;
 }
 
 <table class="table table-hover">
@@ -11,7 +11,8 @@
             <th scope="col">Author</th>
             <th scope="col">Publisher</th>
             <th scope="col">Quantity</th>
-           
+            <th scope="col">Avaiability</th>
+
         </tr>
     </thead>
     <tbody>
@@ -22,12 +23,16 @@
                     <td>@item.AuthorName @item.AuthorSurname</td>
                     <td>@item.PublishingHouse</td>
                     <td>@item.Quantity</td>
-                    <td>
-                        @Html.ActionLink("Show Details", "Details", new { Title = item.Title,
-                   AuthorName = item.AuthorName,AuthorSurname=item.AuthorSurname,PublishingHouse=item.PublishingHouse})
-                    </td>
+                    <td>@{if (item.Avaiability == true)
+                        {
+                            <span>disponibile</span>
+                        }
+                        else
+                        { <span>disponibile dal @item.FirstAvailability</span>}
+                    }</td>
+
                 </tr>
-                
+
             } }
     </tbody>
 </table>

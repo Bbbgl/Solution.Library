@@ -38,6 +38,13 @@ namespace API.Library.Controllers
         }
 
         [HttpPost]
+        [Route("api/Reservation/BookReserve")]
+        public ReservationResult ReserveBookPROVA([FromBody] BookToReserveDTO bookDTO)
+        {
+            return lbl.ReserveBookPROVA(bookDTO.BookID, bookDTO.UserID);
+        }
+
+        [HttpPost]
         [Route("api/Reservation/ReservationHistory")]
         public List<ReservationViewModel> GetReservationHistory([FromBody] ReservationHistoryDTO reservationHistoryDTO)
         {

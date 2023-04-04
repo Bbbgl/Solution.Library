@@ -73,7 +73,27 @@ namespace Proxy.Library
 
         public ReservationResult ReserveBookPROVA(int bookId, int userId)
         {
-            throw new NotImplementedException();
+
+            var bookDTO = new BookToReserveDTO(userId, bookId);
+            StringContent content = new StringContent(JsonConvert.SerializeObject(bookDTO), Encoding.UTF8, "application/json");
+
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri(path);
+
+            var response = client.PostAsync($"BookReserve", content).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                string jsonContent = response.Content.ReadAsStringAsync().Result;
+                return JsonConvert.DeserializeObject<ReservationResult>(jsonContent);
+            }
+            else
+            {
+
+                throw new NotImplementedException();
+            }
+
+
         }
     }
-}
+    }
+
