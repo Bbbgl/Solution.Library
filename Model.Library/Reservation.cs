@@ -100,8 +100,18 @@ namespace Model.Library
         }
     }
 
+    public class BookToReserveDTO
+    {
+        public int UserID { get; set; }
+        public int BookID { get; set; }
 
-public struct ReservationStatusDTO
+        public BookToReserveDTO(int userID, int bookID)
+        {
+            UserID = userID;
+            BookID = bookID;
+        }
+    }
+    public struct ReservationStatusDTO
 {
     public string Status { get; set; }
 

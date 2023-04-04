@@ -11,6 +11,9 @@ namespace Web.Library.Controllers
 {
     public class BookController : Controller
     {
+
+        public static API_BookProxy apiBook = new API_BookProxy();
+        public static Mapper Mapper = new Mapper();
         // 
         // GET: /Book/ 
 
@@ -23,12 +26,10 @@ namespace Web.Library.Controllers
            
         }
 
-        // GET: Books/Create
+        // GET: Book/Create
         public ActionResult Create()
         {
-            //var apiBook = new API_BookProxy();
-            //var listBooks = apiBook.AddBook();
-            //ViewData["BookList"] = listBooks;
+            
             return View();
         }
 
@@ -41,7 +42,7 @@ namespace Web.Library.Controllers
         {
             if (ModelState.IsValid)
             {
-                var apiBook = new API_BookProxy();
+                //var apiBook = new API_BookProxy();
                 apiBook.AddBook(book);
             
             //    db.SaveChanges();
@@ -49,6 +50,28 @@ namespace Web.Library.Controllers
             }
 
             return View(book);
+        }
+
+        //// GET: Book/Details
+        //public ActionResult Details()
+        //{
+
+        //    return View();
+        //}
+
+        public ActionResult Details([Bind(Include = "Title,AuthorName,AuthorSurname,PublishingHouse")]BookServiceViewModel bsvm)
+        {
+            var bookToSearchViewModel = Mapper.MapperBSVMtoBVM(bsvm);
+            if (ModelState.IsValid)
+            {
+                var bookList = apiBook.SearchBookWithAvailabilityInfos(bookToSearchViewModel);
+                ViewData["BookList"] = bookList;
+                return View();
+            }
+
+            return RedirectToAction("Index");
+
+
         }
 
 

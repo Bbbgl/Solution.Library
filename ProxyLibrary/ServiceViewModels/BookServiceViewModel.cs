@@ -54,5 +54,6 @@ namespace Proxy.Library.ServiceViewModels
         {
             this.Avaiability = avaiability;
         }
+        public BookServiceViewModel() { }
     }
 }
