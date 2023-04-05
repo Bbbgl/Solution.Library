@@ -60,6 +60,7 @@ namespace Model.Library
             Id = id;
             Book = book;
         }   
+        public UpdateBookDTO() { }
     }
 
     public class BookViewModelDTO

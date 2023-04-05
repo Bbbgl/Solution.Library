@@ -64,7 +64,7 @@ namespace Web.Library.Controllers
         //}
 
         // GET: Books/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult EditEF(int? id)
         {
             if (id == null)
             {
@@ -83,7 +83,7 @@ namespace Web.Library.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "BookId,Title,AuthorName,AuthorSurname,PublishingHouse,Quantity")] Book book)
+        public ActionResult EditEF([Bind(Include = "BookId,Title,AuthorName,AuthorSurname,PublishingHouse,Quantity")] Book book)
         {
             if (ModelState.IsValid)
             {

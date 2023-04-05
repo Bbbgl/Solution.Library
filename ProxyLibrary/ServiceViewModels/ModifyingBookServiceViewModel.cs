@@ -30,5 +30,7 @@ namespace Proxy.Library.ServiceViewModels
 
         }
 
+        public ModifyingBookServiceViewModel() { }
+
     }
 }

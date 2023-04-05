@@ -1,4 +1,5 @@
-﻿using Proxy.Library;
+﻿using Model.Library;
+using Proxy.Library;
 using Proxy.Library.ServiceViewModels;
 using System;
 using System.Collections.Generic;
@@ -12,14 +13,20 @@ namespace Web.Library.Controllers
     public class BookController : Controller
     {
 
-        public static API_BookProxy apiBook = new API_BookProxy();
-        public static Mapper Mapper = new Mapper();
+        //public static API_BookProxy apiBook = new API_BookProxy();
+        public static Mapper Mapper = new Mapper();//non posso registrarlo in unity.container perchè non ho l'interfaccia, e questo mapper contiene solo metodi statici
         // 
         // GET: /Book/ 
+        readonly IBookProxy apiBook;
 
+        //inject dependency
+        public BookController(IBookProxy bookProxy)
+        {
+            this.apiBook = bookProxy;
+        }
         public ActionResult Index()
         {
-            var apiBook = new API_BookProxy();
+            //var apiBook = new API_BookProxy();
             var listBooks = apiBook.ReadBooks();
             ViewData["BookList"] = listBooks;
             return View();
@@ -74,6 +81,31 @@ namespace Web.Library.Controllers
 
         }
 
+        // GET: Book/Edit
+        public ActionResult Edit(int? id)
+        {
+            var bookToModify = apiBook.ReadBooks().Where(b=>b.BookId==id).ToList();
+            ViewData["BookToModify"] = bookToModify[0];
+            return View();
+        }
+        // POST: Book/Edit
+
+
+
+        //public ActionResult Edit([Bind(Include = "Title,AuthorName,AuthorSurname,PublishingHouse,Quantity")] ModifyingBookServiceViewModel bookToModify,[Bind(Include = "Title,AuthorName,AuthorSurname,PublishingHouse,Quantity")] AddingBookServiceViewModel bookWithNewValuesSVM)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int? id,[Bind(Include = "Title,AuthorName,AuthorSurname,PublishingHouse,Quantity")] AddingBookServiceViewModel bookWithNewValuesServiceViewModel)
+        {
+
+            var bookToModify = apiBook.ReadBooks().Where(b => b.BookId == id).ToList();
+            
+            var bookWithNewValuesViewModel = Mapper.MapperAddingBSVMtoAddingBVM(bookWithNewValuesServiceViewModel);
+            //var libro = new Book(queryId[0], title, authorName, authorSurname, casaEditrice, Int16.Parse(quantity));
+            var bookWithNewValues = Mapper.MapperABVMtoBOOK(bookWithNewValuesViewModel);
+            apiBook.UpdateBook(bookToModify[0].BookId, bookWithNewValues);
+            return RedirectToAction("Index");
+        }
 
     }
 }
