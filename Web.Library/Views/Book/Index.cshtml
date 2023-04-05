@@ -1,7 +1,7 @@
-﻿@using Model.Library
+﻿@model Model.Library.Book
 
 @{
-    List<Book> bookList = ViewData["BookList"] as List<Book>;
+    List<Model.Library.Book> bookList = ViewData["BookList"] as List<Model.Library.Book>;
 }
 
 <table class="table table-hover">
@@ -25,6 +25,15 @@
                     <td>
                         @Html.ActionLink("Show Details", "Details", new { Title = item.Title,
                    AuthorName = item.AuthorName,AuthorSurname=item.AuthorSurname,PublishingHouse=item.PublishingHouse})
+                    </td>
+                    <td>
+                         
+                        @Html.ActionLink("Edit", "Edit", new { id = item.BookId })
+                       
+
+
+                        
+
                     </td>
                 </tr>
                 
