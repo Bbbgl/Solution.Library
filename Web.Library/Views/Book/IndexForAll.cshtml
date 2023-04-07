@@ -1,0 +1,47 @@
+﻿@model Model.Library.Book
+
+@{
+    List<Model.Library.Book> bookList = ViewData["BookList"] as List<Model.Library.Book>;
+}
+
+<table class="table table-hover">
+    <thead>
+        <tr class="table-active table-primary">
+            <th scope="col">Title</th>
+            <th scope="col">Author</th>
+            <th scope="col">Publisher</th>
+            <th scope="col">Quantity</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @{ foreach (var item in bookList)
+            {
+                <tr class="table-active">
+                    <td>@item.Title</td>
+                    <td>@item.AuthorName @item.AuthorSurname</td>
+                    <td>@item.PublishingHouse</td>
+                    <td>@item.Quantity</td>
+                    <td>
+                        @Html.ActionLink("Show Details", "Details", new
+                        {
+                            Title = item.Title,
+                   AuthorName = item.AuthorName,
+                            AuthorSurname = item.AuthorSurname,
+                            PublishingHouse = item.PublishingHouse
+                        })
+                    </td>
+                    <td>
+
+                       
+
+
+
+
+
+                    </td>
+                </tr>
+
+            } }
+    </tbody>
+</table>

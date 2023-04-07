@@ -66,7 +66,7 @@ namespace Web.Library
                 container.RegisterType<IUserProxy,API_UserProxy>();
                 container.RegisterType<IBookProxy, API_BookProxy>();
             container.RegisterType<IReservationProxy, API_ReservationProxy>();
-
+            
                 DependencyResolver.SetResolver(new UnityDependencyResolver(container));
             }
         }

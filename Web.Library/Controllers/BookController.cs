@@ -33,6 +33,15 @@ namespace Web.Library.Controllers
            
         }
 
+        public ActionResult IndexForAll()
+        {
+            //var apiBook = new API_BookProxy();
+            var listBooks = apiBook.ReadBooks();
+            ViewData["BookList"] = listBooks;
+            return View();
+
+        }
+
         // GET: Book/Create
         public ActionResult Create()
         {
@@ -95,6 +104,7 @@ namespace Web.Library.Controllers
         //public ActionResult Edit([Bind(Include = "Title,AuthorName,AuthorSurname,PublishingHouse,Quantity")] ModifyingBookServiceViewModel bookToModify,[Bind(Include = "Title,AuthorName,AuthorSurname,PublishingHouse,Quantity")] AddingBookServiceViewModel bookWithNewValuesSVM)
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int? id,[Bind(Include = "Title,AuthorName,AuthorSurname,PublishingHouse,Quantity")] AddingBookServiceViewModel bookWithNewValuesServiceViewModel)
         {
 

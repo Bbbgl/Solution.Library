@@ -16,17 +16,19 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Book", new { area = "" }, new { @class = "navbar-brand" })
+               
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Book")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Create a Book", "Create", "Book")</li>
+            <div @*class="navbar-collapse collapse"*@>
+                @*<ul class="nav navbar-nav">*@
+                    <button>@Html.ActionLink("Application name", "Index", "Book", new { area = "" }, new { @class = "navbar-brand" })</button>
+                    <button>@Html.ActionLink("Home", "Index", "Book")</button>
+                    <button>@Html.ActionLink("About", "About", "Home")</button>
+                    <button>@Html.ActionLink("Contact", "Contact", "Home")</button>
+                    <button>@Html.ActionLink("Create a Book", "Create", "Book")</button>
 
-                </ul>
+                @*</ul>*@
             </div>
+            <div>@Html.ActionLink("Login", "Login", "Auth")</div>
         </div>
     </div>
     <div class="container body-content">

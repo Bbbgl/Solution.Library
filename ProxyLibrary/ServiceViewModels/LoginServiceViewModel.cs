@@ -23,10 +23,8 @@ namespace Proxy.Library.ServiceViewModels
             this.Username = username;
             this.Password = password;
 
-
-
-
-
         }
+
+        public LoginServiceViewModel() { }
     }
 }

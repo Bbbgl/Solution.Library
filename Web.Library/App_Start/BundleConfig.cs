@@ -23,7 +23,7 @@ namespace Web.Library
                       "~/Scripts/bootstrap.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
+                      "~/Content/first-theme.css",
                       "~/Content/site.css"));
         }
     }
